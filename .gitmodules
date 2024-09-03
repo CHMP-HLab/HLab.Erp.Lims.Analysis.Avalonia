@@ -1,0 +1,6 @@
+[submodule "HLab.Erp.Lims.Analysis.Avalonia/HLab.Core"]
+	path = HLab.Erp.Lims.Analysis.Avalonia/HLab.Core
+	url = https://github.com/mgth/HLab.Core
+[submodule "HLab.Erp.Lims.Analysis.Avalonia/HLab.Avalonia"]
+	path = HLab.Erp.Lims.Analysis.Avalonia/HLab.Avalonia
+	url = https://github.com/mgth/HLab.Avalonia
