@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HLab.Erp.Lims.Analysis.Avalonia", "HLab.Erp.Lims.Analysis.Avalonia\HLab.Erp.Lims.Analysis.Avalonia.csproj", "{8243E118-F46E-45DD-B089-927223B240B5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HLab.Erp.Lims.Analysis.Avalonia.Desktop", "HLab.Erp.Lims.Analysis.Avalonia.Desktop\HLab.Erp.Lims.Analysis.Avalonia.Desktop.csproj", "{39BB034B-2C3C-4452-B8A1-56552BF1404A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8243E118-F46E-45DD-B089-927223B240B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8243E118-F46E-45DD-B089-927223B240B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8243E118-F46E-45DD-B089-927223B240B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8243E118-F46E-45DD-B089-927223B240B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39BB034B-2C3C-4452-B8A1-56552BF1404A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39BB034B-2C3C-4452-B8A1-56552BF1404A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39BB034B-2C3C-4452-B8A1-56552BF1404A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39BB034B-2C3C-4452-B8A1-56552BF1404A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7336FDE1-8CD2-4476-9466-9CA8EA19BB46}
+	EndGlobalSection
+EndGlobal
