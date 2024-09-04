@@ -1,77 +1,69 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using HLab.Erp.Core;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
-using HLab.Notify.Annotations;
-using HLab.Notify.PropertyChanged;
 using NPoco;
+using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data
+namespace HLab.Erp.Lims.Analysis.Data;
+
+public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
 {
-    using H = HD<Pharmacopoeia>;
+    public Pharmacopoeia() => _caption = this.WhenAnyValue(e => e.Name).ToProperty(this, e => e.Caption);
 
-    public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
+    public string Name
     {
-        public Pharmacopoeia() => H.Initialize(this);
-
-        public string Name
-        {
-            get => _name.Get();
-            set => _name.Set(value);
-        }
-        private readonly IProperty<string> _name = H.Property<string>(c => c.Default(""));
-
-        public string Abbreviation
-        {
-            get => _abbreviation.Get();
-            set => _abbreviation.Set(value);
-        }
-        private readonly IProperty<string> _abbreviation = H.Property<string>(c => c.Default(""));
-
-
-        public string Url
-        {
-            get => _url.Get();
-            set => _url.Set(value);
-        }
-        private readonly IProperty<string> _url = H.Property<string>(c => c.Default(""));
-
-
-        public string SearchUrl
-        {
-            get => _searchUrl.Get();
-            set => _searchUrl.Set(value);
-        }
-        private readonly IProperty<string> _searchUrl = H.Property<string>(c => c.Default(""));
-
-
-        public string ReferenceUrl
-        {
-            get => _referenceUrl.Get();
-            set => _referenceUrl.Set(value);
-        }
-        private readonly IProperty<string> _referenceUrl = H.Property<string>(c => c.Default(""));
-
-        public string IconPath
-        {
-            get => _iconPath.Get();
-            set => _iconPath.Set(value);
-        }
-        private readonly IProperty<string> _iconPath = H.Property<string>(c => c.Default(""));
-
-        [Ignore]
-        public string Caption => _caption.Get();
-        private readonly IProperty<string> _caption = H.Property<string>(c => c
-            .On(e => e.Name)
-            .Set(e => e.Name)
-        );
-        
-
-        public static Pharmacopoeia DesignModel => new Pharmacopoeia
-        {
-            Name = "{US Pharmacopoeia}",
-            Abbreviation = "Usp"
-        };
-
+        get => _name;
+        set => SetAndRaise(ref _name, value);
     }
+    private string _name = "";
+
+    public string Abbreviation
+    {
+        get => _abbreviation;
+        set => SetAndRaise(ref _abbreviation, value);
+    }
+    private string _abbreviation = "";
+
+
+    public string Url
+    {
+        get => _url;
+        set => SetAndRaise(ref _url, value);
+    }
+    private string _url = "";
+
+
+    public string SearchUrl
+    {
+        get => _searchUrl;
+        set => SetAndRaise(ref _searchUrl, value);
+    }
+    private string _searchUrl = "";
+
+
+    public string ReferenceUrl
+    {
+        get => _referenceUrl;
+        set => SetAndRaise(ref _referenceUrl, value);
+    }
+    private string _referenceUrl = "";
+
+    public string IconPath
+    {
+        get => _iconPath;
+        set => SetAndRaise(ref _iconPath, value);
+    }
+    private string _iconPath = "";
+
+    [Ignore]
+    public string Caption => _caption.Value;
+    ObservableAsPropertyHelper<string> _caption;
+
+
+    public static Pharmacopoeia DesignModel => new Pharmacopoeia
+    {
+        Name = "{US Pharmacopoeia}",
+        Abbreviation = "Usp"
+    };
+
 }
+

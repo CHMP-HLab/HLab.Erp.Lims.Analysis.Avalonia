@@ -1,40 +1,40 @@
 ﻿using HLab.Erp.Data;
-using HLab.Notify.PropertyChanged;
 
 using NPoco;
+using System;
 
-namespace HLab.Erp.Lims.Analysis.Data
+namespace HLab.Erp.Lims.Analysis.Data;
+
+public class LinkedDocument : Entity
 {
-    public class LinkedDocument : Entity
+    public LinkedDocument()
     {
-        public LinkedDocument() => HD<LinkedDocument>.Initialize(this);
-        
-
-        public string Name
-        {
-            get => _name.Get();
-            set => _name.Set(value);
-        }
-
-        private readonly IProperty<string> _name = HD<LinkedDocument>.Property<string>(c => c.Default(""));
-        public int? SampleTestResultId
-        {
-            get => _sampleTestResult.Id.Get();
-            set => _sampleTestResult.Id.Set(value);
-        }
-
-        [Ignore] public SampleTestResult SampleTestResult
-        {
-            get => _sampleTestResult.Get();
-            set => _sampleTestResult.Set(value);
-        }
-        private readonly IForeign<SampleTestResult> _sampleTestResult = HD<LinkedDocument>.Foreign<SampleTestResult>();
-
-        public byte[] File
-        {
-            get => _file.Get();
-            set => _file.Set(value);
-        }
-        private readonly IProperty<byte[]> _file = HD<LinkedDocument>.Property<byte[]>();
+        _sampleTestResult = Foreign(this, e => e.SampleTestResultId, e => e.SampleTestResult);
     }
+
+    public string Name
+    {
+        get => _name;
+        set => SetAndRaise(ref _name, value);
+    }
+    string _name = "";
+
+    public int? SampleTestResultId
+    {
+        get => _sampleTestResult.Id;
+        set => _sampleTestResult.SetId(value);
+    }
+    [Ignore] public SampleTestResult SampleTestResult
+    {
+        get => _sampleTestResult.Value;
+        set => SampleTestResultId = value.Id;
+    }
+    readonly ForeignPropertyHelper<LinkedDocument,SampleTestResult> _sampleTestResult;
+
+    public byte[] File
+    {
+        get => _file;
+        set => SetAndRaise(ref _file, value);
+    }
+    byte[] _file = Array.Empty<byte>();
 }

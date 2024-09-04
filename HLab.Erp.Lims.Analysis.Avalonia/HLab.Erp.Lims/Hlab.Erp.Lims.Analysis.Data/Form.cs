@@ -1,48 +1,43 @@
-using HLab.Erp.Core;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
-using HLab.Notify.PropertyChanged;
 using NPoco;
+using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data
+namespace HLab.Erp.Lims.Analysis.Data;
+
+public partial class Form : Entity, IListableModel, ILocalCache
 {
-    using H = H<Form>;
+    public static Form DesignModel => new() { Name="Tablet"};
 
-    public partial class Form : Entity, IListableModel, ILocalCache
+    public override string ToString() => Name;
+
+    public Form()
     {
-        public static Form DesignModel => new() { Name="Tablet"};
-
-        public Form() => H.Initialize(this);
-
-        public override string ToString() => Name;
-
-
-        public string Name
-        {
-            get => _name.Get(); set => _name.Set(value);
-        }
-        private readonly IProperty<string> _name = H.Property<string>(c => c.Default(""));
-
-        public string EnglishName
-        {
-            get => _englishName.Get();
-            set => _englishName.Set(value);
-        }
-        private readonly IProperty<string> _englishName = H.Property<string>(c => c.Default(""));
-
-        public string IconPath
-        {
-            get => _iconPath.Get();
-            set => _iconPath.Set(value);
-        }
-        private readonly IProperty<string> _iconPath = H.Property<string>();
-
-        [Ignore]
-        public string Caption => Name;
-        private readonly IProperty<string> _caption = H.Property<string>(c => c
-            .On(e => e.Name)
-            .Set(e => e.Name)
-        );
-
+        _caption = this.WhenAnyValue(e => e.Name).ToProperty(this, e => e.Caption);
     }
+
+    public string Name
+    {
+        get => _name; 
+        set => SetAndRaise(ref _name, value);
+    }
+    string _name = "";
+
+    public string EnglishName
+    {
+        get => _englishName;
+        set => SetAndRaise(ref _englishName, value);
+    }
+    private string _englishName = "";
+
+    public string IconPath
+    {
+        get => _iconPath;
+        set => SetAndRaise(ref _iconPath, value);
+    }
+    string _iconPath = "";
+
+    [Ignore]
+    public string Caption => _caption.Value;
+    ObservableAsPropertyHelper<string> _caption;
 }

@@ -1,63 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HLab.Erp.Conformity.Annotations;
-using HLab.Erp.Core;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
-using HLab.Notify.PropertyChanged;
 using NPoco;
+using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data
+namespace HLab.Erp.Lims.Analysis.Data;
+
+public class FormClass : Entity, IListableModel, IEntityWithIcon, IFormClass
 {
-    using H = H<FormClass>;
-
-    public class FormClass : Entity, IListableModel, IEntityWithIcon, IFormClass
+    public FormClass()
     {
-        public FormClass() => H.Initialize(this);
+        _caption = this.WhenAnyValue(e => e.Name)
+            .ToProperty(this, e => e.Caption);
+    }   
 
-        public string Name
-        {
-            get => _name.Get();
-            set => _name.Set(value);
-        }
-        private readonly IProperty<string> _name = H.Property<string>();
-        public byte[] Code
-        {
-            get => _code.Get();
-            set => _code.Set(value);
-        }
-        private readonly IProperty<byte[]> _code = H.Property<byte[]>();
-        public string Class
-        {
-            get => _class.Get();
-            set => _class.Set(value);
-        }
-        private readonly IProperty<string> _class = H.Property<string>();
-        public string IconPath
-        {
-            get => _iconPath.Get();
-            set => _iconPath.Set(value);
-        }
-        private readonly IProperty<string> _iconPath = H.Property<string>();
-        public string Version
-        {
-            get => _version.Get();
-            set => _version.Set(value);
-        }
-        private readonly IProperty<string> _version = H.Property<string>();
-
-        public byte[] CodeHash
-        {
-            get => _codeHash.Get();
-            set => _codeHash.Set(value);
-        }
-        private readonly IProperty<byte[]> _codeHash = H.Property<byte[]>();
-
-        [Ignore]
-        public string Caption => Name;
-
+    public string Name
+    {
+        get => _name;
+        set => this.RaiseAndSetIfChanged(ref _name, value);
     }
+    string _name = "";
+
+    public byte[] Code
+    {
+        get => _code;
+        set => this.RaiseAndSetIfChanged(ref _code, value);
+    }
+    byte[] _code = Array.Empty<byte>();
+
+    public string Class
+    {
+        get => _class;
+        set => this.RaiseAndSetIfChanged(ref _class, value);
+    }
+    string _class = "";
+
+    public string IconPath
+    {
+        get => _iconPath;
+        set => this.RaiseAndSetIfChanged(ref _iconPath, value);
+    }
+    string _iconPath = "";
+
+    public string Version
+    {
+        get => _version;
+        set => this.RaiseAndSetIfChanged(ref _version, value);
+    }
+    string _version = "";
+
+    public byte[] CodeHash
+    {
+        get => _codeHash;
+        set => this.RaiseAndSetIfChanged(ref _codeHash, value);
+    }
+    byte[] _codeHash = Array.Empty<byte>();
+
+    [Ignore]
+    public string Caption => _caption.Value;
+    readonly ObservableAsPropertyHelper<string> _caption;
+
 }
