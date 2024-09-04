@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HLab.Erp.Lims.Analysis.Avalonia", "HLab.Erp.Lims.Analysis.Avalonia\HLab.Erp.Lims.Analysis.Avalonia.csproj", "{8243E118-F46E-45DD-B089-927223B240B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HLab.Erp.Lims.Analysis.Avalonia", "HLab.Erp.Lims\HLab.Erp.Lims.Analysis.Avalonia\HLab.Erp.Lims.Analysis.Avalonia.csproj", "{8243E118-F46E-45DD-B089-927223B240B5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HLab.Erp.Lims.Analysis.Avalonia.Desktop", "HLab.Erp.Lims.Analysis.Avalonia.Desktop\HLab.Erp.Lims.Analysis.Avalonia.Desktop.csproj", "{39BB034B-2C3C-4452-B8A1-56552BF1404A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HLab.Erp.Lims.Analysis.Avalonia.Desktop", "HLab.Erp.Lims\HLab.Erp.Lims.Analysis.Avalonia.Desktop\HLab.Erp.Lims.Analysis.Avalonia.Desktop.csproj", "{39BB034B-2C3C-4452-B8A1-56552BF1404A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HLab.Erp.Lims.Analysis.Data", "Hlab.Erp.Lims.Analysis.Data\HLab.Erp.Lims.Analysis.Data.csproj", "{9180378F-A59F-488D-A333-508D164BF641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HLab.Erp.Lims.Analysis.Data", "HLab.Erp.Lims\Hlab.Erp.Lims.Analysis.Data\HLab.Erp.Lims.Analysis.Data.csproj", "{9180378F-A59F-488D-A333-508D164BF641}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HLab.Erp", "HLab.Erp", "{74680561-9536-4DB7-B97F-117BDF4A4888}"
 EndProject
@@ -44,6 +44,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLab.Erp.Core.Annotations", "HLab.Erp\HLab.Erp.Core.Annotations\HLab.Erp.Core.Annotations.csproj", "{175140C0-BE10-40D1-AEB0-8625C2A97019}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLab.Erp.Conformity.Annotations", "HLab.Erp\HLab.Erp.Forms.Annotations\HLab.Erp.Conformity.Annotations.csproj", "{D6EF0809-1EAD-4613-9F44-37CA9324EA78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HLab.Erp.Lims", "HLab.Erp.Lims", "{E65F55FA-5F33-4B34-9B9A-EF6ABC829D1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -405,6 +407,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{8243E118-F46E-45DD-B089-927223B240B5} = {E65F55FA-5F33-4B34-9B9A-EF6ABC829D1F}
+		{39BB034B-2C3C-4452-B8A1-56552BF1404A} = {E65F55FA-5F33-4B34-9B9A-EF6ABC829D1F}
+		{9180378F-A59F-488D-A333-508D164BF641} = {E65F55FA-5F33-4B34-9B9A-EF6ABC829D1F}
 		{591549BA-F03F-4517-8196-731524C0DEE1} = {74680561-9536-4DB7-B97F-117BDF4A4888}
 		{44501C3C-15B7-4FF9-B9C8-6B29478E0FA5} = {74680561-9536-4DB7-B97F-117BDF4A4888}
 		{8446BEE1-62DA-4AE2-8FE3-5D198C5B6677} = {74680561-9536-4DB7-B97F-117BDF4A4888}
