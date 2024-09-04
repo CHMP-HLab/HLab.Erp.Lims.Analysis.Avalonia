@@ -1,27 +1,22 @@
 ﻿using HLab.Erp.Data;
-using HLab.Notify.PropertyChanged;
 
-namespace HLab.Erp.Lims.Analysis.Data
+namespace HLab.Erp.Lims.Analysis.Data;
+public class Xaml : Entity, ILocalCache
 {
-    using H = H<Xaml>;
+    public Xaml() { }
 
-    public class Xaml : Entity, ILocalCache
+    public string Name
     {
-        public Xaml() => H.Initialize(this);
-
-        public string Name
-        {
-            get => _name.Get();
-            set => _name.Set(value);
-        }
-
-        private readonly IProperty<string> _name = H.Property<string>(c => c.Default(""));
-        public string Page
-        {
-            get => _page.Get();
-            set => _page.Set(value);
-        }
-
-        private readonly IProperty<string> _page = H.Property<string>(c => c.Default(""));
+        get => _name;
+        set => SetAndRaise(ref _name,value);
     }
+
+    private string _name = "";
+    public string Page
+    {
+        get => _page;
+        set => SetAndRaise(ref _page,value);
+    }
+
+    private string _page = "";
 }

@@ -1,93 +1,100 @@
-using HLab.Erp.Core;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
-using HLab.Notify.PropertyChanged;
 using NPoco;
+using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data
+namespace HLab.Erp.Lims.Analysis.Data;
+
+public partial class Product : Entity, ILocalCache, IListableModel
 {
-    using H = HD<Product>;
-
-    public partial class Product : Entity, ILocalCache, IListableModel
+    public Product()
     {
-        public Product() => H.Initialize(this);
+        _caption = this.WhenAnyValue(
+            e => e.Inn,
+            e => e.Dose,
+            e => e.Form,
+            (inn, dose, form) => inn + " - " + (form?.Caption ?? "") + " (" + dose + ")")
+            .ToProperty(this, e => e.Caption);
 
-        public string Complement
-        {
-            get => _complement.Get();
-            set => _complement.Set(value);
-        }
-        private readonly IProperty<string> _complement = H.Property<string>(c => c.Default(""));
+        _iconPath = this.WhenAnyValue(e => e.Form.IconPath)
+            .ToProperty(this, e => e.IconPath);
 
-        public string Inn
-        {
-            get => _inn.Get();
-            set => _inn.Set(value);
-        }
-        private readonly IProperty<string> _inn = H.Property<string>(c => c.Default(""));
+        _form = Foreign(this, e => e.FormId, e => e.Form);
+        _category = Foreign(this, e => e.CategoryId, e => e.Category);
 
-        public string Dose
-        {
-            get => _dose.Get();
-            set => _dose.Set(value);
-        }
-        private readonly IProperty<string> _dose = H.Property<string>(c => c.Default(""));
+    }
 
 
-        public string Note
-        {
-            get => _note.Get();
-            set => _note.Set(value);
-        }
-        private readonly IProperty<string> _note = H.Property<string>(c => c.Default(""));
-        [Ignore]
-        public string Caption => _caption.Get();
-        private readonly IProperty<string> _caption = H.Property<string>(c => c
-            .On(e => e.Inn)
-            .On(e => e.Dose)
-            .On(e => e.Form)
-            .Set(e => e.Inn + " - " + (e.Form?.Caption??"") +  " (" + e.Dose + ")")
-        );
-
-        [Ignore]
-        public string IconPath => _iconPath.Get();
-        private readonly IProperty<string> _iconPath = H.Property<string>(c => c
-        .Set(e => e.Form?.IconPath)
-            .On(e => e.Form.IconPath).Update()
-        );
 
 
-        public int? FormId
-        {
-            get => _form.Id.Get();
-            set => _form.Id.Set(value);
-        }
+    public string Complement
+    {
+        get => _complement;
+        set => this.RaiseAndSetIfChanged(ref _complement, value);
+    }
+    string _complement = "";
 
-        [Ignore]
-        public Form Form
-        {
-            set => _form.Set(value);
-            get => _form.Get();
-        }
-        private readonly IForeign<Form> _form = H.Foreign<Form>();
+    public string Inn
+    {
+        get => _inn;
+        set => this.RaiseAndSetIfChanged(ref _inn, value);
+    }
+    string _inn = "";
 
-        public int? CategoryId
-        {
-            get => _category.Id.Get();
-            set => _category.Id.Set(value);
-        }
-        [Ignore]
-        public ProductCategory Category
-        {
-            get => _category.Get();
-            set => _category.Set(value);
-        }
-        private readonly IForeign<ProductCategory> _category = H.Foreign<ProductCategory>();
+    public string Dose
+    {
+        get => _dose;
+        set => this.RaiseAndSetIfChanged(ref _dose, value);
+    }
+    string _dose = "";
 
 
-        public static Product DesignModel => new Product
-        {
-            Inn = "Paracetamol",Dose ="20 mg",Note = "Design time model"
-        };
-     }
+    public string Note
+    {
+        get => _note;
+        set => this.RaiseAndSetIfChanged(ref _note, value);
+    }
+    string _note = "";
+
+    [Ignore]
+    public string Caption => _caption.Value;
+    readonly ObservableAsPropertyHelper<string> _caption;
+
+    [Ignore]
+    public string IconPath => _iconPath.Value;
+    readonly ObservableAsPropertyHelper<string> _iconPath;
+
+    public int? FormId
+    {
+        get => _form.Id;
+        set => _form.SetId(value);
+    }
+    [Ignore]
+    public Form? Form
+    {
+        get => _form.Value;
+        set => FormId = value?.Id;
+    }
+    readonly ForeignPropertyHelper<Product,Form> _form;
+
+    public int? CategoryId
+    {
+        get => _category.Id;
+        set => _category.SetId(value);
+    }
+    [Ignore]
+    public ProductCategory? Category
+    {
+        get => _category.Value;
+        set => CategoryId = value?.Id;
+    }
+    readonly ForeignPropertyHelper<Product,ProductCategory> _category;
+
+
+    public static Product DesignModel => new Product
+    {
+        Inn = "Paracetamol",
+        Dose = "20 mg",
+        Note = "Design time model"
+    };
 }

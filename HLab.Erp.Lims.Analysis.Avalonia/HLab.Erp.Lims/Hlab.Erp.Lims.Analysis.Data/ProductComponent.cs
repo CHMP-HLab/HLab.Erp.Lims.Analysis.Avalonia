@@ -1,41 +1,42 @@
 using HLab.Erp.Data;
-using HLab.Notify.PropertyChanged;
 using NPoco;
 
-namespace HLab.Erp.Lims.Analysis.Data
+namespace HLab.Erp.Lims.Analysis.Data;
+
+
+
+public class ProductComponent : Entity
 {
-    using H = HD<ProductComponent>;
-
-    public class ProductComponent : Entity
-    {
-        public ProductComponent() => H.Initialize(this);
-
-        public int? ParentId
-        {
-            get => _parent.Id.Get();
-            set => _parent.Id.Set(value);
-        }
-
-        [Ignore]
-        public Product Parent
-        {
-            set => _parent.Set(value);
-            get => _parent.Get();
-        }
-        private readonly IForeign<Product> _parent = H.Foreign<Product>();
-
-        public int? ChildId
-        {
-            get => _child.Id.Get();
-            set => _child.Id.Set(value);
-        }
-
-        [Ignore]
-        public Product Child
-        {
-            set => _child.Set(value);
-            get => _child.Get();
-        }
-        private readonly IForeign<Product> _child = H.Foreign<Product>();
+    public ProductComponent() {
+        _parent = Foreign(this, e => e.ParentId, e => e.Parent);
+        _child = Foreign(this, e => e.ChildId, e => e.Child);
     }
+
+    public int? ParentId
+    {
+        get => _parent.Id;
+        set => _parent.SetId(value);
+    }
+
+    [Ignore]
+    public Product Parent
+    {
+        set => ParentId = value.Id;
+        get => _parent.Value;
+    }
+    readonly ForeignPropertyHelper<ProductComponent, Product> _parent;
+
+    public int? ChildId
+    {
+        get => _child.Id;
+        set => _child.SetId(value);
+    }
+
+    [Ignore]
+    public Product Child
+    {
+        get => _child.Value;
+        set => ChildId = value.Id;
+    }
+    readonly ForeignPropertyHelper<ProductComponent, Product> _child;
 }

@@ -1,108 +1,103 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
-using HLab.Notify.PropertyChanged;
 using NPoco;
 
-namespace HLab.Erp.Lims.Analysis.Data
+namespace HLab.Erp.Lims.Analysis.Data;
+
+
+public class SampleForm : Entity, IFormTarget
 {
-    using H = HD<SampleForm>;
-    public class SampleForm : Entity, IFormTarget
+    public SampleForm() {
+        _formClass = Foreign(this, e => e.FormClassId, e => e.FormClass);
+        _sample = Foreign(this, e => e.SampleId, e => e.Sample);
+    }
+    
+    public int? FormClassId
     {
-        public SampleForm() => H.Initialize(this);
-        
-        public int? FormClassId
-        {
-            get => _formClass.Id.Get();
-            set => _formClass.Id.Set(value);
-        }
-        [Ignore]
-        public FormClass FormClass
-        {
-            set => _formClass.Set(value);
-            get => _formClass.Get();
-        }
-        private readonly IForeign<FormClass> _formClass = H.Foreign<FormClass>();
+        get => _formClass.Id;
+        set => _formClass.SetId(value);
+    }
+    [Ignore]
+    public FormClass FormClass
+    {
+        get => _formClass.Value;
+        set => FormClassId = value.Id;
+    }
+    ForeignPropertyHelper<SampleForm,FormClass> _formClass;
 
-        [Ignore] IFormClass IFormTarget.FormClass 
-        {
-            get => FormClass;
-            set => FormClass = (FormClass)value;
-        }
+    [Ignore] IFormClass IFormTarget.FormClass 
+    {
+        get => FormClass;
+        set => FormClass = (FormClass)value;
+    }
 
 
-        public int? SampleId
-        {
-            get => _sample.Id.Get();
-            set => _sample.Id.Set(value);
-        }
-        [Ignore]
-        public Sample Sample
-        {
-            set => _sample.Set(value);
-            get => _sample.Get();
-        }
-        private readonly IForeign<Sample> _sample = H.Foreign<Sample>();
+    public int? SampleId
+    {
+        get => _sample.Id;
+        set => _sample.SetId(value);
+    }
+    [Ignore]
+    public Sample Sample
+    {
+        get => _sample.Value;
+        set => SampleId = value.Id;
+    }
+    ForeignPropertyHelper<SampleForm,Sample> _sample;
 
 
-        public ConformityState ConformityId
-        {
-            get =>_conformityId.Get(); 
-            set =>_conformityId.Set(value); 
-        }
+    public ConformityState ConformityId
+    {
+        get =>_conformityId; 
+        set =>SetAndRaise(ref _conformityId, value); 
+    }
+    private ConformityState _conformityId = ConformityState.None;
 
-        public void Reset()
-        {
-            throw new NotImplementedException();
-        }
+    public void Reset()
+    {
+        throw new NotImplementedException();
+    }
 
-        private readonly IProperty<ConformityState> _conformityId = H.Property<ConformityState>();
+    public string SpecificationValues
+    {
+        get => _specificationValues; 
+        set => SetAndRaise(ref _specificationValues,value);
+    }
+    private string _specificationValues ;
 
+    public string ResultValues
+    {
+        get => _resultValues; 
+        set => SetAndRaise(ref _resultValues,value);
+    }
+    private string _resultValues ;
 
-        public string SpecificationValues
-        {
-            get => _specificationValues.Get(); 
-            set => _specificationValues.Set(value);
-        }
-        private readonly IProperty<string> _specificationValues = H.Property<string>();
+    public bool MandatoryDone
+    {
+        get => _mandatoryDone; 
+        set => SetAndRaise(ref _mandatoryDone,value);
+    }
+    private bool _mandatoryDone ;
 
-        public string ResultValues
-        {
-            get => _resultValues.Get(); 
-            set => _resultValues.Set(value);
-        }
-        private readonly IProperty<string> _resultValues = H.Property<string>();
+    public bool SpecificationDone
+    {
+        get => _specificationDone; 
+        set => SetAndRaise(ref _specificationDone,value);
+    }
+    private bool _specificationDone ;
 
-        public bool MandatoryDone
-        {
-            get => _mandatoryDone.Get(); 
-            set => _mandatoryDone.Set(value);
-        }
-        private readonly IProperty<bool> _mandatoryDone = H.Property<bool>();
+    byte[] IFormTarget.Code => FormClass.Code;
+    string IFormTarget.TestName { get; set; }
+    string IFormTarget.Description { get; set; }
+    string IFormTarget.Specification { get; set; }
+    string IFormTarget.Conformity { get; set; }
+    string IFormTarget.Result { get; set; }
 
-        public bool SpecificationDone
-        {
-            get => _specificationDone.Get(); 
-            set => _specificationDone.Set(value);
-        }
-        private readonly IProperty<bool> _specificationDone = H.Property<bool>();
-
-        byte[] IFormTarget.Code => FormClass.Code;
-        string IFormTarget.TestName { get; set; }
-        string IFormTarget.Description { get; set; }
-        string IFormTarget.Specification { get; set; }
-        string IFormTarget.Conformity { get; set; }
-        string IFormTarget.Result { get; set; }
-
-        string IFormTarget.DefaultTestName => FormClass.Name;
-        string IFormTarget.Name
-        {
-            get => FormClass.Name;
-            set => FormClass.Name = value;
-        }
+    string IFormTarget.DefaultTestName => FormClass.Name;
+    string IFormTarget.Name
+    {
+        get => FormClass.Name;
+        set => FormClass.Name = value;
     }
 }
