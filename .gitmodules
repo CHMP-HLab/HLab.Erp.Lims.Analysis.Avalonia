@@ -4,3 +4,6 @@
 [submodule "HLab.Erp.Lims.Analysis.Avalonia/HLab.Avalonia"]
 	path = HLab.Erp.Lims.Analysis.Avalonia/HLab.Avalonia
 	url = https://github.com/mgth/HLab.Avalonia
+[submodule "HLab.Erp.Lims.Analysis.Avalonia/HLab.Erp"]
+	path = HLab.Erp.Lims.Analysis.Avalonia/HLab.Erp
+	url = https://github.com/mgth/HLab.Erp
