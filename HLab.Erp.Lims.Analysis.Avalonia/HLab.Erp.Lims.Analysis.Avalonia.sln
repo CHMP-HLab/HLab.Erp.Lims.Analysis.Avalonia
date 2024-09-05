@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HLab.Erp.Lims", "HLab.Erp.L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLab.Base.ReactiveUI", "HLab.Core\HLab.Base.ReactiveUI\HLab.Base.ReactiveUI.csproj", "{CE95D017-7F77-461D-ABA5-E9F5FADE4B05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLab.Mvvm.ReactiveUI", "HLab.Core\HLab.Mvvm.ReactiveUI\HLab.Mvvm.ReactiveUI.csproj", "{390C8A36-5430-4192-AA78-471E87855FB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -545,6 +547,30 @@ Global
 		{CE95D017-7F77-461D-ABA5-E9F5FADE4B05}.ReleaseDebug|x64.Build.0 = Release|Any CPU
 		{CE95D017-7F77-461D-ABA5-E9F5FADE4B05}.ReleaseDebug|x86.ActiveCfg = Release|Any CPU
 		{CE95D017-7F77-461D-ABA5-E9F5FADE4B05}.ReleaseDebug|x86.Build.0 = Release|Any CPU
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Debug|x64.ActiveCfg = Debug|x64
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Debug|x64.Build.0 = Debug|x64
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Debug|x86.ActiveCfg = Debug|x86
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Debug|x86.Build.0 = Debug|x86
+		{390C8A36-5430-4192-AA78-471E87855FB4}.DebugRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{390C8A36-5430-4192-AA78-471E87855FB4}.DebugRelease|Any CPU.Build.0 = Release|Any CPU
+		{390C8A36-5430-4192-AA78-471E87855FB4}.DebugRelease|x64.ActiveCfg = Release|x64
+		{390C8A36-5430-4192-AA78-471E87855FB4}.DebugRelease|x64.Build.0 = Release|x64
+		{390C8A36-5430-4192-AA78-471E87855FB4}.DebugRelease|x86.ActiveCfg = Release|x86
+		{390C8A36-5430-4192-AA78-471E87855FB4}.DebugRelease|x86.Build.0 = Release|x86
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Release|x64.ActiveCfg = Release|x64
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Release|x64.Build.0 = Release|x64
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Release|x86.ActiveCfg = Release|x86
+		{390C8A36-5430-4192-AA78-471E87855FB4}.Release|x86.Build.0 = Release|x86
+		{390C8A36-5430-4192-AA78-471E87855FB4}.ReleaseDebug|Any CPU.ActiveCfg = Release|Any CPU
+		{390C8A36-5430-4192-AA78-471E87855FB4}.ReleaseDebug|Any CPU.Build.0 = Release|Any CPU
+		{390C8A36-5430-4192-AA78-471E87855FB4}.ReleaseDebug|x64.ActiveCfg = Release|x64
+		{390C8A36-5430-4192-AA78-471E87855FB4}.ReleaseDebug|x64.Build.0 = Release|x64
+		{390C8A36-5430-4192-AA78-471E87855FB4}.ReleaseDebug|x86.ActiveCfg = Release|x86
+		{390C8A36-5430-4192-AA78-471E87855FB4}.ReleaseDebug|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -570,6 +596,7 @@ Global
 		{175140C0-BE10-40D1-AEB0-8625C2A97019} = {74680561-9536-4DB7-B97F-117BDF4A4888}
 		{D6EF0809-1EAD-4613-9F44-37CA9324EA78} = {74680561-9536-4DB7-B97F-117BDF4A4888}
 		{CE95D017-7F77-461D-ABA5-E9F5FADE4B05} = {AA5C9D7E-018F-4B22-82C5-955C8FB17EE7}
+		{390C8A36-5430-4192-AA78-471E87855FB4} = {AA5C9D7E-018F-4B22-82C5-955C8FB17EE7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7336FDE1-8CD2-4476-9466-9CA8EA19BB46}
