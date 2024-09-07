@@ -33,5 +33,12 @@ public static class AnalysisRights
     //Products
     public static readonly AclRight AnalysisProductCreate = AclRight.Get();
 
+    //Manufacturer
+    public static readonly AclRight AnalysisManufacturerCreate = AclRight.Get();
 
+    //TestClass
+    public static readonly AclRight AnalysisTestClassCreate = AclRight.Get();
+
+    //StatQuery
+    public static readonly AclRight AnalysisStatQueryCreate = AclRight.Get();
 }

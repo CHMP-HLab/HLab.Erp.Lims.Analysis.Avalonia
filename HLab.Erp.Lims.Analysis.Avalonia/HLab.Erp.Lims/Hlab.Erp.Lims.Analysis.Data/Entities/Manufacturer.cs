@@ -4,7 +4,7 @@ using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 public partial class Manufacturer : Corporation, ILocalCache, IListableModel
 {
@@ -17,7 +17,7 @@ public partial class Manufacturer : Corporation, ILocalCache, IListableModel
     [Ignore]
     public string Caption => _caption.Value;
     ObservableAsPropertyHelper<string> _caption;
-    static string GetCaption(int id, string name) => (id < 0 && string.IsNullOrEmpty(name)) ? "Nouveau client" : name;
+    static string GetCaption(int id, string name) => id < 0 && string.IsNullOrEmpty(name) ? "{New manufacturer}" : name;
 
     [Ignore] public string IconPath => _iconPath.Value;
     ObservableAsPropertyHelper<string> _iconPath;

@@ -2,23 +2,28 @@ using HLab.Erp.Data;
 using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
+using System.Reactive.Linq;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 public partial class Form : Entity, IListableModel, ILocalCache
 {
-    public static Form DesignModel => new() { Name="Tablet"};
+    public static Form DesignModel => new() { Name = "Tablet" };
 
     public override string ToString() => Name;
 
     public Form()
     {
-        _caption = this.WhenAnyValue(e => e.Name).ToProperty(this, e => e.Caption);
+
+        _caption = this
+            .WhenAnyValue(f => f.Name)
+            .Select(name => string.IsNullOrWhiteSpace(name) ? "{New product form}" : name)
+            .ToProperty(this, f => f.Caption);
     }
 
     public string Name
     {
-        get => _name; 
+        get => _name;
         set => SetAndRaise(ref _name, value);
     }
     string _name = "";

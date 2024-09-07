@@ -1,13 +1,12 @@
 ﻿using HLab.Erp.Acl;
-using HLab.Erp.Lims.Analysis.Data;
-using HLab.Erp.Lims.Analysis.Data.Workflows;
+using HLab.Erp.Lims.Analysis.Data.Entities;
 using HLab.Erp.Workflows;
 
-namespace HLab.Erp.Lims.Analysis.Module.Products;
+namespace HLab.Erp.Lims.Analysis.Data.Workflows;
 
-public class ProductWorkflow : Workflow<ProductWorkflow,Product>
+public class ProductWorkflow : Workflow<ProductWorkflow, Product>
 {
-    public ProductWorkflow(Product product,IDataLocker locker):base(product,locker)
+    public ProductWorkflow(Product product, IDataLocker locker) : base(product, locker)
     {
         CurrentStage = Created;
         Update();
@@ -15,7 +14,7 @@ public class ProductWorkflow : Workflow<ProductWorkflow,Product>
 
     public static Stage Created = Stage.Create(c => c
         .Caption("^Reception entry").Icon("Icons/Sample/PackageOpened")
-        .SetState(() => Created)
+            .SetStage(() => Created)
     );
 
     protected override Stage TargetStage { get; set; }

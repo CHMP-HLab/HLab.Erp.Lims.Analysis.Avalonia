@@ -2,12 +2,23 @@ using HLab.Erp.Data;
 using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
+using System;
+using System.Reactive.Linq;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
+
+public static class ObservablesExtensions
+{
+    public static IObservable<string> IfNullOrWhiteSpace(this IObservable<string> obs, string value)
+        => obs.Select(s => string.IsNullOrWhiteSpace(s) ? value : s);
+}
 
 public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
 {
-    public Pharmacopoeia() => _caption = this.WhenAnyValue(e => e.Name).ToProperty(this, e => e.Caption);
+    public Pharmacopoeia() => _caption = this
+        .WhenAnyValue(e => e.Name)
+        .IfNullOrWhiteSpace("{New pharmacopoeia}")
+        .ToProperty(this, e => e.Caption);
 
     public string Name
     {
@@ -22,6 +33,12 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
         set => SetAndRaise(ref _abbreviation, value);
     }
     private string _abbreviation = "";
+    //public string LastVersion
+    //{
+    //    get => _lastVersion;
+    //    set => SetAndRaise(ref _lastVersion,value);
+    //}
+    //private string _lastVersion = "";
 
 
     public string Url

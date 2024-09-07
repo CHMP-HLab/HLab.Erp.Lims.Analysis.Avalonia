@@ -6,16 +6,22 @@ using HLab.Erp.Lims.Analysis.Data.Workflows;
 using NPoco;
 using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 public partial class SampleTest : Entity
     , IEntityWithIcon
     , IEntityWithColor
-    ,IFormTarget
+    , IFormTarget
 {
 
-    public SampleTest() 
+    public SampleTest()
     {
+        _sample = Foreign(this, e => e.SampleId, e => e.Sample);
+        _testClass = Foreign(this, e => e.TestClassId, e => e.TestClass);
+        _result = Foreign(this, e => e.ResultId, e => e.Result);
+        _pharmacopoeia = Foreign(this, e => e.PharmacopoeiaId, e => e.Pharmacopoeia);
+        _productComponent = Foreign(this, e => e.ProductComponentId, e => e.ProductComponent);
+
         _color = this
             .WhenAnyValue(e => e.TestClass.Color)
             .ToProperty(this, e => e.Color);
@@ -40,7 +46,7 @@ public partial class SampleTest : Entity
         get => _sample.Value;
         set => SampleId = value.Id;
     }
-    ForeignPropertyHelper<SampleTest,Sample> _sample;
+    readonly ForeignPropertyHelper<SampleTest, Sample> _sample;
 
 
     public int? TestClassId
@@ -54,23 +60,23 @@ public partial class SampleTest : Entity
         get => _testClass.Value;
         set => TestClassId = value.Id;
     }
-    ForeignPropertyHelper<Sample,TestClass> _testClass;
+    readonly ForeignPropertyHelper<SampleTest, TestClass> _testClass;
 
 
     public int? TestStateId
     {
         get => _testStateId;
-        set => SetAndRaise(ref _testStateId,value);
+        set => SetAndRaise(ref _testStateId, value);
     }
-    private int? _testStateId ;
+    private int? _testStateId;
 
 
     public int? UserId
     {
         get => _userId;
-        set => SetAndRaise(ref _userId,value);
+        set => SetAndRaise(ref _userId, value);
     }
-    private int? _userId ;
+    private int? _userId;
 
 
     public string Method { get; set; }
@@ -78,36 +84,36 @@ public partial class SampleTest : Entity
     public int? PurposeId
     {
         get => _purposeId;
-        set => SetAndRaise(ref _purposeId,value);
+        set => SetAndRaise(ref _purposeId, value);
     }
-    private int? _purposeId ;
+    private int? _purposeId;
 
     public string Note
     {
         get => _note;
-        set => SetAndRaise(ref _note,value);
+        set => SetAndRaise(ref _note, value);
     }
-    private string _note ;
+    private string _note;
 
     public int? Validation
     {
         get => _validation;
-        set => SetAndRaise(ref _validation,value);
+        set => SetAndRaise(ref _validation, value);
     }
-    private int? _validation ;
+    private int? _validation;
 
 
     public int? ValidatorId
     {
         get => _validatorId;
-        set => SetAndRaise(ref _validatorId,value);
+        set => SetAndRaise(ref _validatorId, value);
     }
-    private int? _validatorId ;
+    private int? _validatorId;
 
     public string TestName
     {
         get => _testName;
-        set => SetAndRaise(ref _testName,value);
+        set => SetAndRaise(ref _testName, value);
     }
     private string _testName = "";
 
@@ -115,7 +121,7 @@ public partial class SampleTest : Entity
     public string Version
     {
         get => _version;
-        set => SetAndRaise(ref _version,value);
+        set => SetAndRaise(ref _version, value);
     }
     private string _version = "";
 
@@ -132,7 +138,7 @@ public partial class SampleTest : Entity
     public string Description
     {
         get => _description;
-        set => SetAndRaise(ref _description,value);
+        set => SetAndRaise(ref _description, value);
     }
     private string _description = "";
 
@@ -142,7 +148,7 @@ public partial class SampleTest : Entity
     public string Specification
     {
         get => _specification;
-        set => SetAndRaise(ref _specification,value);
+        set => SetAndRaise(ref _specification, value);
     }
     private string _specification = "";
 
@@ -150,58 +156,58 @@ public partial class SampleTest : Entity
     public string Values
     {
         get => _values;
-        set => SetAndRaise(ref _values,value);
+        set => SetAndRaise(ref _values, value);
     }
     private string _values = "";
 
     string IFormTarget.SpecificationValues
     {
-        get => Values; 
+        get => Values;
         set => Values = value;
     }
 
     public DateTime? ScheduledDate
     {
         get => _scheduledDate;
-        set => SetAndRaise(ref _scheduledDate,value);
+        set => SetAndRaise(ref _scheduledDate, value);
     }
-    private DateTime? _scheduledDate ;
+    private DateTime? _scheduledDate;
 
     public DateTime? StartDate
     {
         get => _startDate;
-        set => SetAndRaise(ref _startDate,value);
+        set => SetAndRaise(ref _startDate, value);
     }
-    private DateTime? _startDate ;
+    private DateTime? _startDate;
 
 
     public DateTime? EndDate
     {
         get => _endDate;
-        set => SetAndRaise(ref _endDate,value);
+        set => SetAndRaise(ref _endDate, value);
     }
-    private DateTime? _endDate ;
+    private DateTime? _endDate;
 
 
     public string OosNo
     {
         get => _oosNo;
-        set => SetAndRaise(ref _oosNo,value);
+        set => SetAndRaise(ref _oosNo, value);
     }
     private string _oosNo = "";
 
     public int? Order
     {
         get => _order;
-        set => SetAndRaise(ref _order,value);
+        set => SetAndRaise(ref _order, value);
     }
-    private int? _order ;
+    private int? _order;
 
 
     public string PharmacopoeiaVersion
     {
         get => _pharmacopoeiaVersion;
-        set => SetAndRaise(ref _pharmacopoeiaVersion,value);
+        set => SetAndRaise(ref _pharmacopoeiaVersion, value);
     }
     private string _pharmacopoeiaVersion = "";
 
@@ -217,16 +223,29 @@ public partial class SampleTest : Entity
         get => _pharmacopoeia.Value;
         set => PharmacopoeiaId = value.Id;
     }
-    ForeignPropertyHelper<SampleTest,Pharmacopoeia> _pharmacopoeia;
+    ForeignPropertyHelper<SampleTest, Pharmacopoeia> _pharmacopoeia;
+
+    public int? ProductComponentId
+    {
+        get => _productComponent.Id;
+        set => _productComponent.SetId(value);
+    }
+    [Ignore]
+    public ProductComponent ProductComponent
+    {
+        get => _productComponent.Value;
+        set => ProductComponentId = value?.Id;
+    }
+    ForeignPropertyHelper<SampleTest, ProductComponent> _productComponent;
 
     [Column("Stage")]
     public string StageId
     {
         get => _stageId;
-        set => SetAndRaise(ref _stageId,value);
+        set => SetAndRaise(ref _stageId, value);
     }
-    private string _stageId ;
-    
+    private string _stageId;
+
     [Ignore]
     public SampleTestWorkflow.Stage Stage
     {
@@ -239,9 +258,9 @@ public partial class SampleTest : Entity
     public bool SpecificationDone
     {
         get => _specificationDone;
-        set => SetAndRaise(ref _specificationDone,value);
+        set => SetAndRaise(ref _specificationDone, value);
     }
-    private bool _specificationDone ;
+    private bool _specificationDone;
 
     // RESULT
     public int? ResultId
@@ -249,19 +268,20 @@ public partial class SampleTest : Entity
         get => _result.Id;
         set => _result.SetId(value);
     }
-    [Ignore]public SampleTestResult Result
+    [Ignore]
+    public SampleTestResult Result
     {
         get => _result.Value;
         set => ResultId = value.Id;
     }
-    ForeignPropertyHelper<SampleTest,SampleTestResult> _result;
+    ForeignPropertyHelper<SampleTest, SampleTestResult> _result;
 
     bool IFormTarget.MandatoryDone
     {
-        get => Result?.MandatoryDone??true;
+        get => Result?.MandatoryDone ?? true;
         set
         {
-            if(Result!=null)
+            if (Result != null)
                 Result.MandatoryDone = value;
         }
     }
@@ -271,7 +291,7 @@ public partial class SampleTest : Entity
         get => Result?.Conformity;
         set
         {
-            if(Result!=null)
+            if (Result != null)
                 Result.Conformity = value;
         }
     }
@@ -279,26 +299,27 @@ public partial class SampleTest : Entity
     public double Progress
     {
         get => _progress;
-        set => SetAndRaise(ref _progress,value);
+        set => SetAndRaise(ref _progress, value);
     }
-    private double _progress ;
+    private double _progress;
 
-    [Ignore] string IFormTarget.Result
+    [Ignore]
+    string IFormTarget.Result
     {
         get => Result?.Result;
         set
         {
-            if(Result!=null)
+            if (Result != null)
                 Result.Result = value;
         }
     }
 
-    ConformityState IFormTarget.ConformityId 
+    ConformityState IFormTarget.ConformityId
     {
-        get => Result?.ConformityId??ConformityState.NotChecked;
+        get => Result?.ConformityId ?? ConformityState.NotChecked;
         set
         {
-            if(Result!=null)
+            if (Result != null)
                 Result.ConformityId = value;
         }
     }
@@ -308,7 +329,7 @@ public partial class SampleTest : Entity
         get => Result?.Values;
         set
         {
-            if(Result!=null)
+            if (Result != null)
                 Result.Values = value;
         }
     }
@@ -325,10 +346,12 @@ public partial class SampleTest : Entity
 
 
     [Ignore]
-    public ObservableQuery<SampleTestResult> Results => _results.Get();
-    private ObservableQuery<SampleTestResult> _results = H.Property<ObservableQuery<SampleTestResult>>(c => c
-        .Foreign(e => e.SampleTestId)
-    );
+    public ObservableQuery<SampleTestResult> Results;
+    // TODO : implement
+
+    //private ObservableQuery<SampleTestResult> _results = H.Property<ObservableQuery<SampleTestResult>>(c => c
+    //    .Foreign(e => e.SampleTestId)
+    //);
 
 
     [Ignore] string IFormTarget.DefaultTestName => TestClass?.Name;
@@ -336,10 +359,6 @@ public partial class SampleTest : Entity
     IFormClass IFormTarget.FormClass { get => TestClass; set => TestClass = (TestClass)value; }
     string IFormTarget.Name { get => TestClass?.Name; set => throw new NotImplementedException(); }
 
-    public void Reset()
-    {
-        throw new NotImplementedException();
-    }
 
 
 }

@@ -3,17 +3,17 @@ using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 public partial class Product : Entity, ILocalCache, IListableModel
 {
     public Product()
     {
         _caption = this.WhenAnyValue(
-            e => e.Inn,
-            e => e.Dose,
+            e => e.Name,
+            e => e.Variant,
             e => e.Form,
-            (inn, dose, form) => inn + " - " + (form?.Caption ?? "") + " (" + dose + ")")
+            (name, variant, form) => $"{name} - {form.Caption} ({variant})")
             .ToProperty(this, e => e.Caption);
 
         _iconPath = this.WhenAnyValue(e => e.Form.IconPath)
@@ -24,35 +24,36 @@ public partial class Product : Entity, ILocalCache, IListableModel
 
     }
 
+    public string Name
+    {
+        get => _name;
+        set => SetAndRaise(ref _name,value);
+    }
 
+    string _name = "";
+
+
+    public string Variant
+    {
+        get => _variant;
+        set => SetAndRaise(ref _variant,value);
+    }
+
+    string _variant = "";
 
 
     public string Complement
     {
         get => _complement;
-        set => this.RaiseAndSetIfChanged(ref _complement, value);
+        set => SetAndRaise(ref _complement, value);
     }
     string _complement = "";
-
-    public string Inn
-    {
-        get => _inn;
-        set => this.RaiseAndSetIfChanged(ref _inn, value);
-    }
-    string _inn = "";
-
-    public string Dose
-    {
-        get => _dose;
-        set => this.RaiseAndSetIfChanged(ref _dose, value);
-    }
-    string _dose = "";
 
 
     public string Note
     {
         get => _note;
-        set => this.RaiseAndSetIfChanged(ref _note, value);
+        set => SetAndRaise(ref _note, value);
     }
     string _note = "";
 
@@ -70,12 +71,12 @@ public partial class Product : Entity, ILocalCache, IListableModel
         set => _form.SetId(value);
     }
     [Ignore]
-    public Form? Form
+    public Form Form
     {
         get => _form.Value;
-        set => FormId = value?.Id;
+        set => FormId = value.Id;
     }
-    readonly ForeignPropertyHelper<Product,Form> _form;
+    readonly ForeignPropertyHelper<Product, Form> _form;
 
     public int? CategoryId
     {
@@ -83,18 +84,18 @@ public partial class Product : Entity, ILocalCache, IListableModel
         set => _category.SetId(value);
     }
     [Ignore]
-    public ProductCategory? Category
+    public ProductCategory Category
     {
         get => _category.Value;
-        set => CategoryId = value?.Id;
+        set => CategoryId = value.Id;
     }
-    readonly ForeignPropertyHelper<Product,ProductCategory> _category;
+    readonly ForeignPropertyHelper<Product, ProductCategory> _category;
 
 
     public static Product DesignModel => new Product
     {
-        Inn = "Paracetamol",
-        Dose = "20 mg",
+        Name = "Paracetamol",
+        Variant = "20 mg",
         Note = "Design time model"
     };
 }

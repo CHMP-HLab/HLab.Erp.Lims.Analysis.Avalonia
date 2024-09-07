@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Reactive.Linq;
 using HLab.Erp.Acl;
 using HLab.Erp.Data.Observables;
+using HLab.Erp.Lims.Analysis.Data.Entities;
 using HLab.Erp.Workflows;
+using ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Workflows;
-
-
 
 public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
 {
@@ -15,18 +15,18 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
     {
         _sampleTests = sampleTests;
         var id = sample.Id;
-        _sampleTests.AddFilter(() => e => e.SampleId == id);
+        _sampleTests?.AddFilter(() => e => e.SampleId == id);
 
-        H<SampleWorkflow>.Initialize(this);
-            
-        var task = UpdateChildrenAsync();
+        this.WhenAnyValue(e => e.Target.Stage).Do(e => SetStage(e)).Subscribe();
+        this.WhenAnyValue(e => e.Locker.IsActive).Do(e => UpdateChildren()).Subscribe();
+
+        UpdateChildren();
         SetStage(sample.Stage);
     }
 
-    public async Task UpdateChildrenAsync()
+        public void UpdateChildren()
     {
-        _sampleTests.Update(); // TODO : should be async
-        Update();
+            _sampleTests?.Update(Update);
     }
 
 
@@ -36,34 +36,26 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
         set => Target.Stage = value;
     }
 
-    private ITrigger _ = H<SampleWorkflow>.Trigger(c => c
-
-        .On(e => e.Target.Stage)
-        .Do((a,p) =>
+        protected override Stage TargetPreviousStage
         {
-            a.SetStage(a.Target.Stage);
-        })
-
-        .On(e => e.Locker.IsActive)
-        .Do(async (swf,p) =>
-        {
-            await swf.UpdateChildrenAsync();
-        })
-    );
+            get => StageFromName(Target.PreviousStageId);
+            set => Target.PreviousStageId = value.Name;
+        }
 
 
     //########################################################
     // RECEPTION
 
     public static Stage Reception = Stage.CreateDefault(c => c
-        .Caption("{Reception entry}").Icon("Icons/Sample/PackageOpened|Icons/Validations/Edit")
-        .SetState(() => Reception)
+        .Caption("{Reception entry}")
+        .Icon("Icons/Sample/PackageOpened|Icons/Validations/Edit")
+        .SetStage(() => Reception)
     );
 
     public static Action SignReception = Action.Create(c => c
         .Caption("{Sign}").Icon("Icons/Validations/Sign")
-        .FromState(() => Reception)
-        .ToState(() => ReceptionCheck)
+        .FromStage(() => Reception)
+        .ToStage(() => ReceptionCheck)
         .NeedRight(()=>AnalysisRights.AnalysisReceptionSign)
         .Sign()
     );
@@ -110,17 +102,17 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
 
 
     public static Action CheckReception = Action.Create(c => c
-        .Caption(w => "{Check}").Icon(w => "Icons/Workflows/Check")
-        .FromState(() => ReceptionCheck)
-        .ToState(() => Monograph)
+            .Caption(w => "{Check}").Icon(w => "Icons/Workflows/CheckResult")
+        .FromStage(() => ReceptionCheck)
+        .ToStage(() => Monograph)
         .NeedRight(()=>AnalysisRights.AnalysisReceptionCheck)
         .Sign()
     );
 
     public static Action ReceptionAskForCorrection = Action.Create(c => c
         .Caption(w => "{Ask for correction}").Icon(w => "Icons/Workflows/Correct")
-        .FromState(() => ReceptionCheck)
-        .ToState(() => ReceptionCorrectionAsked)
+        .FromStage(() => ReceptionCheck)
+        .ToStage(() => ReceptionCorrectionAsked)
         .NeedRight(()=>AnalysisRights.AnalysisReceptionCheck)
         .Backward()
         .Sign()
@@ -138,8 +130,8 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
 
     public static Action CorrectReception = Action.Create(c => c
        .Caption(w => "{Correct reception}").Icon(w => "Icons/Workflows/Correct")
-       .FromState(() => ReceptionCorrectionAsked,()=>ReceptionCheck,()=>Monograph)
-       .ToState(() => Reception)
+       .FromStage(() => ReceptionCorrectionAsked,()=>ReceptionCheck,()=>Monograph)
+       .ToStage(() => Reception)
        .NeedRight(()=>AnalysisRights.AnalysisReceptionSign)
        .Backward()
        .Sign()
@@ -151,19 +143,44 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
 
     public static Stage Monograph = Stage.Create(c => c
         .Caption(w => "{Monograph Entry}").Icon(w => "Icons/Workflows/Monograph|Icons/Validations/Edit")
-        .WhenStateAllowed(() => ReceptionCheck)
+        .WhenStageAllowed(() => ReceptionCheck)
         .Progress(0.3).Action(w => w.Target.Progress=0.3)
     );
 
+        public static Action AskForMonographCorrection = Action.Create(c => c
+           .Caption(w => "{Ask for correction}").Icon(w => "Icons/Workflows/Monograph|Icons/Workflows/Correct")
+           .NeedRight(() => AnalysisRights.AnalysisMonographValidate)
+           .FromStage(() => Monograph, () => MonographClosed, () => Planning, () => Production)
+           .ToStage(() => MonographReviewNeeded)
+            .Sign()
+            .Motivate()
+            .Backward()
+            );
+
     public static Action ValidateMonograph = Action.Create(c => c
        .Caption(w => "{Validate monograph}").Icon(w => "Icons/Workflows/Monograph|Icons/Validations/Validated")
-       .NeedRight(()=>AnalysisRights.AnalysisReceptionCheck)
-       .FromState(() => Monograph)
-       .ToState(() => MonographClosed)
+           .NeedRight(() => AnalysisRights.AnalysisMonographValidate)
+       .FromStage(() => Monograph)
+       .ToStage(() => MonographClosed)
         .Sign()
         );
 
     //########################################################
+        // MONOGRAPH REVIEW NEEDED
+
+        public static Stage MonographReviewNeeded = Stage.Create(c => c
+            .Caption(w => "{Monograph Review Needed}").Icon(w => "Icons/Workflows/Monograph|Icons/Workflows/Correct")
+            .WhenStageAllowed(() => Monograph)
+        );
+
+        public static Action CorrectMonograph = Action.Create(c => c
+            .Caption("{Correct}").Icon("Icons/Workflows/Correct")
+            .FromStage(() => MonographReviewNeeded)
+            .NeedRight(() => AnalysisRights.AnalysisMonographValidate)
+            .ToStage(() => Monograph)
+        );
+
+        //########################################################
     // MONOGRAPH VALIDATED
 
     public static Stage MonographClosed = Stage.Create(c => c
@@ -178,11 +195,13 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
             .WithMessage(w => "{Missing} : {Pharmacopoeia version}")
             .HighlightField(w => w.Target.PharmacopoeiaVersion)
 
-        .NotWhen(w => w._sampleTests.Count == 0)
+            .NotWhen(w => (w._sampleTests?.Count ?? 0) == 0)
             .WithMessage(w => "{Missing} : {Tests}")
 //                .HighlightField(w => w.Target.Pharmacopoeia)
 
-        .When(w => {
+            .When(w =>
+            {
+                if (w._sampleTests != null)
             foreach (SampleTest test in w._sampleTests)
             {
                 if (test.Stage == SampleTestWorkflow.Specifications) return false; 
@@ -195,8 +214,8 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
 
     public static Action ValidatePlanning = Action.Create(c => c
        .Caption(w => "{Schedule}").Icon(w => "Icons/Workflows/Planning|Icons/Validations/Validated")
-       .FromState(() => MonographClosed)
-       .ToState(() => Planning)
+       .FromStage(() => MonographClosed)
+       .ToStage(() => Planning)
        .NeedRight(()=>AnalysisRights.AnalysisSchedule)
     );
 
@@ -206,13 +225,13 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
     public static Stage Planning = Stage.Create(c => c
         .Caption(w => "{Scheduling}").Icon(w => "icons/Workflows/Planning|Icons/Validations/Edit")
         .Progress(0.5).Action(w => w.Target.Progress=0.5)
-        .WhenStateAllowed(() => MonographClosed)
+        .WhenStageAllowed(() => MonographClosed)
     );
 
     public static Action ValidateProduction = Action.Create(c => c
        .Caption(w => "{Put into production}").Icon(w => "Icons/Workflows/Production")
-       .FromState(() => Planning)
-       .ToState(() => Production)
+           .FromStage(() => Planning, () => MonographClosed)
+       .ToStage(() => Production)
        .NeedRight(()=>AnalysisRights.AnalysisSchedule)
     );
 
@@ -222,7 +241,7 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
     public static Stage Production = Stage.Create(c => c
         .Caption(w => "{Production}").Icon(w => "Icons/Workflows/Production")
         .Progress(0.6).Action(w => w.Target.Progress=0.6)
-        .WhenStateAllowed(() => MonographClosed)
+        .WhenStageAllowed(() => MonographClosed)
     );
 
     //########################################################
@@ -230,34 +249,45 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
 
     public static Action ValidateCertificate = Action.Create( c => c
         .Caption(w => "{Validate Certificate}").Icon(w => "Icons/Workflows/Certificate")
-        .FromState(() => Production)
-        .Action(w=>{
+        .FromStage(() => Production)
+           .Action(w =>
+           {
             w.Target.NotificationDate = DateTime.Today;
             w.Target.Validator = WorkflowAnalysisExtension.Acl.Connection.User;
             })
-        .ToState(() => Certificate)
+        .ToStage(() => Certificate)
         .NeedRight(()=>AnalysisRights.AnalysisCertificateCreate)
         .Sign()
     );
 
-    public static Action AbortSample = Action.Create( c => c
+        public static Action AbortAnalysis = Action.Create(c => c
         .Caption(w => "{Abort analysis}").Icon(w => "Icons/Workflows/Aborted")
-        .FromState(()=>Reception, ()=>Monograph, ()=>Planning, () => Production, ()=>Certificate, ()=>Closed)
-        .Action(w=>{
+        .FromStage(()=>Reception, ()=>Monograph, ()=>Planning, () => Production, ()=>Certificate, ()=>Closed)
+           .Action(w =>
+           {
             w.Target.Validator = WorkflowAnalysisExtension.Acl.Connection.User;
+               w.Target.PreviousStageId = w.TargetStage.Name;
             })
-        .ToState(() => Aborted)
+        .ToStage(() => Aborted)
         .NeedRight(()=>AnalysisRights.AnalysisCertificateCreate)
         .Sign().Motivate()
     );
 
     public static Stage Certificate = Stage.Create(c => c
-        .Caption(w => "{Certificate}").Icon(w => "Icons/Workflows/Certificate")
+            .Caption(w => "{Certificate}")
+            .Icon(w => "Icons/Workflows/Certificate")
         .Progress(0.9).Action(w => w.Target.Progress=0.9)
-        .WhenStateAllowed(()=>MonographClosed)
-        .When(w => {
+        .WhenStageAllowed(()=>MonographClosed)
+            .NotWhen(w => string.IsNullOrWhiteSpace(w.Target.ReportReference))
+                .WithMessage(w => "{Missing} : {Certificate Reference}")
+                .HighlightField(w => w.Target.ReportReference)
+            .When(w =>
+            {
             var validated = 0;
             var invalidated = 0;
+
+                if (w._sampleTests == null) return false;
+
             foreach (SampleTest test in w._sampleTests) 
             {
                 if (test.Stage == SampleTestWorkflow.ValidatedResults) validated++; 
@@ -270,9 +300,21 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
         .WithMessage(w=>"{Some tests not validated yet}")
     );
 
+    //########################################################
+    // ABORTED
+
     public static Stage Aborted = Stage.Create(c => c
         .Caption(w => "{Aborted}").Icon(w => "Icons/Workflows/Aborted")
-        .Progress(1.0).Action(w => w.Target.Progress=1.0)
+            .Progress(1.0)
+            .Action(w => w.Target.Progress = 1.0)
+        );
+
+        public static Action ReopenAnalysis = Action.Create(c => c
+           .Caption(w => "{Reopen analysis}").Icon(w => "Icons/Workflows/Redo")
+           .FromStage(() => Aborted)
+           .ToStage(w => StageFromName(w.Target.PreviousStageId))
+           .NeedRight(() => AnalysisRights.AnalysisCertificateCreate)
+           .Sign().Motivate()
     );
 
     //########################################################
@@ -280,8 +322,8 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
 
     public static Action Close = Action.Create( c => c
         .Caption(w => "{Close}").Icon(w => "Icons/Workflows/Close")
-        .FromState(() => Certificate)
-        .ToState(() => Closed)
+        .FromStage(() => Certificate)
+        .ToStage(() => Closed)
         .NeedPharmacist()
         .Sign()
     );
@@ -289,9 +331,10 @@ public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
     public static Stage Closed = Stage.Create(c => c
         .Caption(w => "{Closed}").Icon(w => "Icons/Workflows/Closed")
         .Progress(1.0).Action(w => w.Target.Progress=1.0)
-        .SetState(() => Closed)
+        .SetStage(() => Closed)
         //.When(w => w.Target.Invoiced).WithMessage(w => "{Not billed}")
         //.When(w => w.Target.Paid).WithMessage(w => "{Not Payed}")
-        .WhenStateAllowed(() => Certificate)
+        .WhenStageAllowed(() => Certificate)
     );
+    
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 using HLab.Base.Fluent;
+using HLab.Base.ReactiveUI;
 using HLab.Core.Annotations;
 using HLab.Erp.Acl;
 using HLab.Erp.Workflows;
@@ -16,9 +18,10 @@ public class WorkFlowBootloader : IBootloader
         _acl = acl;
     }
 
-    public void Load(IBootContext bootstrapper)
+    public Task LoadAsync(IBootContext bootstrapper)
     {
         WorkflowAnalysisExtension.Acl = _acl;
+        return Task.CompletedTask;
     }
 }
 
@@ -26,7 +29,7 @@ public static class WorkflowAnalysisExtension
 {
     public static IAclService Acl { get; set; }
     public static IFluentConfigurator<IWorkflowConditionalObject<TWf>> NeedRight<TWf>(this IFluentConfigurator<IWorkflowConditionalObject<TWf>> t, Func<AclRight> right)
-        where TWf : NotifierBase, IWorkflow<TWf>
+        where TWf : ReactiveModel, IWorkflow<TWf>
     {
         return t.When(w => Acl.IsGranted(
                 right(),
@@ -34,7 +37,7 @@ public static class WorkflowAnalysisExtension
             .WithMessage(w => "{Not allowed} {need} " + right().Caption);
     }
     public static IFluentConfigurator<IWorkflowConditionalObject<TWf>> NeedAnyRight<TWf>(this IFluentConfigurator<IWorkflowConditionalObject<TWf>> t, params Func<AclRight>[] rights)
-        where TWf : NotifierBase, IWorkflow<TWf> => t.When(w =>
+        where TWf : ReactiveModel, IWorkflow<TWf> => t.When(w =>
                                                               {
                                                                   foreach (var right in rights)
                                                                       if (Acl.IsGranted(right(), w.User, w.Target)) return true;
@@ -48,7 +51,7 @@ public static class WorkflowAnalysisExtension
         });
 
     public static IFluentConfigurator<IWorkflowConditionalObject<TWf>> NeedPharmacist<TWf>(this IFluentConfigurator<IWorkflowConditionalObject<TWf>> t)
-        where TWf : NotifierBase, IWorkflow<TWf>
+        where TWf : ReactiveModel, IWorkflow<TWf>
     {
         return t.NotWhen(w => !Acl.IsGranted(
                 AnalysisRights.AnalysisCertificateCreate,
@@ -65,7 +68,7 @@ public static class WorkflowAnalysisExtension
     }
 
     public static IFluentConfigurator<IWorkflowConditionalObject<TWf>> NeedPlanner<TWf>(this IFluentConfigurator<IWorkflowConditionalObject<TWf>> t)
-        where TWf : NotifierBase, IWorkflow<TWf>
+        where TWf : ReactiveModel, IWorkflow<TWf>
     {
         return t.NotWhen(w => !Acl.IsGranted(AnalysisRights.AnalysisSchedule
             ,w.User,w.Target))
@@ -73,8 +76,8 @@ public static class WorkflowAnalysisExtension
     }
 
     public static IFluentConfigurator<IWorkflowConditionalObject<TWf>> 
-        SetState<TWf>(this IFluentConfigurator<IWorkflowConditionalObject<TWf>> t, Func<Workflow<TWf>.Stage> getter)
-        where TWf : NotifierBase, IWorkflow<TWf>
+        SetStage<TWf>(this IFluentConfigurator<IWorkflowConditionalObject<TWf>> t, Func<Workflow<TWf>.Stage> getter)
+        where TWf : ReactiveModel, IWorkflow<TWf>
     {
         return t
             .Action(async w =>

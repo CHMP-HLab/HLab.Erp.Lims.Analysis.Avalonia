@@ -23,7 +23,7 @@ public static class TestClassUnitTestExtension
         return false;
     }
 
-    private class Entry
+        class Entry
     {
         public string Name;
         public string Reference;
@@ -32,7 +32,7 @@ public static class TestClassUnitTestExtension
         public override string ToString() => $@"{Name} = {Reference} <> {Value}";
     }
 
-    private static IEnumerable<Entry> CompareValues(string v1, string v2)
+        static IEnumerable<Entry> CompareValues(string v1, string v2)
     {
         var a1 = v1.Split("■").ToHashSet();
         var a2 = v2.Split("■").ToHashSet();

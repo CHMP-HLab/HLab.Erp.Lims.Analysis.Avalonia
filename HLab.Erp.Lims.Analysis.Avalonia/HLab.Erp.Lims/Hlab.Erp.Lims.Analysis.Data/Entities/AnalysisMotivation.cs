@@ -2,16 +2,19 @@ using HLab.Erp.Data;
 using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
+using System.Reactive.Linq;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 public partial class AnalysisMotivation : Entity, IListableModel, ILocalCache
 {
-    public static AnalysisMotivation DesignModel => new() { Name="My Form"};
+    public static AnalysisMotivation DesignModel => new() { Name = "My Form" };
 
-    public AnalysisMotivation() 
+    public AnalysisMotivation()
     {
-        _caption = this.WhenAnyValue(e => e.Name)
+        _caption = this
+            .WhenAnyValue(e => e.Name)
+            .Select(name => string.IsNullOrWhiteSpace(name) ? "{New motivation}" : $"{{Motivation}}\n{name}")
             .ToProperty(this, e => e.Caption);
     }
 
@@ -20,7 +23,7 @@ public partial class AnalysisMotivation : Entity, IListableModel, ILocalCache
 
     public string Name
     {
-        get => _name; set => SetAndRaise(ref _name,value);
+        get => _name; set => SetAndRaise(ref _name, value);
     }
     string _name = "";
 
@@ -28,7 +31,7 @@ public partial class AnalysisMotivation : Entity, IListableModel, ILocalCache
     public string IconPath
     {
         get => _iconPath;
-        set => SetAndRaise(ref _iconPath,value);
+        set => SetAndRaise(ref _iconPath, value);
     }
     string _iconPath = "";
 

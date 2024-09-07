@@ -10,12 +10,13 @@ using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 
 public partial class Sample : Entity, IListableModel
 {
-    public Sample() {
+    public Sample()
+    {
 
         _validator = Foreign(this, e => e.ValidatorId, e => e.Validator);
 
@@ -46,27 +47,25 @@ public partial class Sample : Entity, IListableModel
         _stage = this
             .WhenAnyValue(e => e.StageId, id => SampleWorkflow.StageFromName(id))
             .ToProperty(this, e => e.Stage);
-
-
     }
 
     public string FileId
     {
         get => _fileId;
-        set => SetAndRaise(ref _fileId,value);
+        set => SetAndRaise(ref _fileId, value);
     }
-    private string _fileId ;
+    private string _fileId;
 
 
     public int? UserId
     {
-        get => _user.Id; 
+        get => _user.Id;
         set => _user.SetId(value);
     }
     [Ignore]
     public User User
     {
-        get => _user.Value; 
+        get => _user.Value;
         set => UserId = value.Id;
     }
     ForeignPropertyHelper<Sample, User> _user;
@@ -75,40 +74,40 @@ public partial class Sample : Entity, IListableModel
     public string Reference
     {
         get => _reference;
-        set => SetAndRaise(ref _reference,value);
+        set => SetAndRaise(ref _reference, value);
     }
-    private string _reference ;
+    private string _reference;
 
 
     public string CustomerReference
     {
         get => _customerReference;
-        set => SetAndRaise(ref _customerReference,value);
+        set => SetAndRaise(ref _customerReference, value);
     }
-    private string _customerReference ;
+    private string _customerReference;
 
 
     public string ReportReference
     {
         get => _reportReference;
-        set => SetAndRaise(ref _reportReference,value);
+        set => SetAndRaise(ref _reportReference, value);
     }
-    private string _reportReference ;
+    private string _reportReference;
 
 
     public DateTime? ReceptionDate
     {
         get => _receptionDate;
-        set => SetAndRaise(ref _receptionDate,value);
+        set => SetAndRaise(ref _receptionDate, value);
     }
-    private DateTime? _receptionDate ;
+    private DateTime? _receptionDate;
 
 
     public string Worksheet
 
     {
         get => _worksheet;
-        set => SetAndRaise(ref _worksheet,value);
+        set => SetAndRaise(ref _worksheet, value);
     }
     private string _worksheet = "";
 
@@ -116,7 +115,7 @@ public partial class Sample : Entity, IListableModel
     public string CommercialName
     {
         get => _commercialName;
-        set => SetAndRaise(ref _commercialName,value);
+        set => SetAndRaise(ref _commercialName, value);
     }
     private string _commercialName = "";
 
@@ -124,7 +123,7 @@ public partial class Sample : Entity, IListableModel
     public string Batch
     {
         get => _batch;
-        set => SetAndRaise(ref _batch,value);
+        set => SetAndRaise(ref _batch, value);
     }
     private string _batch = "";
 
@@ -132,55 +131,55 @@ public partial class Sample : Entity, IListableModel
     public DateTime? ExpirationDate
     {
         get => _expirationDate;
-        set => SetAndRaise(ref _expirationDate,value);
+        set => SetAndRaise(ref _expirationDate, value);
     }
-    private DateTime? _expirationDate ;
+    private DateTime? _expirationDate;
 
 
     public bool ExpirationDayValid
     {
         get => _expirationDayValid;
-        set => SetAndRaise(ref _expirationDayValid,value);
+        set => SetAndRaise(ref _expirationDayValid, value);
     }
-    private bool _expirationDayValid ;
+    private bool _expirationDayValid;
 
 
     public DateTime? ManufacturingDate
     {
         get => _manufacturingDate;
-        set => SetAndRaise(ref _manufacturingDate,value);
+        set => SetAndRaise(ref _manufacturingDate, value);
     }
-    private DateTime? _manufacturingDate ;
+    private DateTime? _manufacturingDate;
 
 
     public bool ManufacturingDayValid
     {
         get => _manufacturingDayValid;
-        set => SetAndRaise(ref _manufacturingDayValid,value);
+        set => SetAndRaise(ref _manufacturingDayValid, value);
     }
-    private bool _manufacturingDayValid ;
-    
-    
+    private bool _manufacturingDayValid;
+
+
     public DateTime? SamplingDate
     {
         get => _samplingDate;
-        set => SetAndRaise(ref _samplingDate,value);
+        set => SetAndRaise(ref _samplingDate, value);
     }
-    private DateTime? _samplingDate ;
+    private DateTime? _samplingDate;
 
 
     public bool SamplingDayValid
     {
         get => _samplingDayValid;
-        set => SetAndRaise(ref _samplingDayValid,value);
+        set => SetAndRaise(ref _samplingDayValid, value);
     }
-    private bool _samplingDayValid ;
+    private bool _samplingDayValid;
 
 
     public string SamplingOrigin
     {
         get => _samplingOrigin;
-        set => SetAndRaise(ref _samplingOrigin,value);
+        set => SetAndRaise(ref _samplingOrigin, value);
     }
     private string _samplingOrigin = "";
 
@@ -188,7 +187,7 @@ public partial class Sample : Entity, IListableModel
     public string PharmacopoeiaVersion
     {
         get => _pharmacopoeiaVersion;
-        set => SetAndRaise(ref _pharmacopoeiaVersion,value);
+        set => SetAndRaise(ref _pharmacopoeiaVersion, value);
     }
     private string _pharmacopoeiaVersion = "";
 
@@ -196,15 +195,15 @@ public partial class Sample : Entity, IListableModel
     public bool InOriginalPackaging
     {
         get => _inOriginalPackaging;
-        set => SetAndRaise(ref _inOriginalPackaging,value);
+        set => SetAndRaise(ref _inOriginalPackaging, value);
     }
-    private bool _inOriginalPackaging ;
+    private bool _inOriginalPackaging;
 
 
     public string PrimaryPackaging
     {
         get => _primaryPackaging;
-        set => SetAndRaise(ref _primaryPackaging,value);
+        set => SetAndRaise(ref _primaryPackaging, value);
     }
     private string _primaryPackaging = "";
 
@@ -212,7 +211,7 @@ public partial class Sample : Entity, IListableModel
     public string SecondaryPackaging
     {
         get => _secondaryPackaging;
-        set => SetAndRaise(ref _secondaryPackaging,value);
+        set => SetAndRaise(ref _secondaryPackaging, value);
     }
     private string _secondaryPackaging = "";
 
@@ -220,15 +219,22 @@ public partial class Sample : Entity, IListableModel
     public double? ReceivedQuantity
     {
         get => _receivedQuantity;
-        set => SetAndRaise(ref _receivedQuantity,value);
+        set => SetAndRaise(ref _receivedQuantity, value);
     }
-    private double? _receivedQuantity ;
+    private double? _receivedQuantity;
 
+    public double? RemainingQuantity
+    {
+        get => _remainingQuantity;
+        set => SetAndRaise(ref _remainingQuantity,value);
+    }
+
+    double? _remainingQuantity ;
 
     public string Aspect
     {
         get => _aspect;
-        set => SetAndRaise(ref _aspect,value);
+        set => SetAndRaise(ref _aspect, value);
     }
     private string _aspect = "";
 
@@ -236,7 +242,7 @@ public partial class Sample : Entity, IListableModel
     public string Size
     {
         get => _size;
-        set => SetAndRaise(ref _size,value);
+        set => SetAndRaise(ref _size, value);
     }
     private string _size = "";
 
@@ -244,31 +250,31 @@ public partial class Sample : Entity, IListableModel
     public bool HasInstruction
     {
         get => _hasInstruction;
-        set => SetAndRaise(ref _hasInstruction,value);
+        set => SetAndRaise(ref _hasInstruction, value);
     }
-    private bool _hasInstruction ;
+    private bool _hasInstruction;
 
 
     public bool NoticeFr
     {
         get => _noticeFr;
-        set => SetAndRaise(ref _noticeFr,value);
+        set => SetAndRaise(ref _noticeFr, value);
     }
-    private bool _noticeFr ;
+    private bool _noticeFr;
 
 
     public bool NoticeEn
     {
         get => _noticeEn;
-        set => SetAndRaise(ref _noticeEn,value);
+        set => SetAndRaise(ref _noticeEn, value);
     }
-    private bool _noticeEn ;
+    private bool _noticeEn;
 
 
     public string InstructionLanguages
     {
         get => _instructionLanguages;
-        set => SetAndRaise(ref _instructionLanguages,value);
+        set => SetAndRaise(ref _instructionLanguages, value);
     }
     private string _instructionLanguages = "";
 
@@ -276,7 +282,7 @@ public partial class Sample : Entity, IListableModel
     public string StorageConditions
     {
         get => _storageConditions;
-        set => SetAndRaise(ref _storageConditions,value);
+        set => SetAndRaise(ref _storageConditions, value);
     }
     private string _storageConditions = "";
 
@@ -284,7 +290,7 @@ public partial class Sample : Entity, IListableModel
     public string Note
     {
         get => _note;
-        set => SetAndRaise(ref _note,value);
+        set => SetAndRaise(ref _note, value);
     }
     private string _note = "";
 
@@ -292,17 +298,17 @@ public partial class Sample : Entity, IListableModel
     public string Conclusion
     {
         get => _conclusion;
-        set => SetAndRaise(ref _conclusion,value);
+        set => SetAndRaise(ref _conclusion, value);
     }
     private string _conclusion = "";
 
 
-     public DateTime? NotificationDate
+    public DateTime? NotificationDate
     {
         get => _notificationDate;
-        set => SetAndRaise(ref _notificationDate,value);
+        set => SetAndRaise(ref _notificationDate, value);
     }
-    private DateTime? _notificationDate ;
+    private DateTime? _notificationDate;
 
 
     public int? ValidatorId
@@ -323,33 +329,33 @@ public partial class Sample : Entity, IListableModel
     public double Progress
     {
         get => _progress;
-        set => SetAndRaise(ref _progress,value);
+        set => SetAndRaise(ref _progress, value);
     }
-    private double _progress ;
+    private double _progress;
 
 
     public sbyte? Validation
     {
         get => _validation;
-        set => SetAndRaise(ref _validation,value);
+        set => SetAndRaise(ref _validation, value);
     }
-    private sbyte? _validation ;
+    private sbyte? _validation;
 
 
     public ConformityState ConformityId
     {
         get => _conformityId;
-        set => SetAndRaise(ref _conformityId,value);
+        set => SetAndRaise(ref _conformityId, value);
     }
-    private ConformityState _conformityId ;
+    private ConformityState _conformityId;
 
     [Column("Stage")]
     public string StageId
     {
         get => _stageId;
-        set => SetAndRaise(ref _stageId,value);
+        set => SetAndRaise(ref _stageId, value);
     }
-    private string _stageId ;
+    private string _stageId;
 
     [Ignore]
     public SampleWorkflow.Stage Stage
@@ -358,6 +364,13 @@ public partial class Sample : Entity, IListableModel
         set => StageId = value.Name;
     }
     ObservableAsPropertyHelper<SampleWorkflow.Stage> _stage;
+    public string PreviousStageId
+    {
+        get => _previousStageId;
+        set => SetAndRaise(ref _previousStageId,value);
+    }
+
+    string _previousStageId ;
 
 
     public int? CustomerId
@@ -425,52 +438,56 @@ public partial class Sample : Entity, IListableModel
         get => _analysisMotivation.Value;
         set => AnalysisMotivationId = value.Id;
     }
-    ForeignPropertyHelper<Sample, AnalysisMotivation> _analysisMotivation;
+    readonly ForeignPropertyHelper<Sample, AnalysisMotivation> _analysisMotivation;
 
-    [Ignore] public ObservableQuery<SampleTest> SampleTests => _sampleTests.Get();
-    private ObservableQuery<SampleTest> _sampleTests = H.Property<ObservableQuery<SampleTest>>(c => c
-        .Foreign(e => e.SampleId)
-    );
+    [Ignore] public ObservableQuery<SampleTest> SampleTests;
 
-    
+    // TODO: Implement SampleTests
+
+    //    => _sampleTests.Get();
+    //private ObservableQuery<SampleTest> _sampleTests = H.Property<ObservableQuery<SampleTest>>(c => c
+    //    .Foreign(e => e.SampleId)
+    //);
+
+
     [Ignore]
     public static Sample DesignModel => new Sample
     {
-            Reference = "0042/11/2019",
-            ReceivedQuantity = 100,
-            ReceptionDate = DateTime.Now,
-            Progress = 50,
-            User = User.DesignModel
+        Reference = "0042/11/2019",
+        ReceivedQuantity = 100,
+        ReceptionDate = DateTime.Now,
+        Progress = 50,
+        User = User.DesignModel
 
     };
 
     public bool Invoiced
     {
         get => _invoiced;
-        set => SetAndRaise(ref _invoiced,value);
+        set => SetAndRaise(ref _invoiced, value);
     }
-    private bool _invoiced ;
+    private bool _invoiced;
 
 
     public bool Paid
     {
         get => _paid;
-        set => SetAndRaise(ref _paid,value);
+        set => SetAndRaise(ref _paid, value);
     }
-    private bool _paid ;
+    private bool _paid;
 
 
     public string InvoiceNo
     {
         get => _invoiceNo;
-        set => SetAndRaise(ref _invoiceNo,value);
+        set => SetAndRaise(ref _invoiceNo, value);
     }
-    private string _invoiceNo ;
+    private string _invoiceNo;
 
     [Ignore]
     public bool Expired => _expired.Value;
-    ObservableAsPropertyHelper<bool> _expired; 
-    
+    ObservableAsPropertyHelper<bool> _expired;
+
 
     [Ignore]
     public TimeSpan Life => _life.Value;

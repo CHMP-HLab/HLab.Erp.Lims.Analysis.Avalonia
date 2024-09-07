@@ -1,24 +1,45 @@
+using System;
 using System.Collections.Generic;
+using System.Reactive.Linq;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
 using NPoco;
+using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
-    , IEntityWithIcon
     , IEntityWithColor
 {
-    public TestClass() { }
+
+    public TestClass()
+    {
+        _caption = this
+            .WhenAnyValue(e => e.Name)
+            .IfNullOrWhiteSpace("{New Test}")
+            //.Select(name => name)
+            .ToProperty(this, e => e.Caption)
+            ;
+        _category = Foreign(this, e => e.CategoryId, e => e.Category);
+    }
 
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name,value);
+        set => SetAndRaise(ref _name, value);
     }
     private string _name = "";
 
+    public string IconPath
+    {
+        get => _iconPath;
+        set => SetAndRaise(ref _iconPath, value);
+    }
+    private string _iconPath = "";
+
+    [Ignore] public string Caption => _caption.Value;
+    readonly ObservableAsPropertyHelper<string> _caption;
 
     public string Version
     {
@@ -27,14 +48,19 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     }
     private string _version = "";
 
-
     public byte[] Code
     {
         get => _code;
         set => SetAndRaise(ref _code,value);
     }
-    private byte[] _code ;
+    private byte[] _code = Array.Empty<byte>();
 
+    public byte[] Binary
+    {
+        get => _binary;
+        set => SetAndRaise(ref _binary,value);
+    }
+    byte[] _binary = Array.Empty<byte>() ;
 
     public int? Order
     {
@@ -42,7 +68,6 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
         set => SetAndRaise(ref _order,value);
     }
     private int? _order ;
-
 
     public int? CategoryId
     {
@@ -55,7 +80,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
         get => _category.Value;
         set => CategoryId = value.Id;
     }
-    ForeignPropertyHelper<TestClass,TestCategory> _category;
+    readonly ForeignPropertyHelper<TestClass,TestCategory> _category;
 
     [Ignore]
     public virtual ICollection<SampleTest> SampleTests { get; set; }
@@ -93,17 +118,12 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     [Ignore]
     public int? Color => 0;
 
-    [Ignore]
-    public string Caption => _caption.Get();
-    private string _caption = H.Property<string>(c => c.Bind(e => e.Name));
-
-    public string IconPath
+    public bool ComponentAware
     {
-        get => _iconPath;
-        set => SetAndRaise(ref _iconPath,value);
+        get => _componentAware;
+        set => SetAndRaise(ref _componentAware,value);
     }
-
-    private string _iconPath ;
+    bool _componentAware ;
 
     public static TestClass DesignModel => new TestClass
     {

@@ -2,14 +2,15 @@
 using HLab.Erp.Data;
 using NPoco;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 
 
 public class TestClassUnitTest : Entity, IFormTarget
 {
-    public TestClassUnitTest() {
-        _testClass = Foreign(this,e => e.TestClassId, e => e.TestClass);
+    public TestClassUnitTest()
+    {
+        _testClass = Foreign(this, e => e.TestClassId, e => e.TestClass);
     }
 
     public int? TestClassId
@@ -17,13 +18,15 @@ public class TestClassUnitTest : Entity, IFormTarget
         get => _testClass.Id;
         set => _testClass.SetId(value);
     }
-    [Ignore] public TestClass TestClass
+    [Ignore]
+    public TestClass TestClass
     {
         get => _testClass.Value;
         set => TestClassId = value.Id;
     }
-    ForeignPropertyHelper<TestClassUnitTest,TestClass> _testClass;
-    [Ignore] IFormClass IFormTarget.FormClass 
+    ForeignPropertyHelper<TestClassUnitTest, TestClass> _testClass;
+    [Ignore]
+    IFormClass IFormTarget.FormClass
     {
         get => TestClass;
         set => TestClass = (TestClass)value;
@@ -35,28 +38,28 @@ public class TestClassUnitTest : Entity, IFormTarget
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name,value);
+        set => SetAndRaise(ref _name, value);
     }
 
     private string _name = "";
     public string ResultValues
     {
         get => _resultValues;
-        set => SetAndRaise(ref _resultValues,value);
+        set => SetAndRaise(ref _resultValues, value);
     }
     private string _resultValues = "";
 
     public string SpecificationValues
     {
         get => _specificationValues;
-        set => SetAndRaise(ref _specificationValues,value);
+        set => SetAndRaise(ref _specificationValues, value);
     }
     private string _specificationValues = "";
 
     public string TestName
     {
         get => _testName;
-        set => SetAndRaise(ref _testName,value);
+        set => SetAndRaise(ref _testName, value);
     }
 
     private string _testName = "";
@@ -64,35 +67,35 @@ public class TestClassUnitTest : Entity, IFormTarget
     public string Description
     {
         get => _description;
-        set => SetAndRaise(ref _description,value);
+        set => SetAndRaise(ref _description, value);
     }
     private string _description = "";
 
     public string Specification
     {
         get => _specification;
-        set => SetAndRaise(ref _specification,value);
+        set => SetAndRaise(ref _specification, value);
     }
     private string _specification = "";
-    
+
     public bool SpecificationDone
     {
         get => _specificationDone;
-        set => SetAndRaise(ref _specificationDone,value);
+        set => SetAndRaise(ref _specificationDone, value);
     }
     private bool _specificationDone = false;
 
     public string Result
     {
         get => _result;
-        set => SetAndRaise(ref _result,value);
+        set => SetAndRaise(ref _result, value);
     }
     private string _result = "";
 
     public ConformityState ConformityId
     {
         get => _conformityId;
-        set => SetAndRaise(ref _conformityId,value);
+        set => SetAndRaise(ref _conformityId, value);
     }
 
     public void Reset()
@@ -105,14 +108,14 @@ public class TestClassUnitTest : Entity, IFormTarget
     public bool MandatoryDone
     {
         get => _mandatoryDone;
-        set => SetAndRaise(ref _mandatoryDone,value);
+        set => SetAndRaise(ref _mandatoryDone, value);
     }
     private bool _mandatoryDone = false;
 
     public string Conformity
     {
         get => _conformity;
-        set => SetAndRaise(ref _conformity,value);
+        set => SetAndRaise(ref _conformity, value);
     }
     private string _conformity = "";
 

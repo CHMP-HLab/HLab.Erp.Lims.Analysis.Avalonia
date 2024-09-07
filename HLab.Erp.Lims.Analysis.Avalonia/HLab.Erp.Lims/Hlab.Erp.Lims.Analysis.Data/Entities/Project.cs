@@ -1,10 +1,11 @@
 ﻿using HLab.Erp.Data;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 public class Project : Entity
 {
-    public Project() {
+    public Project()
+    {
         _parent = Foreign(this, e => e.ParentId, e => e.Parent);
     }
 
@@ -24,7 +25,7 @@ public class Project : Entity
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name,value);
+        set => SetAndRaise(ref _name, value);
     }
     private string _name = "";
 

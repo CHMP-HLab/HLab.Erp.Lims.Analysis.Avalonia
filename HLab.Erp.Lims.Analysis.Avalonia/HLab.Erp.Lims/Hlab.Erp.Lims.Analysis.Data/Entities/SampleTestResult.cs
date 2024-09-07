@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Reactive.Linq;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
 using NPoco;
+using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Data;
+namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 
 
@@ -13,8 +15,16 @@ public partial class SampleTestResult : Entity, IFormTarget
 //        , IEntityWithIcon
 //        , IEntityWithColor
 {
-    public SampleTestResult() { }
+    public SampleTestResult() {
+        // = H.Property<SampleTestResultWorkflow.Stage>(c => c
+        //.Set(e => SampleTestResultWorkflow.StageFromName(e.StageId))
+        //.On(e => e.StageId)
+        //.Update()
+        _stage = this.WhenAnyValue(e => e.StageId)
+            .Select(SampleTestResultWorkflow.StageFromName)
+            .ToProperty(this, e => e.Stage);
 
+    }
 
     //public int? Color => _color.Get();
     //private int? _color = H.Property<int?>(c => c.OneWayBind(e => e.SampleTest.TestClass.Color));
@@ -24,41 +34,37 @@ public partial class SampleTestResult : Entity, IFormTarget
 
     public int? SampleTestId
     {
-        get => _sampleTestId;
-        set => SetAndRaise(ref _sampleTestId,value);
+        get => _sampleTest.Id;
+        set => _sampleTest.SetId(value);
     }
-
-    private int? _sampleTestId ;
 
     [Ignore]
     public virtual SampleTest SampleTest
     {
-        get => _sampleTest;
+        get => _sampleTest.Value;
         set => SampleTestId = value?.Id;
     }
-
-
-    private SampleTest _sampleTest = H.Property<SampleTest>(c => c.Foreign(e => e.SampleTestId));
+    ForeignPropertyHelper<SampleTestResult, SampleTest> _sampleTest;
 
     public int? UserId
     {
         get => _userId;
-        set => SetAndRaise(ref _userId,value);
+        set => SetAndRaise(ref _userId, value);
     }
 
-    private int? _userId ;
+    private int? _userId;
 
     public string Values
     {
         get => _values;
-        set => SetAndRaise(ref _values,value);
+        set => SetAndRaise(ref _values, value);
     }
     private string _values = "";
 
     public string Result
     {
         get => _result;
-        set => SetAndRaise(ref _result,value);
+        set => SetAndRaise(ref _result, value);
     }
     private string _result = "";
 
@@ -66,73 +72,76 @@ public partial class SampleTestResult : Entity, IFormTarget
     public string Conformity
     {
         get => _conformity;
-        set => SetAndRaise(ref _conformity,value);
+        set => SetAndRaise(ref _conformity, value);
     }
     private string _conformity = "";
 
     public DateTime? Start
     {
         get => _start;
-        set => SetAndRaise(ref _start,value);
+        set => SetAndRaise(ref _start, value);
     }
-    private DateTime? _start ;
+    private DateTime? _start;
 
     public DateTime? End
     {
         get => _end;
-        set => SetAndRaise(ref _end,value);
+        set => SetAndRaise(ref _end, value);
     }
 
-    private DateTime? _end ;
+    private DateTime? _end;
 
 
     public ConformityState ConformityId
     {
         get => _conformityId;
-        set => SetAndRaise(ref _conformityId,value);
+        set
+        {
+#if DEBUG
+            if (_conformityId != default && _conformityId != value)
+            {
+                if (Stage != SampleTestResultWorkflow.Running)
+                {
+                    throw new Exception("Invalid state");
+                }
+            }
+#endif
+            _conformityId = value;
+        }
     }
 
-    void IFormTarget.Reset()
-    {
-        throw new NotImplementedException();
-    }
-
-    private ConformityState _conformityId ;
+    private ConformityState _conformityId;
 
 
     public int? Validation
     {
         get => _validation;
-        set => SetAndRaise(ref _validation,value);
+        set => SetAndRaise(ref _validation, value);
     }
-    private int? _validation ;
+    private int? _validation;
 
     [Column("Stage")]
     public string StageId
     {
         get => _stageId;
-        set => SetAndRaise(ref _stageId,value);
+        set => SetAndRaise(ref _stageId, value);
     }
-    private string _stageId ;
+    private string _stageId;
 
     [Ignore]
     public SampleTestResultWorkflow.Stage Stage
     {
-        get => _stage;
+        get => _stage.Value;
         set => StageId = value.Name;
     }
-    private SampleTestResultWorkflow.Stage _stage = H.Property<SampleTestResultWorkflow.Stage>(c => c
-        .Set(e => SampleTestResultWorkflow.StageFromName(e.StageId))
-        .On(e => e.StageId)
-        .Update()
-    );
+    ObservableAsPropertyHelper<SampleTestResultWorkflow.Stage> _stage;
 
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name,value);
+        set => SetAndRaise(ref _name, value);
     }
-    private string _name ;
+    private string _name;
 
 
     string IFormTarget.ResultValues
@@ -144,33 +153,35 @@ public partial class SampleTestResult : Entity, IFormTarget
     public bool MandatoryDone
     {
         get => _mandatoryDone;
-        set => SetAndRaise(ref _mandatoryDone,value);
+        set => SetAndRaise(ref _mandatoryDone, value);
     }
 
-    private bool _mandatoryDone ;
+    private bool _mandatoryDone;
     public string Note
     {
         get => _note;
-        set => SetAndRaise(ref _note,value);
+        set => SetAndRaise(ref _note, value);
     }
-    private string _note ;
+    private string _note;
 
     public double Progress
     {
         get => _progress;
-        set => SetAndRaise(ref _progress,value);
+        set => SetAndRaise(ref _progress, value);
     }
-    private double _progress ;
+    private double _progress;
 
     // TEST
 
-    [Ignore] string IFormTarget.Description
+    [Ignore]
+    string IFormTarget.Description
     {
         get => SampleTest.Description;
         set => SampleTest.Description = value;
     }
 
-    [Ignore] string IFormTarget.TestName
+    [Ignore]
+    string IFormTarget.TestName
     {
         get => SampleTest.TestName;
         set => SampleTest.TestName = value;
@@ -196,5 +207,5 @@ public partial class SampleTestResult : Entity, IFormTarget
 
     string IFormTarget.DefaultTestName => ((IFormTarget)SampleTest).DefaultTestName;
 
-    IFormClass IFormTarget.FormClass { get => SampleTest.TestClass; set => throw new NotImplementedException(); }
+    public IFormClass FormClass { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 }
