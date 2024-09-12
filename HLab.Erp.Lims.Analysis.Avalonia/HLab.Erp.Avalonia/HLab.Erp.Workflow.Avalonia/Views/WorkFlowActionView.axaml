@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="HLab.Erp.Workflow.Avalonia.Views.WorkFlowActionView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:workflows="clr-namespace:HLab.Erp.Workflows"
+             xmlns:viewModels="clr-namespace:HLab.Erp.Workflows.ViewModels;assembly=HLab.Erp.Workflows"
+             xmlns:icons="clr-namespace:HLab.Icons.Avalonia.Icons;assembly=HLab.Icons.Avalonia"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             mc:Ignorable="d" 
+             d:DesignHeight="70" d:DesignWidth="300" 
+             d:DataContext="{d:DesignInstance {x:Type viewModels:WorkflowActionViewModel}}"
+			 x:DataType="viewModels:WorkflowActionViewModel"
+			 >
+    <Grid RowDefinitions="Auto,Auto">
+        <Button
+            
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Stretch" 
+            FontWeight="Black" 
+            Command="{Binding Command}"
+            >
+            <Grid ColumnDefinitions="*,10,*">
+                <icons:IconView 
+					Foreground="{DynamicResource HLab.Brushes.Foreground}" 
+					Width="20" Height="20" 
+					Path="{Binding Model.IconPath}"/>
+				
+                <lang:Localize Grid.Column="2" 
+							   VerticalAlignment="Center" 
+							   Id="{Binding Model.Caption}"/>
+            </Grid>
+        </Button>
+        <Grid Grid.Row ="1">
+            <ItemsControl ItemsSource="{Binding Model.Messages}" MaxHeight="50">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <lang:Localize 
+                                HorizontalAlignment="Left" 
+                                Foreground="{DynamicResource MahApps.Brushes.SystemControlErrorTextForeground}"  
+                                VerticalAlignment="Center" Id="{Binding}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</UserControl>

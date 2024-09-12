@@ -3,14 +3,15 @@ using System.Reactive.Linq;
 using HLab.Erp.Acl;
 using HLab.Erp.Data.Observables;
 using HLab.Erp.Lims.Analysis.Data.Entities;
-using HLab.Erp.Workflows;
+using HLab.Erp.Workflows.Extensions;
+using HLab.Erp.Workflows.Models;
 using ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Workflows;
 
 public class SampleWorkflow : Workflow<SampleWorkflow,Sample>
 {
-    private readonly ObservableQuery<SampleTest> _sampleTests;
+    readonly ObservableQuery<SampleTest> _sampleTests;
     public SampleWorkflow(Sample sample, DataLocker<Sample> locker, ObservableQuery<SampleTest> sampleTests):base(sample,locker)
     {
         _sampleTests = sampleTests;

@@ -27,6 +27,7 @@ public class Project : Entity
         get => _name;
         set => SetAndRaise(ref _name, value);
     }
-    private string _name = "";
+
+    string _name = "";
 
 }

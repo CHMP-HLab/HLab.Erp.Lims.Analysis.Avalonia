@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="HLab.Erp.Workflow.Avalonia.Views.WorkflowLockerView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:avalonia="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             xmlns:viewModels="clr-namespace:HLab.Erp.Workflows.ViewModels;assembly=HLab.Erp.Workflows"
+             xmlns:acl="clr-namespace:HLab.Erp.Acl;assembly=HLab.Erp.Acl"
+             xmlns:extensions="clr-namespace:HLab.Erp.Workflows.Extensions;assembly=HLab.Erp.Workflows"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             HorizontalAlignment="Stretch"
+			 x:DataType="extensions:IWorkFlowLockerViewModel"
+			 >
+	
+        <Grid HorizontalAlignment="Stretch">
+            <Border Background="#000000" Opacity="0.3">
+                <Border.Effect>
+                    <BlurEffect Radius="5" />
+                </Border.Effect>
+            </Border>
+
+            <Grid Margin="5" ColumnDefinitions="*,10,Auto">
+
+                <avalonia:ViewLocator 
+					HorizontalAlignment="Stretch" 
+					IsEnabled="{Binding Locker.IsActive}" 
+					Model="{Binding Workflow}"/>
+				
+                <avalonia:ViewLocator 
+					VerticalAlignment="Top" 
+					Grid.Column="2" 
+					IsEnabled="True" 
+					Model="{Binding Locker}"/>
+				
+            </Grid>       
+        </Grid>
+            
+</UserControl>

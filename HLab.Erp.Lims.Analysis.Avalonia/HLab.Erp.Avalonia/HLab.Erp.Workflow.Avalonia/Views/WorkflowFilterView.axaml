@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="HLab.Erp.Workflow.Avalonia.Views.WorkflowFilterView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:icons="clr-namespace:HLab.Icons.Avalonia.Icons;assembly=HLab.Icons.Avalonia"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:models="clr-namespace:HLab.Erp.Workflows.Models;assembly=HLab.Erp.Workflows"
+             xmlns:application="clr-namespace:HLab.Mvvm.Application;assembly=HLab.Mvvm.Application"
+             xmlns:core="clr-namespace:HLab.Erp.Core;assembly=HLab.Erp.Core"
+             xmlns:entityLists="clr-namespace:HLab.Erp.Core.Wpf.EntityLists;assembly=HLab.Erp.Core.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:DataType="entityLists:ListableEntityListViewModel"
+			 >
+    <Grid>
+            <!--<entitySelectors:ForeignView
+                Model="{Binding Value}"
+                ListClass="{Binding ListClass}"
+                />-->
+
+            <ListBox ItemsSource="{Binding List}" >
+                <ItemsControl.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="IsSelected" Value="{Binding Selected, Mode=TwoWay}"/>
+                    </Style>
+                </ItemsControl.Styles>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <!--<CheckBox  IsChecked="{Binding Selected}" />-->
+                            <icons:IconView Path="{Binding IconPath}" MaxHeight="15"/>
+                            <lang:LocalizedLabel Text="{Binding Caption}" Margin="5,0,0,0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
+
+    </Grid>
+</UserControl>

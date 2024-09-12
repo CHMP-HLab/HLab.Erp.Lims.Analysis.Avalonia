@@ -1,0 +1,218 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controlsEx="clr-namespace:HLab.Base.Wpf.ControlsEx;assembly=HLab.Base.Wpf"
+                    xmlns:lang="clr-namespace:HLab.Localization.Wpf.Lang;assembly=HLab.Localization.Wpf"
+                    xmlns:controls="clr-namespace:HLab.Base.Wpf.Controls;assembly=HLab.Base.Wpf">
+
+    <Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="3"/>
+    </Style>
+
+    <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.SemiTransparentGray}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="3"/>
+        <Setter Property="Padding" Value="0"/>
+
+        <!--<Setter Property="Template">
+          <Setter.Value>
+             <ControlTemplate TargetType="{x:Type TextBox}">
+                <ScrollViewer   Margin="0"
+                                                     x:Name="PART_ContentHost"
+                                                     Background="{TemplateBinding Background}"
+                                                     BorderThickness="0"
+                                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                     Foreground="{TemplateBinding Foreground}"
+                                                     Padding="0" />
+ 
+                      <ControlTemplate.Triggers>
+ 
+                         <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="Background" TargetName="PART_ContentHost" Value="Transparent" />
+                         </Trigger>
+                      </ControlTemplate.Triggers>
+                   </ControlTemplate>
+                </Setter.Value>
+             </Setter>
+ 
+       <Style.Triggers>
+          <Trigger Property="IsReadOnly" Value="True">
+             <Trigger.Setters>
+                <Setter Property="Background" Value="Transparent" />
+             </Trigger.Setters>
+          </Trigger>
+       </Style.Triggers>-->
+    </Style>
+
+    <Style TargetType="{x:Type controls:TextBoxEx}" x:Key="{x:Type controls:TextBoxEx}" BasedOn="{StaticResource {x:Type TextBox}}"/>
+
+    <Style TargetType="{x:Type lang:Localize}" x:Key="{x:Type lang:Localize}">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.SemiTransparentGray}"/>
+        <Setter Property="FontSize" Value="3"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <Style TargetType="{x:Type CheckBox}" x:Key="{x:Type CheckBox}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <BulletDecorator Background="Transparent">
+                        <BulletDecorator.Bullet>
+                            <Grid>
+                                <ContentControl Content="{TemplateBinding CheckBox.Content}" Margin="4,0,0,0"/>
+                                <!--<Rectangle 
+                                    Width="3" 
+                                    Height="3" 
+                                    Stroke="{DynamicResource HLab.Brushes.Foreground}" 
+                                    StrokeThickness="0.25" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Left" 
+                                    RenderTransformOrigin="0.5,0.5" 
+                                    Fill="{TemplateBinding Background}">
+                                    
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <TranslateTransform Y="0" X="0"/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                    
+                                </Rectangle>-->
+                                <Border 
+                                    Width="3.5" 
+                                    Height="3.5" 
+                                    BorderBrush="{DynamicResource HLab.Brushes.Foreground}" 
+                                    CornerRadius="0.5"
+                                    BorderThickness="0.25" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Left" 
+                                    RenderTransformOrigin="0.5,0.5" 
+                                    Background="{TemplateBinding Background}">
+
+                                    <Border.RenderTransform>
+                                        <TransformGroup>
+                                            <TranslateTransform Y="0" X="0"/>
+                                        </TransformGroup>
+                                    </Border.RenderTransform>
+
+                                </Border>
+
+                                <!--<Rectangle Name="coche" Visibility="Collapsed" Width="2" Height="2" Fill="{DynamicResource HLab.Brushes.Foreground}" StrokeThickness="0" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <TranslateTransform Y="0" X="0.5"/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>-->
+
+                                <Border CornerRadius="0.5" Name="coche" Visibility="Collapsed" Width="2.2" Height="2.5" Background="{DynamicResource HLab.Brushes.Foreground}" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <TransformGroup>
+                                            <TranslateTransform Y="0" X="0.55"/>
+                                        </TransformGroup>
+                                    </Border.RenderTransform>
+                                </Border>
+
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                    </BulletDecorator>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" TargetName="coche" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ComboBox}" x:Key="{x:Type ComboBox}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <Grid>
+                        <ToggleButton x:Name="ToggleButton" ClickMode="Press" Focusable="false" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                            <ToggleButton.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Rectangle Name="bouton" Stroke="{DynamicResource HLab.Brushes.Foreground}" StrokeThickness="0.25" Fill="{DynamicResource MahApps.Brushes.Gray5}" />
+                                        <Path Fill="{DynamicResource HLab.Brushes.Foreground}" Data="M 1,1.2 H 3 L2,3 Z" StrokeThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                                            <Setter Property="Fill" TargetName="bouton" Value="{DynamicResource MahApps.Brushes.CheckBox.MouseOver}" />
+                                        </Trigger>
+                                        <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                            <Setter TargetName="bouton" Property="Fill" Value="{DynamicResource MahApps.Brushes.Highlight}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+
+                        <Popup AllowsTransparency="True" Focusable="False" IsOpen="{TemplateBinding IsDropDownOpen}" x:Name="Popup" Placement="Left" PopupAnimation="Slide">
+                            <Grid MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown">
+                                <Border x:Name="DropDownBorder" Background="{DynamicResource MahApps.Brushes.Badged.Background}" BorderBrush="{DynamicResource MahApps.Brushes.Badged.Background.Disabled}" BorderThickness="1" CornerRadius="0" />
+                                <controlsEx:ScrollViewerEx Margin="1">
+                                    <StackPanel KeyboardNavigation.DirectionalNavigation="Contained" IsItemsHost="True" TextBlock.Foreground="{DynamicResource HLab.Brushes.Foreground}" />
+                                </controlsEx:ScrollViewerEx>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+
+                    <Border Name="Border" Padding="0" SnapsToDevicePixels="true">
+
+                        <TextBlock Foreground="{DynamicResource HLab.Brushes.Foreground}" x:Name="txt1" Text="{TemplateBinding Content}" />
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsHighlighted" Value="true">
+
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MahApps.Brushes.MenuItem.SelectionFill}"/>
+
+                            <Setter TargetName="txt1" Property="Foreground" Value="{DynamicResource MahApps.MahApps.Brushes.MenuItem.SelectionStroke}"/>
+
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MahApps.Brushes.Flyout.Background}"/>
+
+                            <Setter TargetName="txt1" Property="Foreground" Value="{DynamicResource MahApps.Brushes.Flyout.Foreground}"/>
+                            
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+
+</ResourceDictionary>

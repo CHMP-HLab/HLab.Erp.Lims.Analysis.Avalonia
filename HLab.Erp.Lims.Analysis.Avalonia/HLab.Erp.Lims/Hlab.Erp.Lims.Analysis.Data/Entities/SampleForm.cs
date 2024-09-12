@@ -1,12 +1,13 @@
 ﻿using System;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
+using HLab.Mvvm.Application;
 using NPoco;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
 
-public class SampleForm : Entity, IFormTarget
+public class SampleForm : Entity, IFormTarget, IListableModel
 {
     public SampleForm()
     {
@@ -25,7 +26,7 @@ public class SampleForm : Entity, IFormTarget
         get => _formClass.Value;
         set => FormClassId = value.Id;
     }
-    ForeignPropertyHelper<SampleForm, FormClass> _formClass;
+    readonly ForeignPropertyHelper<SampleForm, FormClass> _formClass;
 
     [Ignore]
     IFormClass IFormTarget.FormClass
@@ -33,7 +34,6 @@ public class SampleForm : Entity, IFormTarget
         get => FormClass;
         set => FormClass = (FormClass)value;
     }
-
 
     public int? SampleId
     {
@@ -46,7 +46,7 @@ public class SampleForm : Entity, IFormTarget
         get => _sample.Value;
         set => SampleId = value.Id;
     }
-    ForeignPropertyHelper<SampleForm, Sample> _sample;
+    readonly ForeignPropertyHelper<SampleForm, Sample> _sample;
 
 
     public ConformityState ConformityId
@@ -54,7 +54,8 @@ public class SampleForm : Entity, IFormTarget
         get => _conformityId;
         set => SetAndRaise(ref _conformityId, value);
     }
-    private ConformityState _conformityId = ConformityState.None;
+
+    ConformityState _conformityId = ConformityState.None;
 
 
     public string SpecificationValues
@@ -62,28 +63,32 @@ public class SampleForm : Entity, IFormTarget
         get => _specificationValues;
         set => SetAndRaise(ref _specificationValues, value);
     }
-    private string _specificationValues;
+
+    string _specificationValues;
 
     public string ResultValues
     {
         get => _resultValues;
         set => SetAndRaise(ref _resultValues, value);
     }
-    private string _resultValues;
+
+    string _resultValues;
 
     public bool MandatoryDone
     {
         get => _mandatoryDone;
         set => SetAndRaise(ref _mandatoryDone, value);
     }
-    private bool _mandatoryDone;
+
+    bool _mandatoryDone;
 
     public bool SpecificationDone
     {
         get => _specificationDone;
         set => SetAndRaise(ref _specificationDone, value);
     }
-    private bool _specificationDone;
+
+    bool _specificationDone;
 
     byte[] IFormTarget.Code => FormClass.Code;
     string IFormTarget.TestName { get; set; }

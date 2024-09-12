@@ -125,7 +125,8 @@ public class TestClassUnitTestClone : ReactiveModel, IFormTarget
         get => _formClass;
         set => SetAndRaise(ref _formClass,value);
     }
-    private IFormClass _formClass ;
+
+    IFormClass _formClass ;
 
 
     [Ignore] byte[] IFormTarget.Code => FormClass?.Code;
@@ -136,21 +137,24 @@ public class TestClassUnitTestClone : ReactiveModel, IFormTarget
         get => _name;
         set => SetAndRaise(ref _name,value);
     }
-    private string _name = "";
+
+    string _name = "";
 
     public string ResultValues
     {
         get => _resultValues;
         set => SetAndRaise(ref _resultValues,value);
     }
-    private string _resultValues = "";
+
+    string _resultValues = "";
 
     public string SpecificationValues
     {
         get => _specificationValues;
         set => SetAndRaise(ref _specificationValues,value);
     }
-    private string _specificationValues = "";
+
+    string _specificationValues = "";
 
     public string TestName
     {
@@ -158,35 +162,39 @@ public class TestClassUnitTestClone : ReactiveModel, IFormTarget
         set => SetAndRaise(ref _testName,value);
     }
 
-    private string _testName = "";
+    string _testName = "";
 
     public string Description
     {
         get => _description;
         set => SetAndRaise(ref _description,value);
     }
-    private string _description = "";
+
+    string _description = "";
 
     public string Specification
     {
         get => _specification;
         set => SetAndRaise(ref _specification,value);
     }
-    private string _specification = "";
+
+    string _specification = "";
     
     public bool SpecificationDone
     {
         get => _specificationDone;
         set => SetAndRaise(ref _specificationDone,value);
     }
-    private bool _specificationDone = false;
+
+    bool _specificationDone = false;
 
     public string Result
     {
         get => _result;
         set => SetAndRaise(ref _result,value);
     }
-    private string _result = "";
+
+    string _result = "";
 
     public ConformityState ConformityId
     {
@@ -199,21 +207,23 @@ public class TestClassUnitTestClone : ReactiveModel, IFormTarget
         throw new System.NotImplementedException();
     }
 
-    private ConformityState _conformityId = ConformityState.NotChecked;
+    ConformityState _conformityId = ConformityState.NotChecked;
 
     public bool MandatoryDone
     {
         get => _mandatoryDone;
         set => SetAndRaise(ref _mandatoryDone,value);
     }
-    private bool _mandatoryDone = false;
+
+    bool _mandatoryDone = false;
 
     public string Conformity
     {
         get => _conformity;
         set => SetAndRaise(ref _conformity,value);
     }
-    private string _conformity = "";
+
+    string _conformity = "";
 
 
 

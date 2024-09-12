@@ -1,29 +1,13 @@
 ﻿using System;
 using System.Text;
-using System.Threading.Tasks;
 using HLab.Base.Fluent;
 using HLab.Base.ReactiveUI;
-using HLab.Core.Annotations;
 using HLab.Erp.Acl;
-using HLab.Erp.Workflows;
+using HLab.Erp.Workflows.Extensions;
+using HLab.Erp.Workflows.Interfaces;
+using HLab.Erp.Workflows.Models;
 
 namespace HLab.Erp.Lims.Analysis.Data.Workflows;
-
-public class WorkFlowBootloader : IBootloader
-{
-    private readonly IAclService _acl;
-
-    public WorkFlowBootloader(IAclService acl)
-    {
-        _acl = acl;
-    }
-
-    public Task LoadAsync(IBootContext bootstrapper)
-    {
-        WorkflowAnalysisExtension.Acl = _acl;
-        return Task.CompletedTask;
-    }
-}
 
 public static class WorkflowAnalysisExtension
 {

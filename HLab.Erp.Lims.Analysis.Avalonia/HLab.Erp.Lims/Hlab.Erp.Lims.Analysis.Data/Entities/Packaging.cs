@@ -12,7 +12,8 @@ public class Packaging : Entity, ILocalCache
         get => _secondary;
         set => SetAndRaise(ref _secondary, value);
     }
-    private bool _secondary;
+
+    bool _secondary;
 
 
     [Column("Nom")]
@@ -21,6 +22,7 @@ public class Packaging : Entity, ILocalCache
         get => _name;
         set => SetAndRaise(ref _name, value);
     }
-    private string _name;
+
+    string _name;
 
 }

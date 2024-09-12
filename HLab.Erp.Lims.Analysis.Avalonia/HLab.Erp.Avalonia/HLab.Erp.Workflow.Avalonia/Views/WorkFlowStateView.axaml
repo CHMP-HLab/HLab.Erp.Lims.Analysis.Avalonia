@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="HLab.Erp.Workflow.Avalonia.Views.WorkFlowStageView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:workflows="clr-namespace:HLab.Erp.Workflows"
+             xmlns:viewModels="clr-namespace:HLab.Erp.Workflows.ViewModels;assembly=HLab.Erp.Workflows"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:icons="clr-namespace:HLab.Icons.Avalonia.Icons;assembly=HLab.Icons.Avalonia"
+             mc:Ignorable="d" 
+             d:DesignHeight="70" d:DesignWidth="300" 
+             d:DataContext="{d:DesignInstance {x:Type viewModels:WorkflowViewModel}}"
+			 x:DataType="viewModels:WorkflowViewModel"
+             >
+        <Grid MinHeight="50"                
+>
+            <Grid.Effect>
+                <DropShadowEffect 
+					OffsetX="0"
+					OffsetY="0"
+                    Color="{DynamicResource MahApps.Colors.ThemeForeground}"
+                    Opacity="1"
+                    BlurRadius="10"
+                />
+            </Grid.Effect>
+
+            <Border
+                BorderThickness="0"
+                Background="{DynamicResource MahApps.Brushes.Control.Background}" 
+                CornerRadius="10" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border
+                    BorderBrush="{DynamicResource MahApps.Brushes.Button.Flat.Foreground}"
+                    BorderThickness="0"
+                    Background="{DynamicResource MahApps.Brushes.Badged.Background}" 
+                    CornerRadius="10,0,0,10" />
+
+                <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
+                            <lang:Localize 
+                                Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}"  
+                                Id="{}{Workflow}">
+                                <lang:Localize.RenderTransform>
+                                    <RotateTransform Angle="-90" />
+                                </lang:Localize.RenderTransform>
+                            </lang:Localize>
+                            <icons:IconView Margin="0,10" Path="Icons/Workflow" MaxHeight="15" MaxWidth="15"/>
+                </StackPanel>
+
+                <Grid Grid.Column="1" RowDefinitions="*,*">
+                    <StackPanel HorizontalAlignment="Center"  Orientation="Horizontal">
+                    <Grid Margin="5" Width="40" Height="40">
+                        <icons:IconView 
+                            HorizontalAlignment="Right" 
+                            Foreground="{DynamicResource HLab.Brushes.Foreground}" 
+                            Width="40" Height="40"
+                            Path="{Binding Model.IconPath}"/>
+                        <icons:IconView 
+                            VerticalAlignment="Bottom" 
+                            HorizontalAlignment="Right" 
+                            Foreground="{DynamicResource HLab.Brushes.Foreground}" 
+                            Width="20" Height="20"
+                            Path="{Binding Model.SubIconPath}"/>
+                    </Grid>
+                    <Label
+                        Margin="5"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Left" 
+                        FontSize="16"
+                        FontWeight="Black" 
+                        Foreground="{DynamicResource HLab.Brushes.Foreground}"
+                        >
+                        <lang:Localize TextWrapping="Wrap" Id="{Binding Model.Caption}"/>
+                    </Label>
+                </StackPanel>
+                    <Grid Grid.Row="1" ColumnDefinitions="Auto,*">
+
+                        <ItemsControl 
+                    Grid.Column="0"
+                    Margin="5"
+                    ItemsSource="{Binding BackwardActions}"
+                    Background="Transparent"
+                    />
+
+                <ItemsControl 
+                    Grid.Column="1"
+                    Margin="5"
+                    ItemsSource="{Binding Actions}"
+                    Background="Transparent"
+                    HorizontalAlignment="Right"
+                    />
+                        
+                        
+                    </Grid>
+                </Grid>
+                
+                
+            </Grid>
+        </Grid>
+</UserControl>

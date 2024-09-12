@@ -68,7 +68,8 @@ public partial class SampleTest : Entity
         get => _testStateId;
         set => SetAndRaise(ref _testStateId, value);
     }
-    private int? _testStateId;
+
+    int? _testStateId;
 
 
     public int? UserId
@@ -76,7 +77,8 @@ public partial class SampleTest : Entity
         get => _userId;
         set => SetAndRaise(ref _userId, value);
     }
-    private int? _userId;
+
+    int? _userId;
 
 
     public string Method { get; set; }
@@ -86,21 +88,24 @@ public partial class SampleTest : Entity
         get => _purposeId;
         set => SetAndRaise(ref _purposeId, value);
     }
-    private int? _purposeId;
+
+    int? _purposeId;
 
     public string Note
     {
         get => _note;
         set => SetAndRaise(ref _note, value);
     }
-    private string _note;
+
+    string _note;
 
     public int? Validation
     {
         get => _validation;
         set => SetAndRaise(ref _validation, value);
     }
-    private int? _validation;
+
+    int? _validation;
 
 
     public int? ValidatorId
@@ -108,14 +113,16 @@ public partial class SampleTest : Entity
         get => _validatorId;
         set => SetAndRaise(ref _validatorId, value);
     }
-    private int? _validatorId;
+
+    int? _validatorId;
 
     public string TestName
     {
         get => _testName;
         set => SetAndRaise(ref _testName, value);
     }
-    private string _testName = "";
+
+    string _testName = "";
 
 
     public string Version
@@ -123,7 +130,8 @@ public partial class SampleTest : Entity
         get => _version;
         set => SetAndRaise(ref _version, value);
     }
-    private string _version = "";
+
+    string _version = "";
 
 
     //public byte[] Code
@@ -140,7 +148,8 @@ public partial class SampleTest : Entity
         get => _description;
         set => SetAndRaise(ref _description, value);
     }
-    private string _description = "";
+
+    string _description = "";
 
 
 
@@ -150,7 +159,8 @@ public partial class SampleTest : Entity
         get => _specification;
         set => SetAndRaise(ref _specification, value);
     }
-    private string _specification = "";
+
+    string _specification = "";
 
 
     public string Values
@@ -158,7 +168,8 @@ public partial class SampleTest : Entity
         get => _values;
         set => SetAndRaise(ref _values, value);
     }
-    private string _values = "";
+
+    string _values = "";
 
     string IFormTarget.SpecificationValues
     {
@@ -171,14 +182,16 @@ public partial class SampleTest : Entity
         get => _scheduledDate;
         set => SetAndRaise(ref _scheduledDate, value);
     }
-    private DateTime? _scheduledDate;
+
+    DateTime? _scheduledDate;
 
     public DateTime? StartDate
     {
         get => _startDate;
         set => SetAndRaise(ref _startDate, value);
     }
-    private DateTime? _startDate;
+
+    DateTime? _startDate;
 
 
     public DateTime? EndDate
@@ -186,7 +199,8 @@ public partial class SampleTest : Entity
         get => _endDate;
         set => SetAndRaise(ref _endDate, value);
     }
-    private DateTime? _endDate;
+
+    DateTime? _endDate;
 
 
     public string OosNo
@@ -194,14 +208,16 @@ public partial class SampleTest : Entity
         get => _oosNo;
         set => SetAndRaise(ref _oosNo, value);
     }
-    private string _oosNo = "";
+
+    string _oosNo = "";
 
     public int? Order
     {
         get => _order;
         set => SetAndRaise(ref _order, value);
     }
-    private int? _order;
+
+    int? _order;
 
 
     public string PharmacopoeiaVersion
@@ -209,7 +225,8 @@ public partial class SampleTest : Entity
         get => _pharmacopoeiaVersion;
         set => SetAndRaise(ref _pharmacopoeiaVersion, value);
     }
-    private string _pharmacopoeiaVersion = "";
+
+    string _pharmacopoeiaVersion = "";
 
     public int? PharmacopoeiaId
     {
@@ -244,7 +261,8 @@ public partial class SampleTest : Entity
         get => _stageId;
         set => SetAndRaise(ref _stageId, value);
     }
-    private string _stageId;
+
+    string _stageId;
 
     [Ignore]
     public SampleTestWorkflow.Stage Stage
@@ -260,7 +278,8 @@ public partial class SampleTest : Entity
         get => _specificationDone;
         set => SetAndRaise(ref _specificationDone, value);
     }
-    private bool _specificationDone;
+
+    bool _specificationDone;
 
     // RESULT
     public int? ResultId
@@ -301,7 +320,8 @@ public partial class SampleTest : Entity
         get => _progress;
         set => SetAndRaise(ref _progress, value);
     }
-    private double _progress;
+
+    double _progress;
 
     [Ignore]
     string IFormTarget.Result

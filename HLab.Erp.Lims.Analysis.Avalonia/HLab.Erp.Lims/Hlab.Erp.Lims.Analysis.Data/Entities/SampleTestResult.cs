@@ -3,6 +3,7 @@ using System.Reactive.Linq;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
+using HLab.Erp.Workflows.Models;
 using NPoco;
 using ReactiveUI;
 
@@ -52,21 +53,23 @@ public partial class SampleTestResult : Entity, IFormTarget
         set => SetAndRaise(ref _userId, value);
     }
 
-    private int? _userId;
+    int? _userId;
 
     public string Values
     {
         get => _values;
         set => SetAndRaise(ref _values, value);
     }
-    private string _values = "";
+
+    string _values = "";
 
     public string Result
     {
         get => _result;
         set => SetAndRaise(ref _result, value);
     }
-    private string _result = "";
+
+    string _result = "";
 
 
     public string Conformity
@@ -74,14 +77,16 @@ public partial class SampleTestResult : Entity, IFormTarget
         get => _conformity;
         set => SetAndRaise(ref _conformity, value);
     }
-    private string _conformity = "";
+
+    string _conformity = "";
 
     public DateTime? Start
     {
         get => _start;
         set => SetAndRaise(ref _start, value);
     }
-    private DateTime? _start;
+
+    DateTime? _start;
 
     public DateTime? End
     {
@@ -89,7 +94,7 @@ public partial class SampleTestResult : Entity, IFormTarget
         set => SetAndRaise(ref _end, value);
     }
 
-    private DateTime? _end;
+    DateTime? _end;
 
 
     public ConformityState ConformityId
@@ -110,7 +115,7 @@ public partial class SampleTestResult : Entity, IFormTarget
         }
     }
 
-    private ConformityState _conformityId;
+    ConformityState _conformityId;
 
 
     public int? Validation
@@ -118,7 +123,8 @@ public partial class SampleTestResult : Entity, IFormTarget
         get => _validation;
         set => SetAndRaise(ref _validation, value);
     }
-    private int? _validation;
+
+    int? _validation;
 
     [Column("Stage")]
     public string StageId
@@ -126,22 +132,24 @@ public partial class SampleTestResult : Entity, IFormTarget
         get => _stageId;
         set => SetAndRaise(ref _stageId, value);
     }
-    private string _stageId;
+
+    string _stageId;
 
     [Ignore]
-    public SampleTestResultWorkflow.Stage Stage
+    public Workflow<SampleTestResultWorkflow>.Stage? Stage
     {
         get => _stage.Value;
         set => StageId = value.Name;
     }
-    ObservableAsPropertyHelper<SampleTestResultWorkflow.Stage> _stage;
+    ObservableAsPropertyHelper<Workflow<SampleTestResultWorkflow>.Stage?> _stage;
 
     public string Name
     {
         get => _name;
         set => SetAndRaise(ref _name, value);
     }
-    private string _name;
+
+    string _name;
 
 
     string IFormTarget.ResultValues
@@ -156,20 +164,22 @@ public partial class SampleTestResult : Entity, IFormTarget
         set => SetAndRaise(ref _mandatoryDone, value);
     }
 
-    private bool _mandatoryDone;
+    bool _mandatoryDone;
     public string Note
     {
         get => _note;
         set => SetAndRaise(ref _note, value);
     }
-    private string _note;
+
+    string _note;
 
     public double Progress
     {
         get => _progress;
         set => SetAndRaise(ref _progress, value);
     }
-    private double _progress;
+
+    double _progress;
 
     // TEST
 

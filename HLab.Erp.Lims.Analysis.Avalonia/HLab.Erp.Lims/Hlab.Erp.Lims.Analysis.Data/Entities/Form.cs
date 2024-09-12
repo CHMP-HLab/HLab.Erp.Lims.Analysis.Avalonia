@@ -33,7 +33,8 @@ public partial class Form : Entity, IListableModel, ILocalCache
         get => _englishName;
         set => SetAndRaise(ref _englishName, value);
     }
-    private string _englishName = "";
+
+    string _englishName = "";
 
     public string IconPath
     {

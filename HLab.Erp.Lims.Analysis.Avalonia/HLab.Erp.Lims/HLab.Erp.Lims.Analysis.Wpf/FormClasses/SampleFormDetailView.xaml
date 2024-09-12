@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="HLab.Erp.Lims.Analysis.Module.FormClasses.SampleFormDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lang="clr-namespace:HLab.Localization.Wpf.Lang;assembly=HLab.Localization.Wpf"
+             xmlns:workflows="clr-namespace:HLab.Erp.Workflows;assembly=HLab.Erp.Workflows.Wpf"
+             xmlns:views="clr-namespace:HLab.Erp.Core.Wpf.Views;assembly=HLab.Erp.Core.Wpf"
+             xmlns:sampleTestResults="clr-namespace:HLab.Erp.Lims.Analysis.Module.SampleTestResults"
+             xmlns:controlsEx="clr-namespace:HLab.Base.Wpf.ControlsEx;assembly=HLab.Base.Wpf"
+             xmlns:wpf="clr-namespace:HLab.Erp.Lims.Analysis.Wpf"
+             Background="#FF402800"
+             d:DataContext="{d:DesignInstance {x:Type sampleTestResults:SampleTestResultViewModelDesign}, IsDesignTimeCreatable=True}"             
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <workflows:WorkflowLockerView/>
+
+        <controlsEx:ScrollViewerEx Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <views:DetailView
+                                  EditMode="{Binding Locker.IsActive}"
+                                  IconPath="{Binding Model.SampleTest.TestClass.IconPath}" 
+                                  Text="{Binding Model.SampleTest.TestClass.Name}" >
+
+                    <lang:LocalizedLabel Text="{}{Name} : " HorizontalContentAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox FontSize="16" HorizontalAlignment="Left" Text="{Binding Model.Name}" VerticalAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Start} : " HorizontalContentAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding Model.Start}" VerticalAlignment="Center"/>
+
+                    <lang:LocalizedLabel Text="{}{End} : " HorizontalContentAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding Model.End}"/>
+
+                    <lang:LocalizedLabel Text="{}{Specification} : " HorizontalContentAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding Model.SampleTest.Specification}" VerticalAlignment="Center"/>
+                    
+                    <lang:LocalizedLabel Text="{}{Result} : " HorizontalContentAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding Model.Result}" VerticalAlignment="Center"/>
+
+                    <lang:LocalizedLabel Text="{}{Conformity} : " HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal">
+                        <wpf:ConformityIcon Path="{Binding Model.ConformityId}" MaxHeight="25"/>
+                        <Label/>
+                        <lang:Localize Id="{Binding Conformity}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <lang:LocalizedLabel Text="{}{Conformity} : " HorizontalAlignment="Right" VerticalAlignment="Center"/>
+               </views:DetailView>
+
+            </StackPanel>
+        </controlsEx:ScrollViewerEx>
+        <views:DetailView 
+            Grid.Row="2" 
+            Text="{}{Note}" 
+            IconPath="Icons/Edit"
+            EditMode="{Binding Locker.IsActive}">
+            <TextBox Margin="50,0,15,0"  Grid.ColumnSpan="2"  Text="{Binding Model.Note, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap"/>
+            <Label />
+        </views:DetailView>
+    </Grid>
+</UserControl>

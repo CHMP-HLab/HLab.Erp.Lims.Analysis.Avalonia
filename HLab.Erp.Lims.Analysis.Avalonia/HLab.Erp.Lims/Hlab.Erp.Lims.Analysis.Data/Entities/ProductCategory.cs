@@ -29,7 +29,8 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
         get => _name;
         set => SetAndRaise(ref _name, value);
     }
-    private string _name = "";
+
+    string _name = "";
 
     public string NamePropertyName
     {
@@ -59,7 +60,8 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
         get => _priority;
         set => SetAndRaise(ref _priority, value);
     }
-    private int? _priority;
+
+    int? _priority;
 
     #region IListableModel
     [Ignore]
@@ -71,6 +73,7 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
         get => _iconPath;
         set => SetAndRaise(ref _iconPath, value);
     }
-    private string _iconPath = "";
+
+    string _iconPath = "";
     #endregion
 }

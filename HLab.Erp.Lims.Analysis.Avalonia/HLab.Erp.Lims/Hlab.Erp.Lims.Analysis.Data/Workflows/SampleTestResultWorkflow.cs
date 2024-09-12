@@ -1,7 +1,8 @@
 ﻿using System;
 using HLab.Erp.Acl;
 using HLab.Erp.Lims.Analysis.Data.Entities;
-using HLab.Erp.Workflows;
+using HLab.Erp.Workflows.Extensions;
+using HLab.Erp.Workflows.Models;
 
 namespace HLab.Erp.Lims.Analysis.Data.Workflows;
 
@@ -108,7 +109,7 @@ public class SampleTestResultWorkflow : Workflow<SampleTestResultWorkflow, Sampl
     );
 
 
-    protected override Stage TargetStage
+    protected override Stage? TargetStage
     {
         get => Target.Stage; 
         set => Target.Stage = value;

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\HLab.Core\HLab.Compiler\HLab.Compiler.csproj" />
+    <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Base\HLab.Erp.Base.csproj" />
+    <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Core\HLab.Erp.Core.csproj" />
+    <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Forms.Annotations\HLab.Erp.Conformity.Annotations.csproj" />
+    <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Workflows\HLab.Erp.Workflows.csproj" />
+    <ProjectReference Include="..\Hlab.Erp.Lims.Analysis.Data\HLab.Erp.Lims.Analysis.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SampleAuditTrails\" />
+  </ItemGroup>
+
+</Project>

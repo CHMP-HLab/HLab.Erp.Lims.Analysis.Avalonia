@@ -1,6 +1,7 @@
 ﻿using HLab.Erp.Acl;
 using HLab.Erp.Lims.Analysis.Data.Entities;
-using HLab.Erp.Workflows;
+using HLab.Erp.Workflows.Extensions;
+using HLab.Erp.Workflows.Models;
 
 namespace HLab.Erp.Lims.Analysis.Data.Workflows;
 

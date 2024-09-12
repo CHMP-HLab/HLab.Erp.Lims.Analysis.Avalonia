@@ -25,14 +25,16 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
         get => _name;
         set => SetAndRaise(ref _name, value);
     }
-    private string _name = "";
+
+    string _name = "";
 
     public string Abbreviation
     {
         get => _abbreviation;
         set => SetAndRaise(ref _abbreviation, value);
     }
-    private string _abbreviation = "";
+
+    string _abbreviation = "";
     //public string LastVersion
     //{
     //    get => _lastVersion;
@@ -46,7 +48,8 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
         get => _url;
         set => SetAndRaise(ref _url, value);
     }
-    private string _url = "";
+
+    string _url = "";
 
 
     public string SearchUrl
@@ -54,7 +57,8 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
         get => _searchUrl;
         set => SetAndRaise(ref _searchUrl, value);
     }
-    private string _searchUrl = "";
+
+    string _searchUrl = "";
 
 
     public string ReferenceUrl
@@ -62,14 +66,16 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
         get => _referenceUrl;
         set => SetAndRaise(ref _referenceUrl, value);
     }
-    private string _referenceUrl = "";
+
+    string _referenceUrl = "";
 
     public string IconPath
     {
         get => _iconPath;
         set => SetAndRaise(ref _iconPath, value);
     }
-    private string _iconPath = "";
+
+    string _iconPath = "";
 
     [Ignore]
     public string Caption => _caption.Value;

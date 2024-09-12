@@ -11,12 +11,12 @@ public class Xaml : Entity, ILocalCache
         set => SetAndRaise(ref _name, value);
     }
 
-    private string _name = "";
+    string _name = "";
     public string Page
     {
         get => _page;
         set => SetAndRaise(ref _page, value);
     }
 
-    private string _page = "";
+    string _page = "";
 }

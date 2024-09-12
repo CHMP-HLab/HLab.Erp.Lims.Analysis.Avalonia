@@ -29,14 +29,16 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
         get => _name;
         set => SetAndRaise(ref _name, value);
     }
-    private string _name = "";
+
+    string _name = "";
 
     public string IconPath
     {
         get => _iconPath;
         set => SetAndRaise(ref _iconPath, value);
     }
-    private string _iconPath = "";
+
+    string _iconPath = "";
 
     [Ignore] public string Caption => _caption.Value;
     readonly ObservableAsPropertyHelper<string> _caption;
@@ -46,14 +48,16 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
         get => _version;
         set => SetAndRaise(ref _version,value);
     }
-    private string _version = "";
+
+    string _version = "";
 
     public byte[] Code
     {
         get => _code;
         set => SetAndRaise(ref _code,value);
     }
-    private byte[] _code = Array.Empty<byte>();
+
+    byte[] _code = Array.Empty<byte>();
 
     public byte[] Binary
     {
@@ -67,7 +71,8 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
         get => _order;
         set => SetAndRaise(ref _order,value);
     }
-    private int? _order ;
+
+    int? _order ;
 
     public int? CategoryId
     {
@@ -91,7 +96,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
         set => SetAndRaise(ref _durationFirst,value);
     }
 
-    private int? _durationFirst ;
+    int? _durationFirst ;
 
     public int? DurationNext
     {
@@ -99,7 +104,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
         set => SetAndRaise(ref _durationNext,value);
     }
 
-    private int? _durationNext ;
+    int? _durationNext ;
 
     public int? DurationAdmin
     {
@@ -107,7 +112,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
         set => SetAndRaise(ref _durationAdmin,value);
     }
 
-    private int? _durationAdmin ;
+    int? _durationAdmin ;
 
 
     //[Column]

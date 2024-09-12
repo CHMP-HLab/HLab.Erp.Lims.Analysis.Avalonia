@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using HLab.Erp.Acl;
 using HLab.Erp.Data.Observables;
 using HLab.Erp.Lims.Analysis.Data.Entities;
-using HLab.Erp.Workflows;
+using HLab.Erp.Workflows.Extensions;
+using HLab.Erp.Workflows.Models;
 using ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Workflows;

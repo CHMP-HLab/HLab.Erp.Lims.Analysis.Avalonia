@@ -28,19 +28,22 @@ public class TestCategory : Entity, ILocalCache, IListableModel
         get => _name;
         set => SetAndRaise(ref _name, value);
     }
-    private string _name = "";
+
+    string _name = "";
     public int? Priority
     {
         get => _priority;
         set => SetAndRaise(ref _priority, value);
     }
-    private int? _priority;
+
+    int? _priority;
     public string IconPath
     {
         get => _iconPath;
         set => SetAndRaise(ref _iconPath, value);
     }
-    private string _iconPath = "";
+
+    string _iconPath = "";
 
     [Ignore] public string Caption => _caption.Value;
     readonly ObservableAsPropertyHelper<string> _caption;
