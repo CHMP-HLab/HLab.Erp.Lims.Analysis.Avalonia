@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
              xmlns:testClasses="clr-namespace:HLab.Erp.Lims.Analysis.Module.TestClasses"
-             xmlns:controlsEx="clr-namespace:HLab.Base.Wpf.ControlsEx;assembly=HLab.Base.Wpf"
              xmlns:wpf="clr-namespace:HLab.Erp.Base.Wpf;assembly=HLab.Erp.Base.Wpf"
              xmlns:testClasses3="clr-namespace:HLab.Erp.Lims.Analysis.TestClasses;assembly=HLab.Erp.Lims.Analysis"
+             xmlns:controls="clr-namespace:HLab.Base.Wpf.Controls;assembly=HLab.Base.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance testClasses3:TestClassViewModelDesign}"
              Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
@@ -66,7 +66,7 @@
                         </avalonedit:TextEditor.ContextMenu>                    
                     </wpf:TextEditorEx>
 
-                    <controlsEx:ScrollViewerEx MaxHeight="200" VerticalScrollBarVisibility="Auto" Grid.Row="1" >
+                    <controls:ScrollViewerEx MaxHeight="200" VerticalScrollBarVisibility="Auto" Grid.Row="1" >
                         <ListView 
                             ItemsSource="{Binding FormHelper.XamlErrors}"
                             SelectedItem="{Binding FormHelper.SelectedXamlError}"
@@ -79,7 +79,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    </controlsEx:ScrollViewerEx>
+                    </controls:ScrollViewerEx>
                 </Grid>
 
             </TabItem>
@@ -115,7 +115,7 @@
                             </ContextMenu>
                         </avalonedit:TextEditor.ContextMenu>                    
                     </wpf:TextEditorEx>
-                    <controlsEx:ScrollViewerEx MaxHeight="200" VerticalScrollBarVisibility="Auto" Grid.Row="1" >
+                    <controls:ScrollViewerEx MaxHeight="200" VerticalScrollBarVisibility="Auto" Grid.Row="1" >
                         <ListView 
                             ItemsSource="{Binding FormHelper.CsErrors}"
                             SelectedItem="{Binding FormHelper.SelectedCsError}"
@@ -128,7 +128,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    </controlsEx:ScrollViewerEx>
+                    </controls:ScrollViewerEx>
                 </Grid>
             </TabItem>
             <TabItem Header="Debug">
@@ -160,7 +160,7 @@
                             </ContextMenu>
                         </avalonedit:TextEditor.ContextMenu>                    
                     </wpf:TextEditorEx>
-                    <controlsEx:ScrollViewerEx MaxHeight="200" VerticalScrollBarVisibility="Auto" Grid.Row="1" >
+                    <controls:ScrollViewerEx MaxHeight="200" VerticalScrollBarVisibility="Auto" Grid.Row="1" >
                         <ListView 
                             ItemsSource="{Binding FormHelper.DebugErrors}"
                             SelectedItem="{Binding FormHelper.SelectedDebugError}"
@@ -173,7 +173,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    </controlsEx:ScrollViewerEx>
+                    </controls:ScrollViewerEx>
                 </Grid>
             </TabItem>
         </TabControl>
@@ -192,9 +192,9 @@
             <Button Command="{Binding SpecificationModeCommand}">Specifications</Button>
             <Button Command="{Binding CaptureModeCommand}">Capture</Button>
             </StackPanel>
-            <controlsEx:ScrollViewerEx Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <controls:ScrollViewerEx Grid.Row="1" VerticalScrollBarVisibility="Auto">
                 <ContentControl  Content="{Binding FormHelper.Form}"/>
-            </controlsEx:ScrollViewerEx>
+            </controls:ScrollViewerEx>
         </Grid>
 
     </Grid>

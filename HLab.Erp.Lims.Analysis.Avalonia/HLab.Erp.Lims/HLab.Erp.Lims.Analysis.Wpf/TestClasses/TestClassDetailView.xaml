@@ -7,12 +7,13 @@
              xmlns:views="clr-namespace:HLab.Erp.Core.Wpf.Views;assembly=HLab.Erp.Core.Wpf"
               xmlns:icons="clr-namespace:HLab.Icons.Wpf.Icons;assembly=HLab.Icons.Wpf"
              xmlns:annotations="clr-namespace:HLab.Mvvm.Annotations;assembly=HLab.Mvvm.Annotations"
-             xmlns:controlsEx="clr-namespace:HLab.Base.Wpf.ControlsEx;assembly=HLab.Base.Wpf"
              xmlns:icons1="clr-namespace:HLab.Mvvm.Application.Wpf.Icons;assembly=HLab.Mvvm.Application.Wpf"
              xmlns:wpf="clr-namespace:HLab.Mvvm.Wpf;assembly=HLab.Mvvm.Wpf"
              xmlns:wpf1="clr-namespace:HLab.Erp.Lims.Analysis.Wpf"
              xmlns:testClasses1="clr-namespace:HLab.Erp.Lims.Analysis.Wpf.TestClasses"
-             d:DataContext="{d:DesignInstance {x:Type testClasses1:TestClassViewModelDesign}, IsDesignTimeCreatable=True}"             
+             xmlns:controls="clr-namespace:HLab.Base.Wpf.Controls;assembly=HLab.Base.Wpf"
+             xmlns:testClasses="clr-namespace:HLab.Erp.Lims.Analysis.TestClasses;assembly=HLab.Erp.Lims.Analysis"
+             d:DataContext="{d:DesignInstance {x:Type testClasses:TestClassViewModelDesign}, IsDesignTimeCreatable=True}"             
              Background="#FF005040"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -25,7 +26,7 @@
 
                 <wpf:ViewLocator Height="50"  Model="{Binding Locker}" Grid.ColumnSpan="2"/>
 
-                <controlsEx:ScrollViewerEx Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <controls:ScrollViewerEx Grid.Row="1" VerticalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Vertical">
                 <views:DetailView 
                 Text="{}{Test}" 
@@ -107,7 +108,7 @@
 
                 </views:DetailView>
                         </StackPanel>
-                    </controlsEx:ScrollViewerEx>
+                    </controls:ScrollViewerEx>
 
                 <views:DetailView Grid.Row="2" EditMode="{Binding Locker.IsActive}" IconPath="Icons/Edit" Text="{}{Note}">
 

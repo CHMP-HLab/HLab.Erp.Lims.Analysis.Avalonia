@@ -6,10 +6,10 @@
              xmlns:lang="clr-namespace:HLab.Localization.Wpf.Lang;assembly=HLab.Localization.Wpf"
              xmlns:views="clr-namespace:HLab.Erp.Core.Wpf.Views;assembly=HLab.Erp.Core.Wpf"
              xmlns:icons="clr-namespace:HLab.Mvvm.Application.Wpf.Icons;assembly=HLab.Mvvm.Application.Wpf"
-             xmlns:viewModels="clr-namespace:HLab.Erp.Lims.Analysis.Module.Products.ViewModels"
              xmlns:wpf="clr-namespace:HLab.Mvvm.Wpf;assembly=HLab.Mvvm.Wpf"
+             xmlns:products="clr-namespace:HLab.Erp.Lims.Analysis.Products;assembly=HLab.Erp.Lims.Analysis"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance {x:Type viewModels:ProductCategoryViewModel}, IsDesignTimeCreatable=True}"             
+             d:DataContext="{d:DesignInstance {x:Type products:ProductCategoryViewModel}, IsDesignTimeCreatable=True}"             
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 <Grid.RowDefinitions>

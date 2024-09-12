@@ -2,7 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prints="clr-namespace:HLab.Erp.Lims.Analysis.Module.Prints"
-        xmlns:controlsEx="clr-namespace:HLab.Base.Wpf.ControlsEx;assembly=HLab.Base.Wpf"
         xmlns:icons="clr-namespace:HLab.Icons.Wpf.Icons;assembly=HLab.Icons.Wpf"
         xmlns:controls="clr-namespace:HLab.Base.Wpf.Controls;assembly=HLab.Base.Wpf"
         Title="Impression" Width="1000" Height="1000" Background="#FFC7B67D" WindowStartupLocation="CenterOwner">
@@ -13,9 +12,9 @@
          <ColumnDefinition Width="660"/>
       </Grid.ColumnDefinitions>
 
-      <controlsEx:ScrollViewerEx VerticalScrollBarVisibility="Auto" Background="White" Grid.Column="1" >
+      <controls:ScrollViewerEx VerticalScrollBarVisibility="Auto" Background="White" Grid.Column="1" >
          <Frame x:Name="F_Apercu" NavigationUIVisibility="Hidden"/>
-      </controlsEx:ScrollViewerEx>
+      </controls:ScrollViewerEx>
 
       <DockPanel x:Name="DP_Panneau">
          <Grid DockPanel.Dock="Bottom">
