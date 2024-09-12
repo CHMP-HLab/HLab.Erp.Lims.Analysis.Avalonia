@@ -10,7 +10,6 @@
              xmlns:units="clr-namespace:HLab.Erp.Base.Data;assembly=HLab.Erp.Base.Data"
              xmlns:entitySelectors1="clr-namespace:HLab.Erp.Core.Wpf.EntitySelectors;assembly=HLab.Erp.Core.Wpf"
              xmlns:wpf1="clr-namespace:HLab.Mvvm.Wpf;assembly=HLab.Mvvm.Wpf"
-             xmlns:viewModels1="clr-namespace:HLab.Erp.Lims.Analysis.Wpf.Products.ViewModels"
              xmlns:viewModels="clr-namespace:HLab.Erp.Lims.Analysis.Wpf.Products.ViewModels;assembly=HLab.Erp.Lims.Analysis"
              xmlns:products="clr-namespace:HLab.Erp.Lims.Analysis.Products;assembly=HLab.Erp.Lims.Analysis"
              mc:Ignorable="d" 

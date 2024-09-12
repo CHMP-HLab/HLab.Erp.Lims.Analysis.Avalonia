@@ -7,8 +7,6 @@
              xmlns:lang="clr-namespace:HLab.Localization.Wpf.Lang;assembly=HLab.Localization.Wpf"
              xmlns:views="clr-namespace:HLab.Mvvm.Views;assembly=HLab.Mvvm.Wpf"
              xmlns:workflows="clr-namespace:HLab.Erp.Workflows;assembly=HLab.Erp.Workflows.Wpf"
-             xmlns:wpf="clr-namespace:HLab.Base.Wpf;assembly=HLab.Base.Wpf"
-             xmlns:controlsEx="clr-namespace:HLab.Base.Wpf.ControlsEx;assembly=HLab.Base.Wpf"
              xmlns:icons="clr-namespace:HLab.Icons.Wpf.Icons;assembly=HLab.Icons.Wpf"
              xmlns:audittrails="clr-namespace:HLab.Erp.Acl.AuditTrails;assembly=HLab.Erp.Acl.Wpf"
              xmlns:entitySelectors="clr-namespace:HLab.Erp.Core.Wpf.EntitySelectors;assembly=HLab.Erp.Core.Wpf"
@@ -39,7 +37,7 @@
 
         <workflows:WorkflowLockerView/>
 
-        <controlsEx:ScrollViewerEx Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <controls:ScrollViewerEx Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
                 
                 <audittrails:EntityAuditTrailListView/>
@@ -123,7 +121,7 @@
                 <views1:DetailView EditMode="{Binding EditMode}" IconPath="icons/Sample/PackageOpened" Text="{}{Reception}">
 
                     <lang:LocalizedLabel Text="{}{Date} :" />
-                    <wpf:DateEx
+                    <controls:DateEx
                             HorizontalAlignment="Left"
                             DateUtc="{Binding Model.ReceptionDate}" 
                             DayValid="True"
@@ -160,7 +158,7 @@
                             <lang:Localize Id="{}{Sampling date} :"/>
                         </Label>
 
-                        <wpf:DateEx  Grid.Column="2"
+                        <controls:DateEx  Grid.Column="2"
                         
                             HorizontalAlignment="Left"
                             Width="120"
@@ -220,7 +218,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <wpf:DateEx DateUtc="{Binding Model.ExpirationDate}" DayValid="{Binding Model.ExpirationDayValid}" EmptyDayAllowed="True"/>
+                        <controls:DateEx DateUtc="{Binding Model.ExpirationDate}" DayValid="{Binding Model.ExpirationDayValid}" EmptyDayAllowed="True"/>
                         <icons:IconView Grid.Column="1" Path="icons/sample/expired" Height="25" Margin="2">
                             <icons:IconView.Style>
                                 <Style TargetType="icons:IconView">
@@ -244,7 +242,7 @@
                         <Label Grid.Column="2" HorizontalAlignment="Right">
                             <lang:Localize  Id="{}{Manufacture} : "/>
                         </Label>
-                        <wpf:DateEx 
+                        <controls:DateEx 
                     Grid.Column="3" 
                     DateUtc="{Binding Model.ManufacturingDate, UpdateSourceTrigger=PropertyChanged}" 
                     DayValid="{Binding Model.ManufacturingDayValid}" EmptyDayAllowed="True"/>
@@ -427,7 +425,7 @@
 
                 </views1:DetailView>
             </StackPanel>
-        </controlsEx:ScrollViewerEx>
+        </controls:ScrollViewerEx>
 
         <!-- NOTE -->
         <views1:DetailView Grid.Row="2" EditMode="{Binding Locker.IsActive}" IconPath="Icons/Edit" Text="{}{Note}">

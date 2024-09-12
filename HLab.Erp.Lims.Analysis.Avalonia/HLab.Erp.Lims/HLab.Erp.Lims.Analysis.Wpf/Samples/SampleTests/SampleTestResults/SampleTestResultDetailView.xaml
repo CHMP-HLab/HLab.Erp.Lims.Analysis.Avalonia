@@ -7,11 +7,12 @@
              xmlns:annotations="clr-namespace:HLab.Mvvm.Annotations;assembly=HLab.Mvvm.Annotations"
              xmlns:workflows="clr-namespace:HLab.Erp.Workflows;assembly=HLab.Erp.Workflows.Wpf"
              xmlns:views="clr-namespace:HLab.Erp.Core.Wpf.Views;assembly=HLab.Erp.Core.Wpf"
-             xmlns:controlsEx="clr-namespace:HLab.Base.Wpf.ControlsEx;assembly=HLab.Base.Wpf"
              xmlns:icons="clr-namespace:HLab.Icons.Wpf.Icons;assembly=HLab.Icons.Wpf"
-             xmlns:wpf="clr-namespace:HLab.Base.Wpf;assembly=HLab.Base.Wpf" xmlns:audittrails="clr-namespace:HLab.Erp.Acl.AuditTrails;assembly=HLab.Erp.Acl.Wpf"
+             xmlns:audittrails="clr-namespace:HLab.Erp.Acl.AuditTrails;assembly=HLab.Erp.Acl.Wpf"
              xmlns:wpf1="clr-namespace:HLab.Mvvm.Wpf;assembly=HLab.Mvvm.Wpf"
              xmlns:wpf2="clr-namespace:HLab.Erp.Lims.Analysis.Wpf"
+             xmlns:controls="clr-namespace:HLab.Base.Wpf.Controls;assembly=HLab.Base.Wpf"
+             xmlns:sampleTestResults11="clr-namespace:HLab.Erp.Lims.Analysis.Samples.SampleTests.SampleTestResults;assembly=HLab.Erp.Lims.Analysis"
              Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
              d:DataContext="{d:DesignInstance {x:Type sampleTestResults11:SampleTestResultViewModel+Design}, IsDesignTimeCreatable=True}"             
              mc:Ignorable="d" 
@@ -33,7 +34,7 @@
             </Button>
         </StackPanel>
 
-        <controlsEx:ScrollViewerEx Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <controls:ScrollViewerEx Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
 
                 <views:DetailView 
@@ -90,10 +91,10 @@
                     <TextBox FontSize="16" HorizontalAlignment="Left" Text="{Binding Model.Name}" VerticalAlignment="Center" />
 
                     <lang:LocalizedLabel Text="{}{Start} : " HorizontalContentAlignment="Right" VerticalAlignment="Center"/>
-                    <wpf:DateEx HorizontalAlignment="Left" Width="200" EmptyDayAllowed="False" ShowTime="True" DateUtc="{Binding Model.Start}"/>
+                    <controls:DateEx HorizontalAlignment="Left" Width="200" EmptyDayAllowed="False" ShowTime="True" DateUtc="{Binding Model.Start}"/>
 
                     <lang:LocalizedLabel Text="{}{End} : " HorizontalContentAlignment="Right" VerticalAlignment="Center"/>
-                    <wpf:DateEx HorizontalAlignment="Left" Width="200" ShowTime="True" DateUtc="{Binding Model.End}"/>
+                    <controls:DateEx HorizontalAlignment="Left" Width="200" ShowTime="True" DateUtc="{Binding Model.End}"/>
 
                     <Grid Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
@@ -145,7 +146,7 @@
                 </views:DetailView>
 
             </StackPanel>
-        </controlsEx:ScrollViewerEx>
+        </controls:ScrollViewerEx>
         <views:DetailView 
             Grid.Row="2" 
             Text="{}{Note}" 
