@@ -109,7 +109,7 @@ public class ProductToolsViewModel : ViewModel
                     continue;
                 }
 
-                Unit unit = unitString switch
+                Unit? unit = unitString switch
                 {
                     "g" => g,
                     "mg" => mg,

@@ -56,12 +56,12 @@ namespace HLab.Erp.Lims.Analysis.Data.Entities
             set => _unit.SetId(value);
         }
         [Ignore]
-        public Unit Unit
+        public Unit? Unit
         {
             get => _unit.Value;
             set => UnitId = value?.Id;
         }
-        readonly ForeignPropertyHelper<ProductComponent,Unit> _unit;
+        readonly ForeignPropertyHelper<ProductComponent, Unit?> _unit;
 
 
         public static ProductComponent DesignModel => new()
