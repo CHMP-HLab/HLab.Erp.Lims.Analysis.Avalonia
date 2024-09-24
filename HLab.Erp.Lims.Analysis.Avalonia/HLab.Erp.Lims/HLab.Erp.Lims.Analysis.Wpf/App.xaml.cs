@@ -39,6 +39,7 @@ using HLab.Mvvm.Application.Messages;
 using HLab.Mvvm.Application.Wpf;
 using HLab.Mvvm.Wpf;
 using HLab.Options;
+using HLab.Ui.Wpf;
 
 namespace HLab.Erp.Lims.Analysis.Wpf;
 
@@ -58,7 +59,8 @@ public partial class App : Application
 
             var container = new DependencyInjectionContainer();
 
-            ListFilterConfiguratorExtension.Platform = new ListFilterConfiguratorWpfImplementation();
+            ListFilterConfiguratorWpfImplementation.Initialize();
+            UiWpfImplementation.Initialize();
 
             container.Configure(c =>
             {

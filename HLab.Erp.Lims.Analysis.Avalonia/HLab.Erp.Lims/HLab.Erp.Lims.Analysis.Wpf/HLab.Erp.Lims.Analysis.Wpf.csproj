@@ -155,8 +155,8 @@
   <ItemGroup>
     <PackageReference Include="Dirkster.NumericUpDownLib" Version="3.4.0" />
     <PackageReference Include="Grace" Version="7.2.1" />
-    <PackageReference Include="Mages" Version="2.0.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
+    <PackageReference Include="Mages" Version="2.0.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
     <PackageReference Include="WpfMath" Version="2.1.0" />
   </ItemGroup>
 
@@ -177,6 +177,8 @@
     <ProjectReference Include="..\..\HLab.Wpf\HLab.Bugs.Wpf\HLab.Bugs.Wpf.csproj" />
     <ProjectReference Include="..\..\HLab.Wpf\HLab.Mvvm.Application.Wpf\HLab.Mvvm.Application.Wpf.csproj" />
     <ProjectReference Include="..\..\HLab.Wpf\HLab.Mvvm.Wpf\HLab.Mvvm.Wpf.csproj" />
+    <ProjectReference Include="..\..\HLab.Wpf\HLab.Options.Wpf\HLab.Options.Wpf.csproj" />
+    <ProjectReference Include="..\..\HLab.Wpf\HLab.Ui.Wpf\HLab.Ui.Wpf.csproj" />
     <ProjectReference Include="..\..\Lib\PDFsharp\PDFSharp.csproj" />
     <ProjectReference Include="..\HLab.Erp.Lims.Analysis\HLab.Erp.Lims.Analysis.csproj" />
     <ProjectReference Include="..\Hlab.Erp.Lims.Analysis.Data\HLab.Erp.Lims.Analysis.Data.csproj" />
