@@ -1,4 +1,5 @@
-﻿using HLab.Erp.Acl;
+﻿using HLab.Base.ReactiveUI;
+using HLab.Erp.Acl;
 using HLab.Erp.Core.EntityLists;
 using HLab.Erp.Core.ListFilterConfigurators;
 using HLab.Erp.Data;
@@ -39,7 +40,7 @@ public class InnProductComponentListViewModel(
     //.DeleteAllowed()
     // List.AddOnCreate(h => h.Entity. = "<Nouveau Critère>").Update();
 
-    public bool EditMode { get => _editMode; set => SetAndRaise(ref _editMode,value); }
+    public bool EditMode { get => _editMode; set => this.SetAndRaise(ref _editMode,value); }
     bool _editMode = false;
 
     protected override bool DeleteCanExecute(ProductComponent sampleTest, Action<string> errorAction)

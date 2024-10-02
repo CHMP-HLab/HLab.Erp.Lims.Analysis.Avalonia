@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows.Input;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Erp.Base.Data;
 using HLab.Erp.Data;
@@ -27,7 +28,7 @@ public class ProductToolsViewModel : ViewModel
     public string Message
     {
         get => _message;
-        set => SetAndRaise(ref _message,value);
+        set => this.SetAndRaise(ref _message,value);
     }
     string _message ;
 

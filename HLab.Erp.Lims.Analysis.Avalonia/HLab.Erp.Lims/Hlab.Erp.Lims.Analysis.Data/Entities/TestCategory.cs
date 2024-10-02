@@ -3,6 +3,7 @@ using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
 using System.Reactive.Linq;
+using HLab.Base.ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
@@ -26,21 +27,21 @@ public class TestCategory : Entity, ILocalCache, IListableModel
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
 
     string _name = "";
     public int? Priority
     {
         get => _priority;
-        set => SetAndRaise(ref _priority, value);
+        set => this.SetAndRaise(ref _priority, value);
     }
 
     int? _priority;
     public string IconPath
     {
         get => _iconPath;
-        set => SetAndRaise(ref _iconPath, value);
+        set => this.SetAndRaise(ref _iconPath, value);
     }
 
     string _iconPath = "";

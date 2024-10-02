@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reactive.Linq;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
@@ -22,42 +23,42 @@ public class FormClass : Entity, IListableModel, IEntityWithIcon, IFormClass
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
     string _name = "";
 
     public byte[] Code
     {
         get => _code;
-        set => SetAndRaise(ref _code, value);
+        set => this.SetAndRaise(ref _code, value);
     }
     byte[] _code = Array.Empty<byte>();
 
     public string Class
     {
         get => _class;
-        set => SetAndRaise(ref _class, value);
+        set => this.SetAndRaise(ref _class, value);
     }
     string _class = "";
 
     public string IconPath
     {
         get => _iconPath;
-        set => SetAndRaise(ref _iconPath, value);
+        set => this.SetAndRaise(ref _iconPath, value);
     }
     string _iconPath = "";
 
     public string Version
     {
         get => _version;
-        set => SetAndRaise(ref _version, value);
+        set => this.SetAndRaise(ref _version, value);
     }
     string _version = "";
 
     public byte[] CodeHash
     {
         get => _codeHash;
-        set => SetAndRaise(ref _codeHash, value);
+        set => this.SetAndRaise(ref _codeHash, value);
     }
     byte[] _codeHash = Array.Empty<byte>();
 

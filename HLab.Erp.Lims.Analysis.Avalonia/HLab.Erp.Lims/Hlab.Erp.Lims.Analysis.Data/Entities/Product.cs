@@ -1,3 +1,4 @@
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
 using NPoco;
@@ -27,7 +28,7 @@ public partial class Product : Entity, ILocalCache, IListableModel
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name,value);
+        set => this.SetAndRaise(ref _name,value);
     }
 
     string _name = "";
@@ -36,7 +37,7 @@ public partial class Product : Entity, ILocalCache, IListableModel
     public string Variant
     {
         get => _variant;
-        set => SetAndRaise(ref _variant,value);
+        set => this.SetAndRaise(ref _variant,value);
     }
 
     string _variant = "";
@@ -45,7 +46,7 @@ public partial class Product : Entity, ILocalCache, IListableModel
     public string Complement
     {
         get => _complement;
-        set => SetAndRaise(ref _complement, value);
+        set => this.SetAndRaise(ref _complement, value);
     }
     string _complement = "";
 
@@ -53,7 +54,7 @@ public partial class Product : Entity, ILocalCache, IListableModel
     public string Note
     {
         get => _note;
-        set => SetAndRaise(ref _note, value);
+        set => this.SetAndRaise(ref _note, value);
     }
     string _note = "";
 

@@ -1,4 +1,5 @@
-﻿using HLab.Erp.Conformity.Annotations;
+﻿using HLab.Base.ReactiveUI;
+using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
 using NPoco;
 
@@ -38,14 +39,14 @@ public class TestClassUnitTest : Entity, IFormTarget
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
 
     string _name = "";
     public string ResultValues
     {
         get => _resultValues;
-        set => SetAndRaise(ref _resultValues, value);
+        set => this.SetAndRaise(ref _resultValues, value);
     }
 
     string _resultValues = "";
@@ -53,7 +54,7 @@ public class TestClassUnitTest : Entity, IFormTarget
     public string SpecificationValues
     {
         get => _specificationValues;
-        set => SetAndRaise(ref _specificationValues, value);
+        set => this.SetAndRaise(ref _specificationValues, value);
     }
 
     string _specificationValues = "";
@@ -61,7 +62,7 @@ public class TestClassUnitTest : Entity, IFormTarget
     public string TestName
     {
         get => _testName;
-        set => SetAndRaise(ref _testName, value);
+        set => this.SetAndRaise(ref _testName, value);
     }
 
     string _testName = "";
@@ -69,7 +70,7 @@ public class TestClassUnitTest : Entity, IFormTarget
     public string Description
     {
         get => _description;
-        set => SetAndRaise(ref _description, value);
+        set => this.SetAndRaise(ref _description, value);
     }
 
     string _description = "";
@@ -77,7 +78,7 @@ public class TestClassUnitTest : Entity, IFormTarget
     public string Specification
     {
         get => _specification;
-        set => SetAndRaise(ref _specification, value);
+        set => this.SetAndRaise(ref _specification, value);
     }
 
     string _specification = "";
@@ -85,7 +86,7 @@ public class TestClassUnitTest : Entity, IFormTarget
     public bool SpecificationDone
     {
         get => _specificationDone;
-        set => SetAndRaise(ref _specificationDone, value);
+        set => this.SetAndRaise(ref _specificationDone, value);
     }
 
     bool _specificationDone = false;
@@ -93,7 +94,7 @@ public class TestClassUnitTest : Entity, IFormTarget
     public string Result
     {
         get => _result;
-        set => SetAndRaise(ref _result, value);
+        set => this.SetAndRaise(ref _result, value);
     }
 
     string _result = "";
@@ -101,7 +102,7 @@ public class TestClassUnitTest : Entity, IFormTarget
     public ConformityState ConformityId
     {
         get => _conformityId;
-        set => SetAndRaise(ref _conformityId, value);
+        set => this.SetAndRaise(ref _conformityId, value);
     }
 
     public void Reset()
@@ -114,7 +115,7 @@ public class TestClassUnitTest : Entity, IFormTarget
     public bool MandatoryDone
     {
         get => _mandatoryDone;
-        set => SetAndRaise(ref _mandatoryDone, value);
+        set => this.SetAndRaise(ref _mandatoryDone, value);
     }
 
     bool _mandatoryDone = false;
@@ -122,7 +123,7 @@ public class TestClassUnitTest : Entity, IFormTarget
     public string Conformity
     {
         get => _conformity;
-        set => SetAndRaise(ref _conformity, value);
+        set => this.SetAndRaise(ref _conformity, value);
     }
 
     string _conformity = "";
@@ -131,14 +132,14 @@ public class TestClassUnitTest : Entity, IFormTarget
     //public string Conform
     //{
     //    get => _conform;
-    //    set => SetAndRaise(ref _conform,value);
+    //    set => this.SetAndRaise(ref _conform,value);
     //}
     //private string _conform = "";
 
     //public string State
     //{
     //    get => _state;
-    //    set => SetAndRaise(ref _state,value);
+    //    set => this.SetAndRaise(ref _state,value);
     //}
     //private string _state = "";
 }

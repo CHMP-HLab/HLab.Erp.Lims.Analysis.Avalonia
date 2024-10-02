@@ -3,6 +3,7 @@ using NPoco;
 using System;
 using System.Diagnostics;
 using System.IO;
+using HLab.Base.ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
@@ -30,7 +31,7 @@ public class LinkedDocument : Entity
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
     string _name = "";
 
@@ -50,7 +51,7 @@ public class LinkedDocument : Entity
     public byte[] File
     {
         get => _file;
-        set => SetAndRaise(ref _file, value);
+        set => this.SetAndRaise(ref _file, value);
     }
     byte[] _file = Array.Empty<byte>();
 }

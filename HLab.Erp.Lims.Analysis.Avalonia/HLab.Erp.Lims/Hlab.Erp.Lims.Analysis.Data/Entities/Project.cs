@@ -1,4 +1,5 @@
-﻿using HLab.Erp.Data;
+﻿using HLab.Base.ReactiveUI;
+using HLab.Erp.Data;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
@@ -25,7 +26,7 @@ public class Project : Entity
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
 
     string _name = "";

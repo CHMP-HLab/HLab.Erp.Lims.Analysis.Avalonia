@@ -3,6 +3,7 @@ using System.Dynamic;
 using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Erp.Lims.Analysis.Data.Entities;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
@@ -33,23 +34,23 @@ public class QueryViewModel : ListableEntityViewModel<StatQuery>
     public ObservableCollection<string> Columns {get;} = [];
 
 
-    public string ParameterName1 {get => _parameterName1; set => SetAndRaise(ref _parameterName1,value);}
+    public string ParameterName1 {get => _parameterName1; set => this.SetAndRaise(ref _parameterName1,value);}
     string _parameterName1 ;
-    public string ParameterName2 {get => _parameterName2; set => SetAndRaise(ref _parameterName2,value);}
+    public string ParameterName2 {get => _parameterName2; set => this.SetAndRaise(ref _parameterName2,value);}
     string _parameterName2 ;
-    public string ParameterName3 {get => _parameterName3; set => SetAndRaise(ref _parameterName3,value);}
+    public string ParameterName3 {get => _parameterName3; set => this.SetAndRaise(ref _parameterName3,value);}
     string _parameterName3 ;
-    public string ParameterName4 {get => _parameterName4; set => SetAndRaise(ref _parameterName4,value);}
+    public string ParameterName4 {get => _parameterName4; set => this.SetAndRaise(ref _parameterName4,value);}
     string _parameterName4 ;
 
 
-    public string Parameter1 {get => _parameter1; set => SetAndRaise(ref _parameter1,value);}
+    public string Parameter1 {get => _parameter1; set => this.SetAndRaise(ref _parameter1,value);}
     string _parameter1 ;
-    public string Parameter2 {get => _parameter2; set => SetAndRaise(ref _parameter2,value);}
+    public string Parameter2 {get => _parameter2; set => this.SetAndRaise(ref _parameter2,value);}
     string _parameter2 ;
-    public string Parameter3 {get => _parameter3; set => SetAndRaise(ref _parameter3,value);}
+    public string Parameter3 {get => _parameter3; set => this.SetAndRaise(ref _parameter3,value);}
     string _parameter3 ;
-    public string Parameter4 {get => _parameter4; set => SetAndRaise(ref _parameter4,value);}
+    public string Parameter4 {get => _parameter4; set => this.SetAndRaise(ref _parameter4,value);}
     string _parameter4 ;
 
 
@@ -61,7 +62,7 @@ public class QueryViewModel : ListableEntityViewModel<StatQuery>
         ParameterName4 = GetParamName(query,4);
     }
 
-    public string ErrorMessage {get => _errorMessage; set => SetAndRaise(ref _errorMessage,value);}
+    public string ErrorMessage {get => _errorMessage; set => this.SetAndRaise(ref _errorMessage,value);}
     string _errorMessage ;
 
 

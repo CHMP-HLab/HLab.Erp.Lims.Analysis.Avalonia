@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reactive.Linq;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
@@ -50,7 +51,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public int? UserId
     {
         get => _userId;
-        set => SetAndRaise(ref _userId, value);
+        set => this.SetAndRaise(ref _userId, value);
     }
 
     int? _userId;
@@ -58,7 +59,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public string Values
     {
         get => _values;
-        set => SetAndRaise(ref _values, value);
+        set => this.SetAndRaise(ref _values, value);
     }
 
     string _values = "";
@@ -66,7 +67,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public string Result
     {
         get => _result;
-        set => SetAndRaise(ref _result, value);
+        set => this.SetAndRaise(ref _result, value);
     }
 
     string _result = "";
@@ -75,7 +76,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public string Conformity
     {
         get => _conformity;
-        set => SetAndRaise(ref _conformity, value);
+        set => this.SetAndRaise(ref _conformity, value);
     }
 
     string _conformity = "";
@@ -83,7 +84,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public DateTime? Start
     {
         get => _start;
-        set => SetAndRaise(ref _start, value);
+        set => this.SetAndRaise(ref _start, value);
     }
 
     DateTime? _start;
@@ -91,7 +92,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public DateTime? End
     {
         get => _end;
-        set => SetAndRaise(ref _end, value);
+        set => this.SetAndRaise(ref _end, value);
     }
 
     DateTime? _end;
@@ -121,7 +122,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public int? Validation
     {
         get => _validation;
-        set => SetAndRaise(ref _validation, value);
+        set => this.SetAndRaise(ref _validation, value);
     }
 
     int? _validation;
@@ -130,7 +131,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public string StageId
     {
         get => _stageId;
-        set => SetAndRaise(ref _stageId, value);
+        set => this.SetAndRaise(ref _stageId, value);
     }
 
     string _stageId;
@@ -146,7 +147,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
 
     string _name;
@@ -161,14 +162,14 @@ public partial class SampleTestResult : Entity, IFormTarget
     public bool MandatoryDone
     {
         get => _mandatoryDone;
-        set => SetAndRaise(ref _mandatoryDone, value);
+        set => this.SetAndRaise(ref _mandatoryDone, value);
     }
 
     bool _mandatoryDone;
     public string Note
     {
         get => _note;
-        set => SetAndRaise(ref _note, value);
+        set => this.SetAndRaise(ref _note, value);
     }
 
     string _note;
@@ -176,7 +177,7 @@ public partial class SampleTestResult : Entity, IFormTarget
     public double Progress
     {
         get => _progress;
-        set => SetAndRaise(ref _progress, value);
+        set => this.SetAndRaise(ref _progress, value);
     }
 
     double _progress;

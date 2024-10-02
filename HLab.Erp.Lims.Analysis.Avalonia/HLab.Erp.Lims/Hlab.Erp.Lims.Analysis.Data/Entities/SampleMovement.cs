@@ -1,5 +1,6 @@
 using System;
 using HLab.Base.Extensions;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Data;
 using NPoco;
 
@@ -64,7 +65,7 @@ public class SampleMovement : Entity
     public double Quantity
     {
         get => _quantity;
-        set => SetAndRaise(ref _quantity,value);
+        set => this.SetAndRaise(ref _quantity,value);
     }
     double _quantity ;
 

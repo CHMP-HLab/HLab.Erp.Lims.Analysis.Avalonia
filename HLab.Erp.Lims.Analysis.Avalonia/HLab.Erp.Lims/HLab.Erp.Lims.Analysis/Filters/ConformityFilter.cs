@@ -22,7 +22,7 @@ public class ConformityFilter : Filter<ConformityState>, IWorkflowFilter
         public bool Selected
         {
             get => _selected;
-            set => SetAndRaise(ref _selected, value);
+            set => this.SetAndRaise(ref _selected, value);
         }
         bool _selected;
 

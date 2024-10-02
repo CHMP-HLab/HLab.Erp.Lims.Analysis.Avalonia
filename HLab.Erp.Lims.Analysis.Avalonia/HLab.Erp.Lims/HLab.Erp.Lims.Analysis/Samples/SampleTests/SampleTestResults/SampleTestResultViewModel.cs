@@ -1,6 +1,7 @@
 ﻿using System.Reactive.Linq;
 using System.Windows.Input;
 using HLab.Base.Extensions;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Erp.Lims.Analysis.Data.Entities;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
@@ -126,7 +127,7 @@ public class SampleTestResultViewModel : EntityViewModel<SampleTestResult>
     public bool AuditDetail
     {
         get => _auditDetail;
-        set => SetAndRaise(ref _auditDetail,value);
+        set => this.SetAndRaise(ref _auditDetail,value);
     }
     bool _auditDetail ;
 
@@ -171,7 +172,7 @@ public class SampleTestResultViewModel : EntityViewModel<SampleTestResult>
     public SampleTestViewModel Parent
     {
         get => _parent;
-        set => SetAndRaise(ref _parent,value);
+        set => this.SetAndRaise(ref _parent,value);
     }
 
     SampleTestViewModel _parent ;

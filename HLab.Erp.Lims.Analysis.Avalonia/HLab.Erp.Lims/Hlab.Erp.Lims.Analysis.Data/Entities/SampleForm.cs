@@ -1,4 +1,5 @@
 ﻿using System;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
@@ -52,7 +53,7 @@ public class SampleForm : Entity, IFormTarget, IListableModel
     public ConformityState ConformityId
     {
         get => _conformityId;
-        set => SetAndRaise(ref _conformityId, value);
+        set => this.SetAndRaise(ref _conformityId, value);
     }
 
     ConformityState _conformityId = ConformityState.None;
@@ -61,7 +62,7 @@ public class SampleForm : Entity, IFormTarget, IListableModel
     public string SpecificationValues
     {
         get => _specificationValues;
-        set => SetAndRaise(ref _specificationValues, value);
+        set => this.SetAndRaise(ref _specificationValues, value);
     }
 
     string _specificationValues;
@@ -69,7 +70,7 @@ public class SampleForm : Entity, IFormTarget, IListableModel
     public string ResultValues
     {
         get => _resultValues;
-        set => SetAndRaise(ref _resultValues, value);
+        set => this.SetAndRaise(ref _resultValues, value);
     }
 
     string _resultValues;
@@ -77,7 +78,7 @@ public class SampleForm : Entity, IFormTarget, IListableModel
     public bool MandatoryDone
     {
         get => _mandatoryDone;
-        set => SetAndRaise(ref _mandatoryDone, value);
+        set => this.SetAndRaise(ref _mandatoryDone, value);
     }
 
     bool _mandatoryDone;
@@ -85,7 +86,7 @@ public class SampleForm : Entity, IFormTarget, IListableModel
     public bool SpecificationDone
     {
         get => _specificationDone;
-        set => SetAndRaise(ref _specificationDone, value);
+        set => this.SetAndRaise(ref _specificationDone, value);
     }
 
     bool _specificationDone;

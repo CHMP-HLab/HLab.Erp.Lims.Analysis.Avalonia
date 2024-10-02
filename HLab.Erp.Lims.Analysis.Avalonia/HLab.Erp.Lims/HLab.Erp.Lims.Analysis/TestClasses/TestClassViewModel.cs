@@ -1,5 +1,6 @@
 ﻿using System.Reactive.Linq;
 using System.Windows.Input;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Lims.Analysis.Data;
@@ -102,7 +103,7 @@ public class TestClassViewModel : ListableEntityViewModel<TestClass>, IFormHelpe
     public string NewName
     {
         get => _newName;
-        set => SetAndRaise(ref _newName,value);
+        set => this.SetAndRaise(ref _newName,value);
     }
 
     string _newName ;

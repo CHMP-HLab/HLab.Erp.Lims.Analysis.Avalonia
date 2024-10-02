@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Windows.Input;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Erp.Base;
 using HLab.Erp.Conformity.Annotations;
@@ -171,7 +172,7 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
     public bool AuditDetail
     {
         get => _auditDetail;
-        set => SetAndRaise(ref _auditDetail, value);
+        set => this.SetAndRaise(ref _auditDetail, value);
     }
     bool _auditDetail;
 

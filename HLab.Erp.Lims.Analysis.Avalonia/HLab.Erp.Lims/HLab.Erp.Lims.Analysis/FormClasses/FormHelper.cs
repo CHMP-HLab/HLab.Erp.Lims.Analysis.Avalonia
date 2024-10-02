@@ -49,49 +49,49 @@ public class FormHelper : ReactiveModel
     public IForm Form
     {
         get => _form;
-        set => SetAndRaise(ref _form, value);
+        set => this.SetAndRaise(ref _form, value);
     }
     IForm _form;
 
     public ITestResultProvider Result
     {
         get => _result;
-        set => SetAndRaise(ref _result, value);
+        set => this.SetAndRaise(ref _result, value);
     }
     ITestResultProvider _result;
 
     public string Xaml
     {
         get => _xaml;
-        set { if(SetAndRaise(ref _xaml, value)) FormUpToDate = false; }
+        set { if(this.SetAndRaise(ref _xaml, value)) FormUpToDate = false; }
     }
     string _xaml;
 
     public string Cs
     {
         get => _cs;
-        set { if (SetAndRaise(ref _cs, value)) FormUpToDate = false; }
+        set { if (this.SetAndRaise(ref _cs, value)) FormUpToDate = false; }
     }
     string _cs;
 
     public byte[] Binary
     {
         get => _binary;
-        set => SetAndRaise(ref _binary, value);
+        set => this.SetAndRaise(ref _binary, value);
     }
     byte[] _binary = [];
 
     public string XamlMessage
     {
         get => _xamlMessage;
-        set => SetAndRaise(ref _xamlMessage, value);
+        set => this.SetAndRaise(ref _xamlMessage, value);
     }
     string _xamlMessage = "";
 
     public string CsMessage
     {
         get => _csMessage;
-        set => SetAndRaise(ref _csMessage, value);
+        set => this.SetAndRaise(ref _csMessage, value);
     }
     string _csMessage = "";
 
@@ -102,7 +102,7 @@ public class FormHelper : ReactiveModel
     public CompileError SelectedXamlError
     {
         get => _selectedXamlError;
-        set => SetAndRaise(ref _selectedXamlError,value);
+        set => this.SetAndRaise(ref _selectedXamlError,value);
     }
 
     CompileError _selectedXamlError ;
@@ -110,7 +110,7 @@ public class FormHelper : ReactiveModel
     public CompileError SelectedCsError
     {
         get => _selectedCsError;
-        set => SetAndRaise(ref _selectedCsError,value);
+        set => this.SetAndRaise(ref _selectedCsError,value);
     }
 
     CompileError _selectedCsError ;
@@ -118,21 +118,21 @@ public class FormHelper : ReactiveModel
     public CompileError SelectedDebugError
     {
         get => _selectedDebugError;
-        set => SetAndRaise(ref _selectedDebugError,value);
+        set => this.SetAndRaise(ref _selectedDebugError,value);
     }
     CompileError _selectedDebugError ;
 
     public bool FormUpToDate
     {
         get => _formUpToDate;
-        set => SetAndRaise(ref _formUpToDate,value);
+        set => this.SetAndRaise(ref _formUpToDate,value);
     }
     bool _formUpToDate ;
 
     public int CsErrorPos
     {
         get => _csErrorPos;
-        set => SetAndRaise(ref _csErrorPos,value);
+        set => this.SetAndRaise(ref _csErrorPos,value);
     }
     int _csErrorPos ;
 

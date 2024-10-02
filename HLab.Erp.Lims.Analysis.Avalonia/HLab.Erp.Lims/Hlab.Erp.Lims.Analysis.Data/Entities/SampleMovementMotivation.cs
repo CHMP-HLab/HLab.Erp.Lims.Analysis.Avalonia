@@ -1,3 +1,4 @@
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
 using NPoco;
@@ -18,14 +19,14 @@ public class SampleMovementMotivation : Entity, IListableModel
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name,value);
+        set => this.SetAndRaise(ref _name,value);
     }
     string _name = "";
 
     public string IconPath
     {
         get => _iconPath;
-        set => SetAndRaise(ref _iconPath,value);
+        set => this.SetAndRaise(ref _iconPath,value);
     }
     string _iconPath = "";
 

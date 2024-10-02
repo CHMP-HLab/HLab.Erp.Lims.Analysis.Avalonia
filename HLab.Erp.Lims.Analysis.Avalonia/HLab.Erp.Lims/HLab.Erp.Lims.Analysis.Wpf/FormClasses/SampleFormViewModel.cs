@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Erp.Lims.Analysis.Data.Entities;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
@@ -51,7 +52,7 @@ public class SampleFormViewModel : ListableEntityViewModel<SampleForm>
     public SampleViewModel Parent
     {
         get => _parent;
-        set => SetAndRaise(ref _parent,value);
+        set => this.SetAndRaise(ref _parent,value);
     }
 
     SampleViewModel _parent ;
@@ -59,7 +60,7 @@ public class SampleFormViewModel : ListableEntityViewModel<SampleForm>
     public FormHelper FormHelper
     {
         get => _formHelper;
-        set => SetAndRaise(ref _formHelper,value);
+        set => this.SetAndRaise(ref _formHelper,value);
     }
 
     FormHelper _formHelper ;

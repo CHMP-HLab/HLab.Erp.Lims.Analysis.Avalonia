@@ -3,6 +3,7 @@ using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
 using System.Reactive.Linq;
+using HLab.Base.ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
@@ -20,14 +21,14 @@ public class Inn : Entity, IListableModel, ILocalCache
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name,value);
+        set => this.SetAndRaise(ref _name,value);
     }
     string _name = "";
 
     public string CasNumber
     {
         get => _casNumber;
-        set => SetAndRaise(ref _casNumber,value);
+        set => this.SetAndRaise(ref _casNumber,value);
     }
 
     string _casNumber = "";
@@ -35,7 +36,7 @@ public class Inn : Entity, IListableModel, ILocalCache
     public string UnitGroup
     {
         get => _unitGroup; 
-        set => SetAndRaise(ref _unitGroup,value);
+        set => this.SetAndRaise(ref _unitGroup,value);
     }
 
     string _unitGroup = "";
@@ -43,7 +44,7 @@ public class Inn : Entity, IListableModel, ILocalCache
     public double? MolarMass
     {
         get => _molarMass; 
-        set => SetAndRaise(ref _molarMass,value);
+        set => this.SetAndRaise(ref _molarMass,value);
     }
 
     double? _molarMass = (double?)default;
@@ -51,7 +52,7 @@ public class Inn : Entity, IListableModel, ILocalCache
     public double? Density
     {
         get => _density; 
-        set => SetAndRaise(ref _density,value);
+        set => this.SetAndRaise(ref _density,value);
     }
 
     double? _density = (double?)default;

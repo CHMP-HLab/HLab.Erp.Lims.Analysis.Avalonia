@@ -3,6 +3,7 @@ using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
 using System.Reactive.Linq;
+using HLab.Base.ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
@@ -24,14 +25,14 @@ public partial class Form : Entity, IListableModel, ILocalCache
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
     string _name = "";
 
     public string EnglishName
     {
         get => _englishName;
-        set => SetAndRaise(ref _englishName, value);
+        set => this.SetAndRaise(ref _englishName, value);
     }
 
     string _englishName = "";
@@ -39,7 +40,7 @@ public partial class Form : Entity, IListableModel, ILocalCache
     public string IconPath
     {
         get => _iconPath;
-        set => SetAndRaise(ref _iconPath, value);
+        set => this.SetAndRaise(ref _iconPath, value);
     }
     string _iconPath = "";
 

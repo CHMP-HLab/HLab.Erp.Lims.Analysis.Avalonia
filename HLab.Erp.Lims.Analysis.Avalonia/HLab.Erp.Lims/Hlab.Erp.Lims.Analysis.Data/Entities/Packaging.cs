@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Data;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
@@ -10,7 +11,7 @@ public class Packaging : Entity, ILocalCache
     public bool Secondary
     {
         get => _secondary;
-        set => SetAndRaise(ref _secondary, value);
+        set => this.SetAndRaise(ref _secondary, value);
     }
 
     bool _secondary;
@@ -20,7 +21,7 @@ public class Packaging : Entity, ILocalCache
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
 
     string _name;

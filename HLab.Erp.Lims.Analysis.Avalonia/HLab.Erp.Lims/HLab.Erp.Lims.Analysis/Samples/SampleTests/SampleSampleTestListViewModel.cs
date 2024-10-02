@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
 using System.Threading.Tasks;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Core.ListFilterConfigurators;
@@ -110,7 +111,7 @@ public class SampleSampleTestListViewModel : Core.EntityLists.EntityListViewMode
 
     }
 
-    public bool EditMode { get => _editMode; set => SetAndRaise(ref _editMode, value); }
+    public bool EditMode { get => _editMode; set => this.SetAndRaise(ref _editMode, value); }
     bool _editMode = false;
 
     protected override bool DeleteCanExecute(SampleTest sampleTest, Action<string> errorAction)

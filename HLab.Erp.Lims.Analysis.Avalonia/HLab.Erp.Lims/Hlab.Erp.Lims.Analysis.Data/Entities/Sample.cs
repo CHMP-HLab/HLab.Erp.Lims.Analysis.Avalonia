@@ -1,5 +1,6 @@
 using System;
 using System.Reactive.Linq;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Erp.Base.Data;
 using HLab.Erp.Conformity.Annotations;
@@ -52,7 +53,7 @@ public partial class Sample : Entity, IListableModel
     public string FileId
     {
         get => _fileId;
-        set => SetAndRaise(ref _fileId, value);
+        set => this.SetAndRaise(ref _fileId, value);
     }
 
     string _fileId;
@@ -75,7 +76,7 @@ public partial class Sample : Entity, IListableModel
     public string Reference
     {
         get => _reference;
-        set => SetAndRaise(ref _reference, value);
+        set => this.SetAndRaise(ref _reference, value);
     }
 
     string _reference;
@@ -84,7 +85,7 @@ public partial class Sample : Entity, IListableModel
     public string CustomerReference
     {
         get => _customerReference;
-        set => SetAndRaise(ref _customerReference, value);
+        set => this.SetAndRaise(ref _customerReference, value);
     }
 
     string _customerReference;
@@ -93,7 +94,7 @@ public partial class Sample : Entity, IListableModel
     public string ReportReference
     {
         get => _reportReference;
-        set => SetAndRaise(ref _reportReference, value);
+        set => this.SetAndRaise(ref _reportReference, value);
     }
 
     string _reportReference;
@@ -102,7 +103,7 @@ public partial class Sample : Entity, IListableModel
     public DateTime? ReceptionDate
     {
         get => _receptionDate;
-        set => SetAndRaise(ref _receptionDate, value);
+        set => this.SetAndRaise(ref _receptionDate, value);
     }
 
     DateTime? _receptionDate;
@@ -112,7 +113,7 @@ public partial class Sample : Entity, IListableModel
 
     {
         get => _worksheet;
-        set => SetAndRaise(ref _worksheet, value);
+        set => this.SetAndRaise(ref _worksheet, value);
     }
 
     string _worksheet = "";
@@ -121,7 +122,7 @@ public partial class Sample : Entity, IListableModel
     public string CommercialName
     {
         get => _commercialName;
-        set => SetAndRaise(ref _commercialName, value);
+        set => this.SetAndRaise(ref _commercialName, value);
     }
 
     string _commercialName = "";
@@ -130,7 +131,7 @@ public partial class Sample : Entity, IListableModel
     public string Batch
     {
         get => _batch;
-        set => SetAndRaise(ref _batch, value);
+        set => this.SetAndRaise(ref _batch, value);
     }
 
     string _batch = "";
@@ -139,7 +140,7 @@ public partial class Sample : Entity, IListableModel
     public DateTime? ExpirationDate
     {
         get => _expirationDate;
-        set => SetAndRaise(ref _expirationDate, value);
+        set => this.SetAndRaise(ref _expirationDate, value);
     }
 
     DateTime? _expirationDate;
@@ -148,7 +149,7 @@ public partial class Sample : Entity, IListableModel
     public bool ExpirationDayValid
     {
         get => _expirationDayValid;
-        set => SetAndRaise(ref _expirationDayValid, value);
+        set => this.SetAndRaise(ref _expirationDayValid, value);
     }
 
     bool _expirationDayValid;
@@ -157,7 +158,7 @@ public partial class Sample : Entity, IListableModel
     public DateTime? ManufacturingDate
     {
         get => _manufacturingDate;
-        set => SetAndRaise(ref _manufacturingDate, value);
+        set => this.SetAndRaise(ref _manufacturingDate, value);
     }
 
     DateTime? _manufacturingDate;
@@ -166,7 +167,7 @@ public partial class Sample : Entity, IListableModel
     public bool ManufacturingDayValid
     {
         get => _manufacturingDayValid;
-        set => SetAndRaise(ref _manufacturingDayValid, value);
+        set => this.SetAndRaise(ref _manufacturingDayValid, value);
     }
 
     bool _manufacturingDayValid;
@@ -175,7 +176,7 @@ public partial class Sample : Entity, IListableModel
     public DateTime? SamplingDate
     {
         get => _samplingDate;
-        set => SetAndRaise(ref _samplingDate, value);
+        set => this.SetAndRaise(ref _samplingDate, value);
     }
 
     DateTime? _samplingDate;
@@ -184,7 +185,7 @@ public partial class Sample : Entity, IListableModel
     public bool SamplingDayValid
     {
         get => _samplingDayValid;
-        set => SetAndRaise(ref _samplingDayValid, value);
+        set => this.SetAndRaise(ref _samplingDayValid, value);
     }
 
     bool _samplingDayValid;
@@ -193,7 +194,7 @@ public partial class Sample : Entity, IListableModel
     public string SamplingOrigin
     {
         get => _samplingOrigin;
-        set => SetAndRaise(ref _samplingOrigin, value);
+        set => this.SetAndRaise(ref _samplingOrigin, value);
     }
 
     string _samplingOrigin = "";
@@ -202,7 +203,7 @@ public partial class Sample : Entity, IListableModel
     public string PharmacopoeiaVersion
     {
         get => _pharmacopoeiaVersion;
-        set => SetAndRaise(ref _pharmacopoeiaVersion, value);
+        set => this.SetAndRaise(ref _pharmacopoeiaVersion, value);
     }
 
     string _pharmacopoeiaVersion = "";
@@ -211,7 +212,7 @@ public partial class Sample : Entity, IListableModel
     public bool InOriginalPackaging
     {
         get => _inOriginalPackaging;
-        set => SetAndRaise(ref _inOriginalPackaging, value);
+        set => this.SetAndRaise(ref _inOriginalPackaging, value);
     }
 
     bool _inOriginalPackaging;
@@ -220,7 +221,7 @@ public partial class Sample : Entity, IListableModel
     public string PrimaryPackaging
     {
         get => _primaryPackaging;
-        set => SetAndRaise(ref _primaryPackaging, value);
+        set => this.SetAndRaise(ref _primaryPackaging, value);
     }
 
     string _primaryPackaging = "";
@@ -229,7 +230,7 @@ public partial class Sample : Entity, IListableModel
     public string SecondaryPackaging
     {
         get => _secondaryPackaging;
-        set => SetAndRaise(ref _secondaryPackaging, value);
+        set => this.SetAndRaise(ref _secondaryPackaging, value);
     }
 
     string _secondaryPackaging = "";
@@ -238,7 +239,7 @@ public partial class Sample : Entity, IListableModel
     public double? ReceivedQuantity
     {
         get => _receivedQuantity;
-        set => SetAndRaise(ref _receivedQuantity, value);
+        set => this.SetAndRaise(ref _receivedQuantity, value);
     }
 
     double? _receivedQuantity;
@@ -246,7 +247,7 @@ public partial class Sample : Entity, IListableModel
     public double? RemainingQuantity
     {
         get => _remainingQuantity;
-        set => SetAndRaise(ref _remainingQuantity,value);
+        set => this.SetAndRaise(ref _remainingQuantity,value);
     }
 
     double? _remainingQuantity ;
@@ -254,7 +255,7 @@ public partial class Sample : Entity, IListableModel
     public string Aspect
     {
         get => _aspect;
-        set => SetAndRaise(ref _aspect, value);
+        set => this.SetAndRaise(ref _aspect, value);
     }
 
     string _aspect = "";
@@ -263,7 +264,7 @@ public partial class Sample : Entity, IListableModel
     public string Size
     {
         get => _size;
-        set => SetAndRaise(ref _size, value);
+        set => this.SetAndRaise(ref _size, value);
     }
 
     string _size = "";
@@ -272,7 +273,7 @@ public partial class Sample : Entity, IListableModel
     public bool HasInstruction
     {
         get => _hasInstruction;
-        set => SetAndRaise(ref _hasInstruction, value);
+        set => this.SetAndRaise(ref _hasInstruction, value);
     }
 
     bool _hasInstruction;
@@ -281,7 +282,7 @@ public partial class Sample : Entity, IListableModel
     public bool NoticeFr
     {
         get => _noticeFr;
-        set => SetAndRaise(ref _noticeFr, value);
+        set => this.SetAndRaise(ref _noticeFr, value);
     }
 
     bool _noticeFr;
@@ -290,7 +291,7 @@ public partial class Sample : Entity, IListableModel
     public bool NoticeEn
     {
         get => _noticeEn;
-        set => SetAndRaise(ref _noticeEn, value);
+        set => this.SetAndRaise(ref _noticeEn, value);
     }
 
     bool _noticeEn;
@@ -299,7 +300,7 @@ public partial class Sample : Entity, IListableModel
     public string InstructionLanguages
     {
         get => _instructionLanguages;
-        set => SetAndRaise(ref _instructionLanguages, value);
+        set => this.SetAndRaise(ref _instructionLanguages, value);
     }
 
     string _instructionLanguages = "";
@@ -308,7 +309,7 @@ public partial class Sample : Entity, IListableModel
     public string StorageConditions
     {
         get => _storageConditions;
-        set => SetAndRaise(ref _storageConditions, value);
+        set => this.SetAndRaise(ref _storageConditions, value);
     }
 
     string _storageConditions = "";
@@ -317,7 +318,7 @@ public partial class Sample : Entity, IListableModel
     public string Note
     {
         get => _note;
-        set => SetAndRaise(ref _note, value);
+        set => this.SetAndRaise(ref _note, value);
     }
 
     string _note = "";
@@ -326,7 +327,7 @@ public partial class Sample : Entity, IListableModel
     public string Conclusion
     {
         get => _conclusion;
-        set => SetAndRaise(ref _conclusion, value);
+        set => this.SetAndRaise(ref _conclusion, value);
     }
 
     string _conclusion = "";
@@ -335,7 +336,7 @@ public partial class Sample : Entity, IListableModel
     public DateTime? NotificationDate
     {
         get => _notificationDate;
-        set => SetAndRaise(ref _notificationDate, value);
+        set => this.SetAndRaise(ref _notificationDate, value);
     }
 
     DateTime? _notificationDate;
@@ -359,7 +360,7 @@ public partial class Sample : Entity, IListableModel
     public double Progress
     {
         get => _progress;
-        set => SetAndRaise(ref _progress, value);
+        set => this.SetAndRaise(ref _progress, value);
     }
 
     double _progress;
@@ -368,7 +369,7 @@ public partial class Sample : Entity, IListableModel
     public sbyte? Validation
     {
         get => _validation;
-        set => SetAndRaise(ref _validation, value);
+        set => this.SetAndRaise(ref _validation, value);
     }
 
     sbyte? _validation;
@@ -377,7 +378,7 @@ public partial class Sample : Entity, IListableModel
     public ConformityState ConformityId
     {
         get => _conformityId;
-        set => SetAndRaise(ref _conformityId, value);
+        set => this.SetAndRaise(ref _conformityId, value);
     }
 
     ConformityState _conformityId;
@@ -386,7 +387,7 @@ public partial class Sample : Entity, IListableModel
     public string StageId
     {
         get => _stageId;
-        set => SetAndRaise(ref _stageId, value);
+        set => this.SetAndRaise(ref _stageId, value);
     }
 
     string _stageId;
@@ -401,7 +402,7 @@ public partial class Sample : Entity, IListableModel
     public string PreviousStageId
     {
         get => _previousStageId;
-        set => SetAndRaise(ref _previousStageId,value);
+        set => this.SetAndRaise(ref _previousStageId,value);
     }
 
     string _previousStageId ;
@@ -498,7 +499,7 @@ public partial class Sample : Entity, IListableModel
     public bool Invoiced
     {
         get => _invoiced;
-        set => SetAndRaise(ref _invoiced, value);
+        set => this.SetAndRaise(ref _invoiced, value);
     }
 
     bool _invoiced;
@@ -507,7 +508,7 @@ public partial class Sample : Entity, IListableModel
     public bool Paid
     {
         get => _paid;
-        set => SetAndRaise(ref _paid, value);
+        set => this.SetAndRaise(ref _paid, value);
     }
 
     bool _paid;
@@ -516,7 +517,7 @@ public partial class Sample : Entity, IListableModel
     public string InvoiceNo
     {
         get => _invoiceNo;
-        set => SetAndRaise(ref _invoiceNo, value);
+        set => this.SetAndRaise(ref _invoiceNo, value);
     }
 
     string _invoiceNo;

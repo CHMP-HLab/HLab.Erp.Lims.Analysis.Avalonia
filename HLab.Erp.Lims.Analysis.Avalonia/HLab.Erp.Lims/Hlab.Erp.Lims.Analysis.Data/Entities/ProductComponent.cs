@@ -1,3 +1,4 @@
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Base.Data;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
@@ -46,7 +47,7 @@ namespace HLab.Erp.Lims.Analysis.Data.Entities
         public double Quantity
         {
             get => _quantity;
-            set => SetAndRaise(ref _quantity, value);
+            set => this.SetAndRaise(ref _quantity, value);
         }
         double _quantity = 0.0;
 

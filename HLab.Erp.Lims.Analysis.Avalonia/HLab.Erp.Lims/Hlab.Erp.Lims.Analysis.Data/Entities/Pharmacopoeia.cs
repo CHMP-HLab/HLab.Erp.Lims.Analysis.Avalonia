@@ -4,6 +4,7 @@ using NPoco;
 using ReactiveUI;
 using System;
 using System.Reactive.Linq;
+using HLab.Base.ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
@@ -23,7 +24,7 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
 
     string _name = "";
@@ -31,14 +32,14 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
     public string Abbreviation
     {
         get => _abbreviation;
-        set => SetAndRaise(ref _abbreviation, value);
+        set => this.SetAndRaise(ref _abbreviation, value);
     }
 
     string _abbreviation = "";
     //public string LastVersion
     //{
     //    get => _lastVersion;
-    //    set => SetAndRaise(ref _lastVersion,value);
+    //    set => this.SetAndRaise(ref _lastVersion,value);
     //}
     //private string _lastVersion = "";
 
@@ -46,7 +47,7 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
     public string Url
     {
         get => _url;
-        set => SetAndRaise(ref _url, value);
+        set => this.SetAndRaise(ref _url, value);
     }
 
     string _url = "";
@@ -55,7 +56,7 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
     public string SearchUrl
     {
         get => _searchUrl;
-        set => SetAndRaise(ref _searchUrl, value);
+        set => this.SetAndRaise(ref _searchUrl, value);
     }
 
     string _searchUrl = "";
@@ -64,7 +65,7 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
     public string ReferenceUrl
     {
         get => _referenceUrl;
-        set => SetAndRaise(ref _referenceUrl, value);
+        set => this.SetAndRaise(ref _referenceUrl, value);
     }
 
     string _referenceUrl = "";
@@ -72,7 +73,7 @@ public partial class Pharmacopoeia : Entity, IListableModel, ILocalCache
     public string IconPath
     {
         get => _iconPath;
-        set => SetAndRaise(ref _iconPath, value);
+        set => this.SetAndRaise(ref _iconPath, value);
     }
 
     string _iconPath = "";

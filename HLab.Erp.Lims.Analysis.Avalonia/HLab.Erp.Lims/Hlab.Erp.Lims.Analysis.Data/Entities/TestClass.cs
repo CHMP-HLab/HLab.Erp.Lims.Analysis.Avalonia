@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
 using HLab.Mvvm.Application;
@@ -27,7 +28,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
 
     string _name = "";
@@ -35,7 +36,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     public string IconPath
     {
         get => _iconPath;
-        set => SetAndRaise(ref _iconPath, value);
+        set => this.SetAndRaise(ref _iconPath, value);
     }
 
     string _iconPath = "";
@@ -46,7 +47,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     public string Version
     {
         get => _version;
-        set => SetAndRaise(ref _version,value);
+        set => this.SetAndRaise(ref _version,value);
     }
 
     string _version = "";
@@ -54,7 +55,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     public byte[] Code
     {
         get => _code;
-        set => SetAndRaise(ref _code,value);
+        set => this.SetAndRaise(ref _code,value);
     }
 
     byte[] _code = Array.Empty<byte>();
@@ -62,14 +63,14 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     public byte[] Binary
     {
         get => _binary;
-        set => SetAndRaise(ref _binary,value);
+        set => this.SetAndRaise(ref _binary,value);
     }
     byte[] _binary = Array.Empty<byte>() ;
 
     public int? Order
     {
         get => _order;
-        set => SetAndRaise(ref _order,value);
+        set => this.SetAndRaise(ref _order,value);
     }
 
     int? _order ;
@@ -93,7 +94,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     public int? DurationFirst
     {
         get => _durationFirst;
-        set => SetAndRaise(ref _durationFirst,value);
+        set => this.SetAndRaise(ref _durationFirst,value);
     }
 
     int? _durationFirst ;
@@ -101,7 +102,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     public int? DurationNext
     {
         get => _durationNext;
-        set => SetAndRaise(ref _durationNext,value);
+        set => this.SetAndRaise(ref _durationNext,value);
     }
 
     int? _durationNext ;
@@ -109,7 +110,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     public int? DurationAdmin
     {
         get => _durationAdmin;
-        set => SetAndRaise(ref _durationAdmin,value);
+        set => this.SetAndRaise(ref _durationAdmin,value);
     }
 
     int? _durationAdmin ;
@@ -126,7 +127,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
     public bool ComponentAware
     {
         get => _componentAware;
-        set => SetAndRaise(ref _componentAware,value);
+        set => this.SetAndRaise(ref _componentAware,value);
     }
     bool _componentAware ;
 

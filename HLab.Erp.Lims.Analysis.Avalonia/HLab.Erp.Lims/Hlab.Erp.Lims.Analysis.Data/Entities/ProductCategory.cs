@@ -3,6 +3,7 @@ using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
 using System.Reactive.Linq;
+using HLab.Base.ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
@@ -27,7 +28,7 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
     public string Name
     {
         get => _name;
-        set => SetAndRaise(ref _name, value);
+        set => this.SetAndRaise(ref _name, value);
     }
 
     string _name = "";
@@ -35,7 +36,7 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
     public string NamePropertyName
     {
         get => _namePropertyName;
-        set => SetAndRaise(ref _namePropertyName,value);
+        set => this.SetAndRaise(ref _namePropertyName,value);
     }
 
     string _namePropertyName = "{Name}";
@@ -43,7 +44,7 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
     public string VariantPropertyName
     {
         get => _variantPropertyName;
-        set => SetAndRaise(ref _variantPropertyName,value);
+        set => this.SetAndRaise(ref _variantPropertyName,value);
     }
 
     string _variantPropertyName = "{Variant}";
@@ -51,14 +52,14 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
     public string ComplementPropertyName
     {
         get => _complementPropertyName;
-        set => SetAndRaise(ref _complementPropertyName,value);
+        set => this.SetAndRaise(ref _complementPropertyName,value);
     }
 
     string _complementPropertyName = "{Complement}";
     public int? Priority
     {
         get => _priority;
-        set => SetAndRaise(ref _priority, value);
+        set => this.SetAndRaise(ref _priority, value);
     }
 
     int? _priority;
@@ -71,7 +72,7 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
     public string IconPath
     {
         get => _iconPath;
-        set => SetAndRaise(ref _iconPath, value);
+        set => this.SetAndRaise(ref _iconPath, value);
     }
 
     string _iconPath = "";
