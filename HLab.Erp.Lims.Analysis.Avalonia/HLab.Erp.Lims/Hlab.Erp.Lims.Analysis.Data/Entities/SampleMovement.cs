@@ -22,12 +22,12 @@ public class SampleMovement : Entity
         get => _sample.Id;
         set => _sample.SetId(value);
     }
-    [Ignore] public virtual Sample Sample
+    [Ignore] public virtual Sample? Sample
     {
         get => _sample.Value;
         set => SampleId = value.Id;
     }
-    readonly ForeignPropertyHelper<SampleMovement, Sample> _sample;
+    readonly ForeignPropertyHelper<SampleMovement, Sample?> _sample;
 
     /// <summary>
     /// SampleTestResult

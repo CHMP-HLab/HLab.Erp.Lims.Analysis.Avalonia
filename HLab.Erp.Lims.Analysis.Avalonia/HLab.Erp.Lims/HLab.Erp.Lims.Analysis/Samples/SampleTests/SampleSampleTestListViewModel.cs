@@ -18,9 +18,9 @@ public class SampleSampleTestListViewModel : Core.EntityLists.EntityListViewMode
 {
     readonly IAclService _acl;
 
-    public Sample Sample { get; }
+    public Sample? Sample { get; }
 
-    public SampleSampleTestListViewModel(IAclService acl, Injector i, Sample sample) : base(i, c => c
+    public SampleSampleTestListViewModel(IAclService acl, Injector i, Sample? sample) : base(i, c => c
         //.DeleteAllowed()
         .StaticFilter(e => e.SampleId == sample.Id)
 

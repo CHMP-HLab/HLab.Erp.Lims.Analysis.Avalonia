@@ -15,9 +15,9 @@ public class SampleMovementsListViewModel : EntityListViewModel<SampleMovement>,
     protected override bool DeleteCanExecute(SampleMovement target,Action<string> errorAction) => Selected!=null || (SelectedIds?.Any()??false);
 
 
-    readonly Sample _sample;
+    readonly Sample? _sample;
 
-    public SampleMovementsListViewModel(Sample sample, Injector i) : base(i, c => c
+    public SampleMovementsListViewModel(Sample? sample, Injector i) : base(i, c => c
         .StaticFilter(e => e.SampleId == sample.Id)
         .HideFilters()
 

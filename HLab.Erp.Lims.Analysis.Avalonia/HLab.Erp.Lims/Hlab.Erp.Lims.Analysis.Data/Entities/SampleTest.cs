@@ -42,12 +42,12 @@ public partial class SampleTest : Entity
         set => _sample.SetId(value);
     }
     [Ignore]
-    public virtual Sample Sample
+    public virtual Sample? Sample
     {
         get => _sample.Value;
         set => SampleId = value.Id;
     }
-    readonly ForeignPropertyHelper<SampleTest, Sample> _sample;
+    readonly ForeignPropertyHelper<SampleTest, Sample?> _sample;
 
 
     public int? TestClassId

@@ -41,12 +41,12 @@ public partial class SampleTestResult : Entity, IFormTarget
     }
 
     [Ignore]
-    public virtual SampleTest SampleTest
+    public virtual SampleTest? SampleTest
     {
         get => _sampleTest.Value;
         set => SampleTestId = value?.Id;
     }
-    ForeignPropertyHelper<SampleTestResult, SampleTest> _sampleTest;
+    ForeignPropertyHelper<SampleTestResult, SampleTest?> _sampleTest;
 
     public int? UserId
     {

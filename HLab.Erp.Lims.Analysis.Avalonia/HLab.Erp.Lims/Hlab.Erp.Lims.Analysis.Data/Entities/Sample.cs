@@ -350,12 +350,12 @@ public partial class Sample : Entity, IListableModel
 
 
     [Ignore]
-    public User Validator
+    public User? Validator
     {
         get => _validator.Value;
         set => ValidatorId = value.Id;
     }
-    ForeignPropertyHelper<Sample, User> _validator;
+    ForeignPropertyHelper<Sample, User?> _validator;
 
     public double Progress
     {
@@ -414,12 +414,12 @@ public partial class Sample : Entity, IListableModel
         set => _customer.SetId(value);
     }
     [Ignore]
-    public Customer Customer
+    public Customer? Customer
     {
         get => _customer.Value;
         set => CustomerId = value.Id;
     }
-    ForeignPropertyHelper<Sample, Customer> _customer;
+    ForeignPropertyHelper<Sample, Customer?> _customer;
 
     public int? ManufacturerId
     {
@@ -455,12 +455,12 @@ public partial class Sample : Entity, IListableModel
         set => _product.SetId(value);
     }
     [Ignore]
-    public Product Product
+    public Product? Product
     {
         get => _product.Value;
         set => ProductId = value.Id;
     }
-    ForeignPropertyHelper<Sample, Product> _product;
+    ForeignPropertyHelper<Sample, Product?> _product;
 
     public int? AnalysisMotivationId
     {
