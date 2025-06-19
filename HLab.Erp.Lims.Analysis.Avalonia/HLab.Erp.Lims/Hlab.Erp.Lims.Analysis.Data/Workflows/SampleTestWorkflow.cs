@@ -129,7 +129,7 @@ public class SampleTestWorkflow : Workflow<SampleTestWorkflow, SampleTest>
    public static Action ToProduction = Action.Create(c => c
        .Caption("{To Production}").Icon("Icons/Workflows/Production")
        .FromStage(() => Scheduling, () => Scheduled)
-       .When(w => w.Target.Sample.Stage == SampleWorkflow.Production)
+       .When(w => w.Target.Sample?.Stage == SampleWorkflow.Production)
        .WithMessage(w => "{Sample not in production}")
        .Action(w => w.Target.StartDate ??= DateTime.Now)
        .ToStage(() => Running)
