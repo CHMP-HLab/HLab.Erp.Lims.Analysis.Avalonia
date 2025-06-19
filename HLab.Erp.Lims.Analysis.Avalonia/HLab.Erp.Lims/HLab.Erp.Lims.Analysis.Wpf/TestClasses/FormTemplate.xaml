@@ -10,7 +10,7 @@
             
     </Grid>
 </UserControl>-->
-<UserControl x:Class="HLab.Erp.Lims.Analysis.Module.TestClasses.FormTemplate"
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Wpf.TestClasses.FormTemplate"
     xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
     UseLayoutRounding = "True" >

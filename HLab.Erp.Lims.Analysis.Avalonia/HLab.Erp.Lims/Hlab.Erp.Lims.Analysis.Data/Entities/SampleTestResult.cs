@@ -3,15 +3,13 @@ using System.Reactive.Linq;
 using HLab.Base.ReactiveUI;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
 using HLab.Erp.Workflows.Models;
 using NPoco;
 using ReactiveUI;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
-
-
-
 
 public partial class SampleTestResult : Entity, IFormTarget
 //        , IEntityWithIcon
@@ -25,6 +23,8 @@ public partial class SampleTestResult : Entity, IFormTarget
         _stage = this.WhenAnyValue(e => e.StageId)
             .Select(SampleTestResultWorkflow.StageFromName)
             .ToProperty(this, e => e.Stage);
+
+        _sampleTest = this.Foreign(e => e.SampleTestId, e => e.SampleTest);
 
     }
 
@@ -46,14 +46,13 @@ public partial class SampleTestResult : Entity, IFormTarget
         get => _sampleTest.Value;
         set => SampleTestId = value?.Id;
     }
-    ForeignPropertyHelper<SampleTestResult, SampleTest?> _sampleTest;
+    readonly ForeignPropertyHelper<SampleTestResult, SampleTest> _sampleTest;
 
     public int? UserId
     {
         get => _userId;
         set => this.SetAndRaise(ref _userId, value);
     }
-
     int? _userId;
 
     public string Values
@@ -133,23 +132,21 @@ public partial class SampleTestResult : Entity, IFormTarget
         get => _stageId;
         set => this.SetAndRaise(ref _stageId, value);
     }
-
     string _stageId;
 
     [Ignore]
     public Workflow<SampleTestResultWorkflow>.Stage? Stage
     {
         get => _stage.Value;
-        set => StageId = value.Name;
+        set => StageId = value?.Name??"";
     }
-    ObservableAsPropertyHelper<Workflow<SampleTestResultWorkflow>.Stage?> _stage;
+    readonly ObservableAsPropertyHelper<Workflow<SampleTestResultWorkflow>.Stage?> _stage;
 
     public string Name
     {
         get => _name;
         set => this.SetAndRaise(ref _name, value);
     }
-
     string _name;
 
 
@@ -179,7 +176,6 @@ public partial class SampleTestResult : Entity, IFormTarget
         get => _progress;
         set => this.SetAndRaise(ref _progress, value);
     }
-
     double _progress;
 
     // TEST
@@ -218,5 +214,6 @@ public partial class SampleTestResult : Entity, IFormTarget
 
     string IFormTarget.DefaultTestName => ((IFormTarget)SampleTest).DefaultTestName;
 
+    [Ignore]
     public IFormClass FormClass { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace HLab.Erp.Lims.Analysis.Module.TestClasses;
+namespace HLab.Erp.Lims.Analysis.Wpf.TestClasses;
 
 /// <summary>
 /// Logique d'interaction pour FormTemplate.xaml

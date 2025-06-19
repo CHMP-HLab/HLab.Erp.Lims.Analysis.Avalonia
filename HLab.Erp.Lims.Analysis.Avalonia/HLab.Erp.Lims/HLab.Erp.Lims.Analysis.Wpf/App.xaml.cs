@@ -39,6 +39,7 @@ using HLab.Mvvm.Application.Messages;
 using HLab.Mvvm.Application.Wpf;
 using HLab.Mvvm.Wpf;
 using HLab.Options;
+using HLab.UI;
 using HLab.Ui.Wpf;
 
 namespace HLab.Erp.Lims.Analysis.Wpf;
@@ -100,6 +101,7 @@ public partial class App : Application
                 c.Export<LoginViewModel>().As<ILoginViewModel>();
                 c.Export<AuditTrailMotivationViewModel>().As<IAuditTrailProvider>();
                 c.Export<SelectedMessage>().As<ISelectedMessage>();
+                c.Export<GuiTimer>().As<IGuiTimer>();
 
                 c.Export(typeof(EntityListHelper<>)).As(typeof(IEntityListHelper<>));
                 c.Export(typeof(ColumnsProvider<>)).As(typeof(IColumnsProvider<>));

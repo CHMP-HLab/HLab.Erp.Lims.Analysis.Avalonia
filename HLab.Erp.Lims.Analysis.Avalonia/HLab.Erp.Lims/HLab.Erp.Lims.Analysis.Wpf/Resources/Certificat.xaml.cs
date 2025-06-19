@@ -1,11 +1,11 @@
 ﻿using System.Windows.Controls;
 
-namespace HLab.Erp.Lims.Analysis.Module.Resources;
+namespace HLab.Erp.Lims.Analysis.Wpf.Resources;
 
 /// <summary>
 /// Logique d'interaction pour Certificat.xaml
 /// </summary>
-public partial class Certificat2 : Page
+public partial class Certificat2: Page
 {
     public Certificat2()
     {

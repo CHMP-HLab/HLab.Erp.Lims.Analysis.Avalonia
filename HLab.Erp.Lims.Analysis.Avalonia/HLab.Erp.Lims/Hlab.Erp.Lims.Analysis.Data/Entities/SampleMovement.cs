@@ -2,6 +2,7 @@ using System;
 using HLab.Base.Extensions;
 using HLab.Base.ReactiveUI;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 using NPoco;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
@@ -10,8 +11,8 @@ public class SampleMovement : Entity
 {
     public SampleMovement()
     {
-        _sample = Foreign(this, e => e.SampleId, e => e.Sample);
-        _sampleTestResult = Foreign(this, e => e.SampleTestResultId, e => e.SampleTestResult);
+        _sample = this.Foreign( e => e.SampleId, e => e.Sample);
+        _sampleTestResult = this.Foreign( e => e.SampleTestResultId, e => e.SampleTestResult);
     }
 
     /// <summary>

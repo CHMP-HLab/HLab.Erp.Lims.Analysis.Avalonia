@@ -2,6 +2,7 @@ using System;
 using HLab.Base.ReactiveUI;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 using HLab.Erp.Data.Observables;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
 using NPoco;
@@ -17,11 +18,11 @@ public partial class SampleTest : Entity
 
     public SampleTest()
     {
-        _sample = Foreign(this, e => e.SampleId, e => e.Sample);
-        _testClass = Foreign(this, e => e.TestClassId, e => e.TestClass);
-        _result = Foreign(this, e => e.ResultId, e => e.Result);
-        _pharmacopoeia = Foreign(this, e => e.PharmacopoeiaId, e => e.Pharmacopoeia);
-        _productComponent = Foreign(this, e => e.ProductComponentId, e => e.ProductComponent);
+        _sample = this.Foreign( e => e.SampleId, e => e.Sample);
+        _testClass = this.Foreign( e => e.TestClassId, e => e.TestClass);
+        _result = this.Foreign( e => e.ResultId, e => e.Result);
+        _pharmacopoeia = this.Foreign( e => e.PharmacopoeiaId, e => e.Pharmacopoeia);
+        _productComponent = this.Foreign( e => e.ProductComponentId, e => e.ProductComponent);
 
         _color = this
             .WhenAnyValue(e => e.TestClass.Color)

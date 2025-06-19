@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace HLab.Erp.Lims.Analysis.Module.Stats;
+namespace HLab.Erp.Lims.Analysis.Wpf.Stats;
 
 /// <summary>
 /// Logique d'interaction pour QueryView.xaml

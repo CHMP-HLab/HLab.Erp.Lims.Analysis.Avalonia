@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using HLab.Erp.Data;
-using HLab.Erp.Lims.Analysis.Data;
-using HLab.Erp.Lims.Analysis.Module.Stats;
 using HLab.Erp.Lims.Analysis.Stats;
 using HLab.Mvvm.Annotations;
-using HLab.Mvvm.Application;
 using HLab.Mvvm.Application.Documents;
-using Npgsql;
 
-namespace Outils;
+namespace HLab.Erp.Lims.Analysis.Wpf.Stats;
 
 /// <summary>
 /// Logique d'interaction pour Requeteur.xaml

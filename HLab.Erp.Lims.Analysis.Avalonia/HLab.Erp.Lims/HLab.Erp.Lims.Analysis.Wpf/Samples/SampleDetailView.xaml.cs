@@ -1,11 +1,9 @@
-﻿using HLab.Mvvm.Annotations;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using HLab.Erp.Core.Tools.Details;
-using HLab.Erp.Lims.Analysis.Module.Samples;
 using HLab.Erp.Lims.Analysis.Samples;
-using HLab.Erp.Lims.Analysis.Wpf.Samples;
+using HLab.Mvvm.Annotations;
 
-namespace HLab.Erp.Lims.Analysis.Module;
+namespace HLab.Erp.Lims.Analysis.Wpf.Samples;
 
 /// <summary>
 /// Logique d'interaction pour SampleDetailView.xaml

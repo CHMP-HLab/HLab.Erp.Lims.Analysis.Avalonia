@@ -61,7 +61,7 @@ public static class ColumnsExtensions
                 .IconPath("Icons/Conformity/ConformHeader")
                 .Width(130)
                 .Link(getStateExpression)
-                .Localize(s => $"{{{getState(s)}}}")
+                .Localize(s => "{" + getState(s) + "}")
                 .Icon(s => getState(s).IconPath(), 20)
                 //.Center()
                 .OrderBy(s => getState(s))

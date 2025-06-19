@@ -4,7 +4,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 
-namespace HLab.Erp.Lims.Analysis.Module.Prints;
+namespace HLab.Erp.Lims.Analysis.Wpf.Prints;
 
 /// <summary>
 /// Logique d'interaction pour MiseEnForme.xaml

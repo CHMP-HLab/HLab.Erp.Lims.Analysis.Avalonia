@@ -11,8 +11,6 @@ using HLab.Base.Wpf.Controls;
 using HLab.Base.Wpf.DependencyProperties;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Lims.Analysis.FormClasses;
-using HLab.Erp.Lims.Analysis.Module.FormClasses;
-using HLab.Erp.Lims.Analysis.Module.TestClasses;
 using HLab.Erp.Lims.Analysis.TestClasses;
 using HLab.Erp.Lims.Analysis.Wpf.FormClasses;
 

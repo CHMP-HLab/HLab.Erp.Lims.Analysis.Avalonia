@@ -12,7 +12,7 @@ namespace HLab.Erp.Lims.Analysis.Data.Workflows;
 public static class WorkflowAnalysisExtension
 {
     public static IAclService Acl { get; set; }
-    public static IFluentConfigurator<IWorkflowConditionalObject<TWf>> NeedRight<TWf>(this IFluentConfigurator<IWorkflowConditionalObject<TWf>> t, Func<AclRight> right)
+    public static IFluentConfigurator<IWorkflowConditionalObject<TWf>> NeedRight<TWf>(this IFluentConfigurator<IWorkflowConditionalObject<TWf>> t, Func<AclRight?> right)
         where TWf : ReactiveModel, IWorkflow<TWf>
     {
         return t.When(w => Acl.IsGranted(

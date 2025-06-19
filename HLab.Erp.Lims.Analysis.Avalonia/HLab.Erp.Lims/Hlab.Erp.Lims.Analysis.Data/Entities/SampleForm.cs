@@ -2,6 +2,7 @@
 using HLab.Base.ReactiveUI;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 using HLab.Mvvm.Application;
 using NPoco;
 
@@ -12,8 +13,8 @@ public class SampleForm : Entity, IFormTarget, IListableModel
 {
     public SampleForm()
     {
-        _formClass = Foreign(this, e => e.FormClassId, e => e.FormClass);
-        _sample = Foreign(this, e => e.SampleId, e => e.Sample);
+        _formClass = this.Foreign( e => e.FormClassId, e => e.FormClass);
+        _sample = this.Foreign( e => e.SampleId, e => e.Sample);
     }
 
     public int? FormClassId

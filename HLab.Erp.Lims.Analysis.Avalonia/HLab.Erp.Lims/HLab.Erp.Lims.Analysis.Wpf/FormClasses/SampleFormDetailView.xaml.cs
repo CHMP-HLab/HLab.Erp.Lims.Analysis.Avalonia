@@ -1,9 +1,8 @@
 ﻿using System.Windows.Controls;
 using HLab.Erp.Core.Tools.Details;
-using HLab.Erp.Lims.Analysis.Wpf.FormClasses;
 using HLab.Mvvm.Annotations;
 
-namespace HLab.Erp.Lims.Analysis.Module.FormClasses;
+namespace HLab.Erp.Lims.Analysis.Wpf.FormClasses;
 
 /// <summary>
 /// Logique d'interaction pour TestView.xaml

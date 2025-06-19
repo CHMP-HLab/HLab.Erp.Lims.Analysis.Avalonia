@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using HLab.Base.ReactiveUI;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
@@ -22,7 +23,7 @@ public partial class TestClass : Entity, ILocalCache, IListableModel, IFormClass
             //.Select(name => name)
             .ToProperty(this, e => e.Caption)
             ;
-        _category = Foreign(this, e => e.CategoryId, e => e.Category);
+        _category = this.Foreign( e => e.CategoryId, e => e.Category);
     }
 
     public string Name

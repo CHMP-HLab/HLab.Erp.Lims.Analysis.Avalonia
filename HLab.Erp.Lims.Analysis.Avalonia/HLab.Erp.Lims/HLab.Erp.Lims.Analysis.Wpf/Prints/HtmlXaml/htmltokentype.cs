@@ -8,7 +8,7 @@
 //
 //---------------------------------------------------------------------------
 
-namespace HTMLConverter;
+namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
 
 /// <summary>
 /// types of lexical tokens for html-to-xaml converter

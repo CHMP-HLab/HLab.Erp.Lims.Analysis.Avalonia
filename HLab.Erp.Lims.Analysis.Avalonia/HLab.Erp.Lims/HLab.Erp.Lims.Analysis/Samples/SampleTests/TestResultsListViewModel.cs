@@ -1,5 +1,4 @@
-﻿using HLab.Erp.Acl;
-using HLab.Erp.Core.ListFilterConfigurators;
+﻿using HLab.Erp.Core.ListFilterConfigurators;
 using HLab.Erp.Lims.Analysis.Data.Entities;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
 using HLab.Erp.Lims.Analysis.Extensions;
@@ -10,11 +9,9 @@ namespace HLab.Erp.Lims.Analysis.Samples.SampleTests;
 
 public class TestResultsListViewModel : Core.EntityLists.EntityListViewModel<SampleTestResult>, IMvvmContextProvider
 {
-    readonly IAclService _acl;
-
     public SampleTest SampleTest { get; }
 
-    public TestResultsListViewModel(IAclService acl, Injector i, SampleTest sampleTest) : base(i, c => c
+    public TestResultsListViewModel(Injector i, SampleTest sampleTest) : base(i, c => c
         .StaticFilter(e => e.SampleTestId == sampleTest.Id)
 
         .Column("Selected")
@@ -54,11 +51,7 @@ public class TestResultsListViewModel : Core.EntityLists.EntityListViewModel<Sam
 
     )
     {
-        _acl = acl;
         SampleTest = sampleTest;
-
-        
-
         ShowFilters = false;
     }
 
@@ -92,11 +85,11 @@ public class TestResultsListViewModel : Core.EntityLists.EntityListViewModel<Sam
     protected override bool DeleteCanExecute(SampleTestResult result, Action<string> errorAction)
     {
         if (Selected == null) return false;
-        if (!_acl.IsGranted(AnalysisRights.AnalysisAddResult)) return false;
-        if (SampleTest.Stage != SampleTestWorkflow.Running) return false;
+        if (!Injected.Acl.IsGranted(AnalysisRights.AnalysisAddResult)) return false;
+        if (SampleTest?.Stage != SampleTestWorkflow.Running) return false;
         if (Selected.Stage != null && Selected.Stage != SampleTestResultWorkflow.Running) return false;
-        if (SampleTest.Result == null) return true;
-        if (SampleTest.Result.Id == Selected.Id) return false;
+        if (SampleTest?.Result == null) return true;
+        if (SampleTest?.Result.Id == Selected?.Id) return false;
         return true;
     }
 
@@ -106,8 +99,8 @@ public class TestResultsListViewModel : Core.EntityLists.EntityListViewModel<Sam
     //);
 
     protected override bool AddCanExecute(Action<string> errorAction) 
-        => SampleTest.Stage == SampleTestWorkflow.Running 
-           && _acl.IsGranted(AnalysisRights.AnalysisAddResult);
+        => SampleTestWorkflow.Running == SampleTest?.Stage
+           && Injected.Acl.IsGranted(AnalysisRights.AnalysisAddResult);
 
     public void ConfigureMvvmContext(IMvvmContext ctx)
     {

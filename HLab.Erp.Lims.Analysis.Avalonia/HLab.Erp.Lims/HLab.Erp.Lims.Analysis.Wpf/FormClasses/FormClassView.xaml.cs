@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using HLab.Compiler;
 using HLab.Erp.Lims.Analysis.FormClasses;
-using HLab.Erp.Lims.Analysis.Module.FormClasses;
 using HLab.Mvvm.Annotations;
 using HLab.Mvvm.Application.Documents;
 using ICSharpCode.AvalonEdit;

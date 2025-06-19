@@ -9,9 +9,11 @@
 //---------------------------------------------------------------------------
 
 using System;
-using System.Xml;
 using System.Collections.Generic;
-using System.Text; // StringBuilder
+using System.Text;
+using System.Xml;
+
+// StringBuilder
 
 // important TODOS: 
 // TODO 1. Start tags: The ParseXmlElement function has been modified to be called after both the 
@@ -65,7 +67,7 @@ using System.Text; // StringBuilder
 // deals with it
 
 
-namespace HTMLConverter;
+namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
 
 /// <summary>
 /// HtmlParser class accepts a string of possibly badly formed Html, parses it and returns a string

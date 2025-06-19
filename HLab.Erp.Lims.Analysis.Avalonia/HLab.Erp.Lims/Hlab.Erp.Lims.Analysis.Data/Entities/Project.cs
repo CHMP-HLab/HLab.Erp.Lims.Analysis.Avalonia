@@ -1,5 +1,6 @@
 ﻿using HLab.Base.ReactiveUI;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
@@ -7,7 +8,7 @@ public class Project : Entity
 {
     public Project()
     {
-        _parent = Foreign(this, e => e.ParentId, e => e.Parent);
+        _parent = this.Foreign( e => e.ParentId, e => e.Parent);
     }
 
     public int? ParentId

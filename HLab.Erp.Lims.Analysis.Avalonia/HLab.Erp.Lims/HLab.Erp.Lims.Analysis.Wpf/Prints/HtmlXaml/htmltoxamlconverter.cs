@@ -8,15 +8,19 @@
 //
 //---------------------------------------------------------------------------
 
-namespace HTMLConverter;
-
 using System;
-using System.Xml;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
-using System.Windows; // DependencyProperty
-using System.Windows.Documents; // TextElement
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Documents;
+using System.Xml;
+
+namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
+
+// DependencyProperty
+
+// TextElement
   
 /// <summary>
 /// HtmlToXamlConverter is a static class that takes an HTML string

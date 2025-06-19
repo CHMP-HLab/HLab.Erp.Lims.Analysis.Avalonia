@@ -5,6 +5,7 @@ using HLab.Erp.Acl;
 using HLab.Erp.Base.Data;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 using HLab.Erp.Data.Observables;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
 using HLab.Mvvm.Application;
@@ -19,17 +20,17 @@ public partial class Sample : Entity, IListableModel
     public Sample()
     {
 
-        _validator = Foreign(this, e => e.ValidatorId, e => e.Validator);
+        _validator = this.Foreign( e => e.ValidatorId, e => e.Validator);
 
-        _customer = Foreign(this, e => e.CustomerId, e => e.Customer);
+        _customer = this.Foreign( e => e.CustomerId, e => e.Customer);
 
-        _manufacturer = Foreign(this, e => e.ManufacturerId, e => e.Manufacturer);
+        _manufacturer = this.Foreign( e => e.ManufacturerId, e => e.Manufacturer);
 
-        _pharmacopoeia = Foreign(this, e => e.PharmacopoeiaId, e => e.Pharmacopoeia);
+        _pharmacopoeia = this.Foreign( e => e.PharmacopoeiaId, e => e.Pharmacopoeia);
 
-        _product = Foreign(this, e => e.ProductId, e => e.Product);
+        _product = this.Foreign( e => e.ProductId, e => e.Product);
 
-        _analysisMotivation = Foreign(this, e => e.AnalysisMotivationId, e => e.AnalysisMotivation);
+        _analysisMotivation = this.Foreign( e => e.AnalysisMotivationId, e => e.AnalysisMotivation);
 
         _expired = this.WhenAnyValue(e => e.ExpirationDate, selector: e => e != null && DateTime.Now > e)
             .ToProperty(this, e => e.Expired);
@@ -42,7 +43,7 @@ public partial class Sample : Entity, IListableModel
             .WhenAnyValue(e => e.ExpirationDate, e => e.Life, selector: GetEndOfLife)
             .ToProperty(this, e => e.EndOfLife);
 
-        _user = Foreign(this, e => e.UserId, e => e.User);
+        _user = this.Foreign( e => e.UserId, e => e.User);
 
 
         _stage = this

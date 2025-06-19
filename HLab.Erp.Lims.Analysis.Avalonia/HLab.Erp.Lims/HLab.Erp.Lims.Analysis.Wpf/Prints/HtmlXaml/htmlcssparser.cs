@@ -8,14 +8,14 @@
 //
 //---------------------------------------------------------------------------
 
-namespace HTMLConverter;
-
 using System;
-using System.Xml;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Xml;
+
+namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
 // DependencyProperty
 
 // TextElement

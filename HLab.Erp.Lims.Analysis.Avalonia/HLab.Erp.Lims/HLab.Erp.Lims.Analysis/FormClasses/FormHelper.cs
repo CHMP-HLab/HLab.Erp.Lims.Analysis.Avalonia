@@ -46,12 +46,12 @@ public class FormHelper : ReactiveModel
         await CompileAsync(provider).ConfigureAwait(false);
     }
 
-    public IForm Form
+    public IForm? Form
     {
         get => _form;
         set => this.SetAndRaise(ref _form, value);
     }
-    IForm _form;
+    IForm? _form;
 
     public ITestResultProvider Result
     {
@@ -140,6 +140,8 @@ public class FormHelper : ReactiveModel
 
     public async Task LoadFormAsync(ISampleTestFormClassProvider provider, IFormTarget target)
     {
+
+
         CsMessage = "";
         XamlMessage = "";
 
@@ -218,6 +220,7 @@ public class FormHelper : ReactiveModel
         {
             if (!ReferenceEquals(Form?.Target, target))
             {
+               if(provider is null) return;
                 //if (Form?.Target != null) throw new Exception("Target should be null or same");
                 //Form.Target = target;
                 await ExtractCodeAsync(target.Code).ConfigureAwait(true);

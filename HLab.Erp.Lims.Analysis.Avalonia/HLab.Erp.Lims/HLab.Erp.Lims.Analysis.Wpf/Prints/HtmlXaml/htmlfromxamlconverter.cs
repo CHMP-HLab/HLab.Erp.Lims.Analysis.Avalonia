@@ -8,13 +8,13 @@
 //
 //---------------------------------------------------------------------------
 
-namespace HTMLConverter;
-
 using System;
 using System.Diagnostics;
-using System.Text;
 using System.IO;
+using System.Text;
 using System.Xml;
+
+namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
 
 /// <summary>
 /// HtmlToXamlConverter is a static class that takes an HTML string

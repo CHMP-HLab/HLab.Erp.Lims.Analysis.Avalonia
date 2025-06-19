@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="HLab.Erp.Lims.Analysis.Module.SampleDetailView"
+﻿<UserControl x:Class="HLab.Erp.Lims.Analysis.Wpf.Samples.SampleDetailView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -19,6 +19,7 @@
              xmlns:samples1="clr-namespace:HLab.Erp.Lims.Analysis.Samples;assembly=HLab.Erp.Lims.Analysis"
              xmlns:manufacturers="clr-namespace:HLab.Erp.Lims.Analysis.Manufacturers;assembly=HLab.Erp.Lims.Analysis"
              xmlns:products="clr-namespace:HLab.Erp.Lims.Analysis.Products;assembly=HLab.Erp.Lims.Analysis"
+             xmlns:customers="clr-namespace:HLab.Erp.Base.Customers;assembly=HLab.Erp.Base"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance {x:Type samples1:SampleViewModelDesign}, IsDesignTimeCreatable=True}"             
              d:DesignHeight="1200" d:DesignWidth="500"
@@ -79,7 +80,7 @@
                     <entitySelectors:ForeignView 
                         Model="{Binding Model.Customer}"
                         ModelClass="{x:Type erp.Data:Customer}" 
-                        ListClass="{x:Type customers1:CustomersListViewModel}"/>
+                        ListClass="{x:Type customers:CustomersListViewModel}"/>
                 </views1:DetailView>
 
                 <!--<samples:SampleCustomView/>-->

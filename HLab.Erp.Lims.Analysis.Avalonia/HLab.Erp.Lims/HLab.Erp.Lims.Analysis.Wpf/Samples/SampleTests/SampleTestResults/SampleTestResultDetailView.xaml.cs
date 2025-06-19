@@ -3,7 +3,7 @@ using HLab.Erp.Core.Tools.Details;
 using HLab.Erp.Lims.Analysis.Samples.SampleTests.SampleTestResults;
 using HLab.Mvvm.Annotations;
 
-namespace HLab.Erp.Lims.Analysis.Module.SampleTestResults;
+namespace HLab.Erp.Lims.Analysis.Wpf.Samples.SampleTests.SampleTestResults;
 
 /// <summary>
 /// Logique d'interaction pour TestView.xaml

@@ -2,25 +2,25 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Xml;
-using System.Net;
-using System.IO.Compression;
-using System.Security.Cryptography;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Data;
 using System.Globalization;
-using System.Windows.Controls;
-using System.Windows.Documents;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Markup;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Xml;
 using HLab.Base.Wpf.Controls;
 
-namespace Outils;
+namespace HLab.Erp.Lims.Analysis.Wpf;
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Langue
@@ -386,7 +386,7 @@ public static class O
     public static String ChoixLangue(String texte, Langue langue)
     {
         // Choix de la langue
-        if(langue == Outils.Langue.Anglais)
+        if(langue == Langue.Anglais)
             return Regex.Replace(Regex.Replace(texte, @"\{FR=[\s|!-\|~-■]*}", ""), @"\{US=([\s|!-\|~-■]*)}", "$1"); // En anglais
 
         return Regex.Replace(Regex.Replace(texte, @"\{US=[\s|!-\|~-■]*}", ""), @"\{FR=([\s|!-\|~-■]*)}", "$1"); // En français

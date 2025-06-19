@@ -8,10 +8,10 @@
 //
 //---------------------------------------------------------------------------
 
-namespace HTMLConverter;
-
-using System.Diagnostics;
 using System.Collections;
+using System.Diagnostics;
+
+namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
 
 /// <summary>
 /// HtmlSchema class

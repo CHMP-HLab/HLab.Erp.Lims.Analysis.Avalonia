@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using HLab.Base.ReactiveUI;
+using HLab.Erp.Data.foreigners;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
 
@@ -11,7 +12,7 @@ public class LinkedDocument : Entity
 {
     public LinkedDocument()
     {
-        _sampleTestResult = Foreign(this, e => e.SampleTestResultId, e => e.SampleTestResult);
+        _sampleTestResult = this.Foreign( e => e.SampleTestResultId, e => e.SampleTestResult);
     }
 
     public void OpenDocument()

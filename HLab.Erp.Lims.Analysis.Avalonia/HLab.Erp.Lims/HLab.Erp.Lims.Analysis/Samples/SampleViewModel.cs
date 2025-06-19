@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using HLab.Base.ReactiveUI;
@@ -10,6 +11,7 @@ using HLab.Erp.Lims.Analysis.Data.Workflows;
 using HLab.Erp.Lims.Analysis.FormClasses;
 using HLab.Erp.Lims.Analysis.Products;
 using HLab.Erp.Lims.Analysis.Samples.SampleMovements;
+using HLab.Erp.Lims.Analysis.Samples.SampleTests;
 using HLab.Erp.Lims.Analysis.Wpf.Samples;
 using HLab.Erp.Lims.Analysis.Wpf.Samples.SampleTests;
 using HLab.Erp.Workflows.Models;
@@ -63,18 +65,14 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
         _getMovements = getMovements;
         _getForms = getForms;
 
-        _isReadOnly = this.WhenAnyValue(e => e.EditMode, editMode => !editMode)
-            .ToProperty(this, e => e.IsReadOnly);
-
-        this.WhenAnyValue(e => e.AuditDetail, e => e.AuditTrail)
-            .Subscribe(e => OnAuditDetail(e.Item1, e.Item2));
-
         _auditTrail = this
             .WhenAnyValue(e => e.Model)
             .WhereNotNull()
             .Select(e => _getAudit?.Invoke(e.Id))
             .ToProperty(this, e => e.AuditTrail);
 
+        this.WhenAnyValue(e => e.AuditDetail, e => e.AuditTrail)
+            .Subscribe(e => OnAuditDetail(e.Item1, e.Item2));
 
         this.WhenAnyValue(e => e.Locker.IsActive)
             .Subscribe(isActive =>
@@ -95,6 +93,14 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
             .Select(u => Injected.Acl.IsGranted(ErpRights.ErpViewCustomer))
             .ToProperty(this, e => e.CustomerVisibility);
 
+        _workflow = this.WhenAnyValue(e => e.Model, e => e.Locker, selector : (model, locker) =>
+            {
+                if (model == null || locker == null) return null;
+                return _getSampleWorkflow(model, locker);
+            }
+        ).ToProperty(this , e => e.Workflow, scheduler: RxApp.TaskpoolScheduler );
+
+
         _editMode = this.WhenAnyValue(
                 e => e.Locker.IsActive,
                 e => e.Workflow.CurrentStage,
@@ -103,6 +109,9 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
                     AnalysisRights.AnalysisReceptionSign)
             )
             .ToProperty(this, e => e.EditMode);
+
+        _isReadOnly = this.WhenAnyValue(e => e.EditMode, editMode => !editMode)
+            .ToProperty(this, e => e.IsReadOnly);
 
         _monographMode = this.WhenAnyValue(
             e => e.Locker.IsActive,
@@ -145,12 +154,6 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
             .Select(async _ => await UpdateProductLists())
             .Subscribe();
 
-        _workflow = this.WhenAnyValue(e => e.Model, e => e.Locker, selector : (model, locker) =>
-        {
-            if (model == null || locker == null) return null;
-            return _getSampleWorkflow(model, locker);
-        }
-        ).ToProperty(this , e => e.Workflow);
 
         CertificateCommand = ReactiveCommand.Create(() => Certificate(false), 
             this.WhenAnyValue(e => e.Injected.Acl)
@@ -176,8 +179,9 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
     }
     bool _auditDetail;
 
-    static void OnAuditDetail(bool auditDetail, SampleAuditTrailViewModel auditTrail)
+    static void OnAuditDetail(bool auditDetail, SampleAuditTrailViewModel? auditTrail)
     {
+        if(auditTrail is null) return;
         if (auditDetail)
             auditTrail.List.RemoveFilter("Detail");
         else
@@ -199,7 +203,7 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
     public bool ProductionMode => _productionMode.Value;
     readonly ObservableAsPropertyHelper<bool> _productionMode;
 
-    bool IsStageActive(bool isActive, Workflow<SampleWorkflow>.Stage stage, Workflow<SampleWorkflow>.Stage targetStage, AclRight right)
+    bool IsStageActive(bool isActive, Workflow<SampleWorkflow>.Stage stage, Workflow<SampleWorkflow>.Stage targetStage, AclRight? right)
         => isActive
            && stage == targetStage
            && Injected.Acl.IsGranted(right);
@@ -309,7 +313,7 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
     }
 
     public SampleWorkflow Workflow => _workflow.Value;
-    ObservableAsPropertyHelper<SampleWorkflow> _workflow;
+    readonly ObservableAsPropertyHelper<SampleWorkflow> _workflow;
 
     public ICommand CertificateCommand { get; }
     public ICommand PreviewCertificateCommand { get; }

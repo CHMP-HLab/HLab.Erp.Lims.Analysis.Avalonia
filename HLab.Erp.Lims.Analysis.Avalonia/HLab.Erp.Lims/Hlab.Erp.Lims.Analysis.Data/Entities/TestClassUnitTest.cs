@@ -1,6 +1,7 @@
 ﻿using HLab.Base.ReactiveUI;
 using HLab.Erp.Conformity.Annotations;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 using NPoco;
 
 namespace HLab.Erp.Lims.Analysis.Data.Entities;
@@ -11,7 +12,7 @@ public class TestClassUnitTest : Entity, IFormTarget
 {
     public TestClassUnitTest()
     {
-        _testClass = Foreign(this, e => e.TestClassId, e => e.TestClass);
+        _testClass = this.Foreign( e => e.TestClassId, e => e.TestClass);
     }
 
     public int? TestClassId

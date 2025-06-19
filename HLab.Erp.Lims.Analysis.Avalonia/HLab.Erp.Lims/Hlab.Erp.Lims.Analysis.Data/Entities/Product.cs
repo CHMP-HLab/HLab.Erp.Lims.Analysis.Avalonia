@@ -1,5 +1,6 @@
 using HLab.Base.ReactiveUI;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 using HLab.Mvvm.Application;
 using NPoco;
 using ReactiveUI;
@@ -10,19 +11,19 @@ public partial class Product : Entity, ILocalCache, IListableModel
 {
     public Product()
     {
+        _form = this.Foreign( e => e.FormId, e => e.Form);
+
+        _category = this.Foreign( e => e.CategoryId, e => e.Category);
+
         _caption = this.WhenAnyValue(
             e => e.Name,
             e => e.Variant,
             e => e.Form,
-            (name, variant, form) => $"{name} - {form.Caption} ({variant})")
+            (name, variant, form) => $"{name} - {form?.Caption??""} ({variant})")
             .ToProperty(this, e => e.Caption);
 
         _iconPath = this.WhenAnyValue(e => e.Form.IconPath)
             .ToProperty(this, e => e.IconPath);
-
-        _form = Foreign(this, e => e.FormId, e => e.Form);
-        _category = Foreign(this, e => e.CategoryId, e => e.Category);
-
     }
 
     public string Name

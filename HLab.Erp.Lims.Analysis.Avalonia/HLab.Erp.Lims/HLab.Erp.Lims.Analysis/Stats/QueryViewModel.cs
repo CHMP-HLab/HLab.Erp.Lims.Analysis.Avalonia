@@ -28,7 +28,7 @@ public class QueryViewModel : ListableEntityViewModel<StatQuery>
         RunCommand = ReactiveCommand.Create(Run);
     }
 
-    public override AclRight EditRight => AnalysisRights.AnalysisStatQueryCreate;
+    public override AclRight? EditRight => AnalysisRights.AnalysisStatQueryCreate;
 
     public ObservableCollection<DataObject> Items {get;} = [];
     public ObservableCollection<string> Columns {get;} = [];

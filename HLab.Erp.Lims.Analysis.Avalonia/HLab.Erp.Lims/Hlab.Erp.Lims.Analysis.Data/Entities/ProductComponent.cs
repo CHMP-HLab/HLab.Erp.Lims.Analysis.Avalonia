@@ -1,6 +1,7 @@
 using HLab.Base.ReactiveUI;
 using HLab.Erp.Base.Data;
 using HLab.Erp.Data;
+using HLab.Erp.Data.foreigners;
 using HLab.Mvvm.Application;
 using NPoco;
 
@@ -10,9 +11,9 @@ namespace HLab.Erp.Lims.Analysis.Data.Entities
     {
         public ProductComponent()
         {
-            _unit = Foreign(this, e => e.UnitId, e => e.Unit);
-            _product = Foreign(this, e => e.ProductId, e => e.Product);
-            _inn = Foreign(this, e => e.InnId, e => e.Inn);
+            _unit = this.Foreign( e => e.UnitId, e => e.Unit);
+            _product = this.Foreign( e => e.ProductId, e => e.Product);
+            _inn = this.Foreign( e => e.InnId, e => e.Inn);
         }
 
         public string Caption => $"{Inn?.Caption} {Quantity,0} {Unit?.Symbol}";

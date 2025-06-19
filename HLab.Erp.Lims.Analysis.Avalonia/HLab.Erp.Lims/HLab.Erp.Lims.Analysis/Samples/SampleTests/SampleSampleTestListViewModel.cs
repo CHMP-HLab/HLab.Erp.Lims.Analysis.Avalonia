@@ -1,6 +1,4 @@
 ﻿#nullable enable
-using System;
-using System.Threading.Tasks;
 using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Erp.Conformity.Annotations;
@@ -12,7 +10,7 @@ using HLab.Erp.Workflows.Extensions;
 using HLab.Mvvm.Annotations;
 using ReactiveUI;
 
-namespace HLab.Erp.Lims.Analysis.Wpf.Samples.SampleTests;
+namespace HLab.Erp.Lims.Analysis.Samples.SampleTests;
 
 public class SampleSampleTestListViewModel : Core.EntityLists.EntityListViewModel<SampleTest>, IMvvmContextProvider
 {

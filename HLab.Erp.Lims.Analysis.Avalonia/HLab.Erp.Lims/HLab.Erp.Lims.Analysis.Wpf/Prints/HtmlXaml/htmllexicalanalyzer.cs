@@ -9,11 +9,11 @@
 //---------------------------------------------------------------------------
 
 using System;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
-namespace HTMLConverter;
+namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
 
 /// <summary>
 /// lexical analyzer class

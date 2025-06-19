@@ -8,11 +8,6 @@
 ***********************************************************************************************************************************************************************************************************************************************************************************/
 
 using System;
-using PdfSharp.Pdf;
-using PdfSharp.Drawing;
-using PdfSharp.Xps;
-using PdfSharp.Xps.Rendering;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -35,11 +30,14 @@ using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 using System.Xml;
 using HLab.Base;
+using HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
 using Nito.Disposables.Internals;
+using PdfSharp.Pdf;
+using PdfSharp.Xps.Rendering;
 using Type = System.Type;
 
 
-namespace Outils;
+namespace HLab.Erp.Lims.Analysis.Wpf.Prints;
 
 /// <summary>
 /// Logique d'interaction pour Impression.xaml
@@ -1013,7 +1011,7 @@ public partial class Print : Window
         MemoryStream msc = new MemoryStream();
         new TextRange(RTB_Message.Document.ContentStart, RTB_Message.Document.ContentEnd).Save(msc, DataFormats.Xaml);
         mail.IsBodyHtml = true;
-        mail.Body = HTMLConverter.HtmlFromXamlConverter.ConvertXamlToHtml("<FlowDocument>" + Encoding.UTF8.GetString(msc.ToArray()) + "</FlowDocument>");
+        mail.Body = HtmlFromXamlConverter.ConvertXamlToHtml("<FlowDocument>" + Encoding.UTF8.GetString(msc.ToArray()) + "</FlowDocument>");
         msc.Close();
 
         // Joint le document
