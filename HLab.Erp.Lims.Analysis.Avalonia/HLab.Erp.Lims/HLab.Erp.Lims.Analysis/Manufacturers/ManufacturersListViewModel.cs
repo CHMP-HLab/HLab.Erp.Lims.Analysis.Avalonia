@@ -17,16 +17,18 @@ public class ManufacturersListViewModel(IAclService acl, EntityListViewModel<Man
         .Link(e => e.Name)
         .Filter()
         .Header("{Name}")
-        .ColumnListable(e => e.Country, "Country").Width(150)), IMvvmContextProvider
+        .ColumnListable(e => e.Country, "Country")
+        .Width(150)
+    ), IMvvmContextProvider
 {
-    public class Bootloader : NestedBootloader
-    { }
+   public class Bootloader : NestedBootloader
+   { }
 
-    protected override bool AddCanExecute(Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisManufacturerCreate);
-    protected override bool DeleteCanExecute(Manufacturer manufacturer, Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisManufacturerCreate);
+   protected override bool AddCanExecute(Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisManufacturerCreate);
+   protected override bool DeleteCanExecute(Manufacturer manufacturer, Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisManufacturerCreate);
 
-    public void ConfigureMvvmContext(IMvvmContext ctx)
-    {
-    }
+   public void ConfigureMvvmContext(IMvvmContext ctx)
+   {
+   }
 
 }

@@ -1,48 +1,47 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
-using HLab.Base.ReactiveUI;
+﻿using System.Windows.Input;
 using HLab.Core.Annotations;
 using HLab.Erp.Acl;
-using HLab.Erp.Lims.Analysis.Products.Tools;
 using HLab.Mvvm.Application.Documents;
 using HLab.Mvvm.Application.Menus;
 
-namespace HLab.Erp.Lims.Analysis.Wpf.Products.Tools;
+namespace HLab.Erp.Lims.Analysis.Products.Tools;
 
-public class ProductToolsModule : ReactiveModel, IBootloader
+public class ProductToolsModule : Bootloader
 {
-    readonly IDocumentService _docs;
-    readonly IAclService _acl;
-    readonly IMenuService _menu;
+   readonly IDocumentService _docs;
+   readonly IAclService _acl;
+   readonly IMenuService _menu;
 
-    public ProductToolsModule(IDocumentService docs, IAclService acl, IMenuService menu)
-    {
-        _docs = docs;
-        _acl = acl;
-        _menu = menu;
-        
-        OpenCommand = ReactiveUI.ReactiveCommand
-            .CreateFromTask(e => _docs.OpenDocumentAsync(typeof(ProductToolsViewModel)));
-    }
+   public ProductToolsModule(IDocumentService docs, IAclService acl, IMenuService menu)
+   {
+      _docs = docs;
+      _acl = acl;
+      _menu = menu;
 
-    public ICommand OpenCommand { get; }
+      OpenCommand = ReactiveUI.ReactiveCommand
+          .CreateFromTask(e => _docs.OpenDocumentAsync(typeof(ProductToolsViewModel)));
+   }
 
-    protected virtual string IconPath => "Icons/Entities/";
+   public ICommand OpenCommand { get; }
 
-    public async virtual Task LoadAsync(IBootContext b)
-    {
-        if (b.WaitDependency("BootLoaderErpWpf")) return;
+   protected virtual string IconPath => "Icons/Entities/";
 
-        if (_acl.Connection == null)
-        {
-            if(!_acl.Cancelled) b.Requeue();
-            return;
-        }
+   protected override BootState Load()
+   {
+      if (WaitingForBootloader("BootLoaderErpWpf")) return BootState.Requeue;
 
-        if(!_acl.IsGranted(AclRights.ManageUser)) return;
+      if (_acl.Connection == null)
+      {
+         return _acl.Cancelled ? BootState.Cancel : BootState.Requeue;
+      }
 
-        _menu.RegisterMenu("tools/ProductTools", "{Product Tools}",
-            OpenCommand,
-            "icons/tools/ProductTools");
-    }
+      if (_acl.IsGranted(AclRights.ManageUser))
+      {
+         _menu.RegisterMenu("tools/ProductTools", "{Product Tools}",
+             OpenCommand,
+             "icons/tools/ProductTools");
+      }
+
+      return base.Load();
+   }
 }

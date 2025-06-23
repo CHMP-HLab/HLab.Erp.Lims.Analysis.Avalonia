@@ -11,7 +11,7 @@
 using System.Collections;
 using System.Diagnostics;
 
-namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
+namespace HLab.Erp.Lims.Analysis.HtmlXaml;
 
 /// <summary>
 /// HtmlSchema class

@@ -13,28 +13,43 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
-	  <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
-	  <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
-	  <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+    <AvaloniaXaml Remove="Prints\**" />
+    <Compile Remove="Prints\**" />
+    <EmbeddedResource Remove="Prints\**" />
+    <None Remove="Prints\**" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-	  <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+   <PackageReference Include="Avalonia.Desktop" Version="11.3.1" />
    <PackageReference Include="Grace" Version="7.2.1" />
+   <PackageReference Include="PDFsharp" Version="6.2.0" />
+   <PackageReference Include="Simplecto.Avalonia.RichTextBox" Version="1.3.5" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Samples\SampleTests\" />
   </ItemGroup>
 
   <ItemGroup>
 	<ProjectReference Include="..\..\HLab.Avalonia\HLab.Base.Avalonia\HLab.Base.Avalonia.csproj" />
+	<ProjectReference Include="..\..\HLab.Avalonia\HLab.Icons.Avalonia\HLab.Icons.Avalonia.csproj" />
+	<ProjectReference Include="..\..\HLab.Avalonia\HLab.Localization.Avalonia3\HLab.Localization.Avalonia.csproj" />
+	<ProjectReference Include="..\..\HLab.Avalonia\HLab.Mvvm.Application.Avalonia\HLab.Mvvm.Application.Avalonia.csproj" />
 	<ProjectReference Include="..\..\HLab.Avalonia\HLab.Mvvm.Avalonia\HLab.Mvvm.Avalonia.csproj" />
+	<ProjectReference Include="..\..\HLab.Avalonia\HLab.Theme.Avalonia\HLab.Theme.Avalonia.csproj" />
+	<ProjectReference Include="..\..\HLab.Avalonia\HLab.Ui.Avalonia\HLab.Ui.Avalonia.csproj" />
+	<ProjectReference Include="..\..\HLab.Core\HLab.Core.ReactiveUI\HLab.Core.ReactiveUI.csproj" />
     <ProjectReference Include="..\..\HLab.Core\HLab.Core\HLab.Core.csproj" />
     <ProjectReference Include="..\..\HLab.Core\HLab.Mvvm.Annotations\HLab.Mvvm.Annotations.csproj" />
+    <ProjectReference Include="..\..\HLab.Erp.Avalonia\HLab.Erp.Workflow.Avalonia\HLab.Erp.Workflow.Avalonia.csproj" />
     <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Acl.Avalonia\HLab.Erp.Acl.Avalonia.csproj" />
     <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Acl.Windows\HLab.Erp.Acl.Windows.csproj" />
     <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Base\HLab.Erp.Base.csproj" />
+    <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Core.Avalonia\HLab.Erp.Core.Avalonia.csproj" />
     <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Core\HLab.Erp.Core.csproj" />
     <ProjectReference Include="..\Hlab.Erp.Lims.Analysis.Data\HLab.Erp.Lims.Analysis.Data.csproj" />
+    <ProjectReference Include="..\HLab.Erp.Lims.Analysis\HLab.Erp.Lims.Analysis.csproj" />
   </ItemGroup>
 </Project>

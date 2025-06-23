@@ -8,26 +8,32 @@
 //
 //---------------------------------------------------------------------------
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows;
-using System.Windows.Documents;
 using System.Xml;
 
-namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
+namespace HLab.Erp.Lims.Analysis.HtmlXaml;
+
+
+public interface IHtmlToXamlConverterPlatformImpl
+{
+   void SetForegroundPropertyValue(XmlElement xamlElement, string stringValue);
+   void SetBackgroundPropertyValue(XmlElement xamlElement, string stringValue);
+}
 
 // DependencyProperty
 
 // TextElement
-  
+
 /// <summary>
 /// HtmlToXamlConverter is a static class that takes an HTML string
 /// and converts it into XAML
 /// </summary>
 public static class HtmlToXamlConverter
 {
+
+    public static  IHtmlToXamlConverterPlatformImpl? Platform {get; set;}
+
     // ---------------------------------------------------------------------
     //
     // Internal Methods
@@ -2017,10 +2023,10 @@ public static class HtmlToXamlConverter
                     xamlElement.SetAttribute(Xaml_FontSize, (string)propertyEnumerator.Value);
                     break;
                 case "color":
-                    SetPropertyValue(xamlElement, TextElement.ForegroundProperty, (string)propertyEnumerator.Value);
+                    Platform?.SetForegroundPropertyValue(xamlElement, (string)propertyEnumerator.Value);
                     break;
                 case "background-color":
-                    SetPropertyValue(xamlElement, TextElement.BackgroundProperty, (string)propertyEnumerator.Value);
+                    Platform?.SetBackgroundPropertyValue(xamlElement, (string)propertyEnumerator.Value);
                     break;
                 case "text-decoration-underline":
                     if (!isBlock)
@@ -2255,21 +2261,6 @@ public static class HtmlToXamlConverter
         xamlElement.SetAttribute(propertyName, thickness);
     }
 
-    static void SetPropertyValue(XmlElement xamlElement, DependencyProperty property, string stringValue)
-    {
-        System.ComponentModel.TypeConverter typeConverter = System.ComponentModel.TypeDescriptor.GetConverter(property.PropertyType);
-        try
-        {
-            object convertedValue = typeConverter.ConvertFromInvariantString(stringValue);
-            if (convertedValue != null)
-            {
-                xamlElement.SetAttribute(property.Name, stringValue);
-            }
-        }
-        catch(Exception)
-        {
-        }
-    }
 
     /// <summary>
     /// Analyzes the tag of the htmlElement and infers its associated formatted properties.

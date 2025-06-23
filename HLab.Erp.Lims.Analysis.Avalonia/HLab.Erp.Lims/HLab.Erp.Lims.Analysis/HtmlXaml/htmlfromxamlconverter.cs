@@ -8,19 +8,17 @@
 //
 //---------------------------------------------------------------------------
 
-using System;
 using System.Diagnostics;
-using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
+namespace HLab.Erp.Lims.Analysis.HtmlXaml;
 
 /// <summary>
 /// HtmlToXamlConverter is a static class that takes an HTML string
 /// and converts it into XAML
 /// </summary>
-internal static class HtmlFromXamlConverter
+public static class HtmlFromXamlConverter
 {
     // ---------------------------------------------------------------------
     //
@@ -40,7 +38,7 @@ internal static class HtmlFromXamlConverter
     /// <returns>
     /// Html string produced from a source xaml.
     /// </returns>
-    internal static string ConvertXamlToHtml(string xamlString)
+    public static string ConvertXamlToHtml(string xamlString)
     {
         XmlTextReader xamlReader;
         StringBuilder htmlStringBuilder;

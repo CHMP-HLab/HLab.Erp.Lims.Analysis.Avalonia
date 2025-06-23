@@ -39,7 +39,7 @@ public class SampleTestResultViewModel : EntityViewModel<SampleTestResult>
         _getSampleTestLocker = getSampleTestLocker;
 
         _auditTrail = this.WhenAnyValue(e => e.Model)
-            .Select(e => _getAudit?.Invoke(e.Id))
+            .Select(e => _getAudit?.Invoke(e?.Id??-1))
             .ToProperty(this, e => e.AuditTrail);
 
         this.WhenAnyValue(e => e.AuditDetail, e => e.AuditTrail)

@@ -1,14 +1,13 @@
-﻿using System;
+﻿using HLab.Core.Annotations;
 using HLab.Erp.Acl;
 using HLab.Erp.Core;
 using HLab.Erp.Core.EntityLists;
 using HLab.Erp.Core.ListFilterConfigurators;
-using HLab.Erp.Core.Wpf.EntityLists;
 using HLab.Erp.Lims.Analysis.Data.Entities;
 using HLab.Erp.Lims.Analysis.Data.Workflows;
 using HLab.Mvvm.Annotations;
 
-namespace HLab.Erp.Lims.Analysis.Wpf.Products.ViewModels;
+namespace HLab.Erp.Lims.Analysis.Products;
 
 public class ProductsListViewModel(IAclService acl, EntityListViewModel<Product>.Injector i)
     : EntityListViewModel<Product>(i, c => c
@@ -35,20 +34,28 @@ public class ProductsListViewModel(IAclService acl, EntityListViewModel<Product>
         .ColumnListable(e => e.Form)
         .AddProperty("IsValid", p => true, p => true)), IMvvmContextProvider
 {
-    public class Bootloader : ParamBootloader;
+   public class Bootloader() : NestedBootloader()
+   {
+      protected override BootState Load()
+      {
+         Menu.RegisterMenu("param/products", "{Products}", null, "Icons/Entities/Product");
+         return base.Load();
+      }
+   }
+  
 
-    //.Column("Category")
-    //.Header("{Category}")
-    //.Width(100)
-    //.Content(e => e.Category.Name).Localize()
-    //.FormColumn(e)
+   //.Column("Category")
+   //.Header("{Category}")
+   //.Width(100)
+   //.Content(e => e.Category.Name).Localize()
+   //.FormColumn(e)
 
-    protected override bool AddCanExecute(Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisProductCreate);
-    protected override bool DeleteCanExecute(Product product, Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisProductCreate);
-    protected override bool ImportCanExecute(Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisProductCreate);
-    protected override bool ExportCanExecute(Action<string> errorAction) => true;
+   protected override bool AddCanExecute(Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisProductCreate);
+   protected override bool DeleteCanExecute(Product product, Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisProductCreate);
+   protected override bool ImportCanExecute(Action<string> errorAction) => acl.IsGranted(errorAction, AnalysisRights.AnalysisProductCreate);
+   protected override bool ExportCanExecute(Action<string> errorAction) => true;
 
-    public void ConfigureMvvmContext(IMvvmContext ctx)
-    {
-    }
+   public void ConfigureMvvmContext(IMvvmContext ctx)
+   {
+   }
 }

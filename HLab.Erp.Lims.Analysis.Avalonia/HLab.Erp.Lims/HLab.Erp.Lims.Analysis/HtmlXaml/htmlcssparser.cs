@@ -8,19 +8,17 @@
 //
 //---------------------------------------------------------------------------
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml;
 
-namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
+namespace HLab.Erp.Lims.Analysis.HtmlXaml;
 // DependencyProperty
 
 // TextElement
   
-internal static class HtmlCssParser
+public static class HtmlCssParser
 {
     // .................................................................
     //
@@ -28,7 +26,7 @@ internal static class HtmlCssParser
     //
     // .................................................................
 
-    internal static void GetElementPropertiesFromCssAttributes(XmlElement htmlElement, string elementName, CssStylesheet stylesheet, Hashtable localProperties, List<XmlElement> sourceContext)
+    public static void GetElementPropertiesFromCssAttributes(XmlElement htmlElement, string elementName, CssStylesheet stylesheet, Hashtable localProperties, List<XmlElement> sourceContext)
     {
         string styleFromStylesheet = stylesheet.GetStyle(elementName, sourceContext);
 
@@ -816,8 +814,7 @@ internal static class HtmlCssParser
     }
 }
 
-
-internal class CssStylesheet
+public class CssStylesheet
 {
     // Constructor
     public CssStylesheet(XmlElement htmlElement)

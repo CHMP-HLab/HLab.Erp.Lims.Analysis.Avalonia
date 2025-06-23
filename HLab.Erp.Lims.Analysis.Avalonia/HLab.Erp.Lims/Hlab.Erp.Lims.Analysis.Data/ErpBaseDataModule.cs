@@ -145,6 +145,7 @@ public class HLabErpLimsAnalysisDataUpdaterBootloader : DataUpdaterBootloader
                 case "2.5.0.1":
                     builder.Table<SampleMovement>().AddColumn(s => s.Date);
                     builder.Table<Sample>().AddColumn(s => s.RemainingQuantity);
+                   break;
                 break;
 
         }

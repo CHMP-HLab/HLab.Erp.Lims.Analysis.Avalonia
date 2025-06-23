@@ -22,29 +22,13 @@ public partial class Form : Entity, IListableModel, ILocalCache
             .ToProperty(this, f => f.Caption);
     }
 
-    public string Name
-    {
-        get => _name;
-        set => this.SetAndRaise(ref _name, value);
-    }
-    string _name = "";
+    public string Name { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    public string EnglishName
-    {
-        get => _englishName;
-        set => this.SetAndRaise(ref _englishName, value);
-    }
+    public string EnglishName { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    string _englishName = "";
-
-    public string IconPath
-    {
-        get => _iconPath;
-        set => this.SetAndRaise(ref _iconPath, value);
-    }
-    string _iconPath = "";
+    public string IconPath { get; set => this.SetAndRaise(ref field, value); } = "";
 
     [Ignore]
     public string Caption => _caption.Value;
-    ObservableAsPropertyHelper<string> _caption;
+    readonly ObservableAsPropertyHelper<string> _caption;
 }

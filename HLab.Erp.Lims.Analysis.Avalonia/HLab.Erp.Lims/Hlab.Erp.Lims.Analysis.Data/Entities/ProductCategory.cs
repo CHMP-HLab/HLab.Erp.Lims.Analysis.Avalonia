@@ -17,7 +17,6 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
     };
 
     public ProductCategory() {
-
         _caption = this
             .WhenAnyValue(e => e.Name)
             .IfNullOrWhiteSpace("{New product category}")
@@ -25,56 +24,19 @@ public class ProductCategory : Entity, ILocalCache, IListableModel
             .ToProperty(this, e => e.Caption);
     }
 
-    public string Name
-    {
-        get => _name;
-        set => this.SetAndRaise(ref _name, value);
-    }
+    public string Name { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    string _name = "";
+    public string NamePropertyName { get; set => this.SetAndRaise(ref field, value); } = "{Name}";
 
-    public string NamePropertyName
-    {
-        get => _namePropertyName;
-        set => this.SetAndRaise(ref _namePropertyName,value);
-    }
+    public string VariantPropertyName { get; set => this.SetAndRaise(ref field, value); } = "{Variant}";
 
-    string _namePropertyName = "{Name}";
+    public string ComplementPropertyName { get; set => this.SetAndRaise(ref field, value); } = "{Complement}";
 
-    public string VariantPropertyName
-    {
-        get => _variantPropertyName;
-        set => this.SetAndRaise(ref _variantPropertyName,value);
-    }
+    public int? Priority { get; set => this.SetAndRaise(ref field, value); }
 
-    string _variantPropertyName = "{Variant}";
-
-    public string ComplementPropertyName
-    {
-        get => _complementPropertyName;
-        set => this.SetAndRaise(ref _complementPropertyName,value);
-    }
-
-    string _complementPropertyName = "{Complement}";
-    public int? Priority
-    {
-        get => _priority;
-        set => this.SetAndRaise(ref _priority, value);
-    }
-
-    int? _priority;
-
-    #region IListableModel
     [Ignore]
     public string Caption => _caption.Value;
     readonly ObservableAsPropertyHelper<string> _caption;
 
-    public string IconPath
-    {
-        get => _iconPath;
-        set => this.SetAndRaise(ref _iconPath, value);
-    }
-
-    string _iconPath = "";
-    #endregion
+    public string IconPath { get; set => this.SetAndRaise(ref field, value); } = "";
 }

@@ -51,429 +51,110 @@ public partial class Sample : Entity, IListableModel
             .ToProperty(this, e => e.Stage);
     }
 
-    public string FileId
-    {
-        get => _fileId;
-        set => this.SetAndRaise(ref _fileId, value);
-    }
+    public string FileId { get; set => this.SetAndRaise(ref field, value); }
 
-    string _fileId;
 
+    public int? UserId { get => _user.Id; set => _user.SetId(value); }
+    [Ignore] public User User { get => _user.Value; set => UserId = value.Id; }
+    readonly ForeignPropertyHelper<Sample, User> _user;
 
-    public int? UserId
-    {
-        get => _user.Id;
-        set => _user.SetId(value);
-    }
-    [Ignore]
-    public User User
-    {
-        get => _user.Value;
-        set => UserId = value.Id;
-    }
-    ForeignPropertyHelper<Sample, User> _user;
+    public string Reference { get; set => this.SetAndRaise(ref field, value); }
 
+    public string CustomerReference { get; set => this.SetAndRaise(ref field, value); }
 
-    public string Reference
-    {
-        get => _reference;
-        set => this.SetAndRaise(ref _reference, value);
-    }
+    public string ReportReference { get; set => this.SetAndRaise(ref field, value); }
 
-    string _reference;
+    public DateTime? ReceptionDate { get; set => this.SetAndRaise(ref field, value); }
 
+    public string Worksheet { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    public string CustomerReference
-    {
-        get => _customerReference;
-        set => this.SetAndRaise(ref _customerReference, value);
-    }
+    public string CommercialName { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    string _customerReference;
+    public string Batch { get; set => this.SetAndRaise(ref field, value); } = "";
 
+    public DateTime? ExpirationDate { get; set => this.SetAndRaise(ref field, value); }
 
-    public string ReportReference
-    {
-        get => _reportReference;
-        set => this.SetAndRaise(ref _reportReference, value);
-    }
+    public bool ExpirationDayValid { get; set => this.SetAndRaise(ref field, value); }
 
-    string _reportReference;
+    public DateTime? ManufacturingDate { get; set => this.SetAndRaise(ref field, value); }
 
+    public bool ManufacturingDayValid { get; set => this.SetAndRaise(ref field, value); }
 
-    public DateTime? ReceptionDate
-    {
-        get => _receptionDate;
-        set => this.SetAndRaise(ref _receptionDate, value);
-    }
+    public DateTime? SamplingDate { get; set => this.SetAndRaise(ref field, value); }
 
-    DateTime? _receptionDate;
+    public bool SamplingDayValid { get; set => this.SetAndRaise(ref field, value); }
 
+    public string SamplingOrigin { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    public string Worksheet
+    public string PharmacopoeiaVersion { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    {
-        get => _worksheet;
-        set => this.SetAndRaise(ref _worksheet, value);
-    }
+    public bool InOriginalPackaging { get; set => this.SetAndRaise(ref field, value); }
 
-    string _worksheet = "";
+    public string PrimaryPackaging { get; set => this.SetAndRaise(ref field, value); } = "";
 
+    public string SecondaryPackaging { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    public string CommercialName
-    {
-        get => _commercialName;
-        set => this.SetAndRaise(ref _commercialName, value);
-    }
+    public double? ReceivedQuantity { get; set => this.SetAndRaise(ref field, value); }
 
-    string _commercialName = "";
+    public double? RemainingQuantity { get; set => this.SetAndRaise(ref field, value); }
 
+    public string Aspect { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    public string Batch
-    {
-        get => _batch;
-        set => this.SetAndRaise(ref _batch, value);
-    }
+    public string Size { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    string _batch = "";
+    public bool HasInstruction { get; set => this.SetAndRaise(ref field, value); }
 
+    public bool NoticeFr { get; set => this.SetAndRaise(ref field, value); }
 
-    public DateTime? ExpirationDate
-    {
-        get => _expirationDate;
-        set => this.SetAndRaise(ref _expirationDate, value);
-    }
+    public bool NoticeEn { get; set => this.SetAndRaise(ref field, value); }
 
-    DateTime? _expirationDate;
+    public string InstructionLanguages { get; set => this.SetAndRaise(ref field, value); } = "";
 
+    public string StorageConditions { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    public bool ExpirationDayValid
-    {
-        get => _expirationDayValid;
-        set => this.SetAndRaise(ref _expirationDayValid, value);
-    }
+    public string Note { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    bool _expirationDayValid;
+    public string Conclusion { get; set => this.SetAndRaise(ref field, value); } = "";
 
+    public DateTime? NotificationDate { get; set => this.SetAndRaise(ref field, value); }
 
-    public DateTime? ManufacturingDate
-    {
-        get => _manufacturingDate;
-        set => this.SetAndRaise(ref _manufacturingDate, value);
-    }
+    public int? ValidatorId { get => _validator.Id; set => _validator.SetId(value); }
 
-    DateTime? _manufacturingDate;
+    [Ignore] public User? Validator { get => _validator.Value; set => ValidatorId = value.Id;  }
+    readonly ForeignPropertyHelper<Sample, User?> _validator;
 
+    public double Progress { get; set => this.SetAndRaise(ref field, value); }
 
-    public bool ManufacturingDayValid
-    {
-        get => _manufacturingDayValid;
-        set => this.SetAndRaise(ref _manufacturingDayValid, value);
-    }
+    public sbyte? Validation { get; set => this.SetAndRaise(ref field, value); }
 
-    bool _manufacturingDayValid;
+    public ConformityState ConformityId { get; set => this.SetAndRaise(ref field, value); }
 
+    public string StageId { get; set => this.SetAndRaise(ref field, value); }
 
-    public DateTime? SamplingDate
-    {
-        get => _samplingDate;
-        set => this.SetAndRaise(ref _samplingDate, value);
-    }
+    [Ignore] public SampleWorkflow.Stage Stage { get => _stage.Value; set => StageId = value.Name; }
 
-    DateTime? _samplingDate;
+    readonly ObservableAsPropertyHelper<SampleWorkflow.Stage> _stage;
+    public string PreviousStageId { get; set => this.SetAndRaise(ref field, value); }
 
 
-    public bool SamplingDayValid
-    {
-        get => _samplingDayValid;
-        set => this.SetAndRaise(ref _samplingDayValid, value);
-    }
+    public int? CustomerId { get => _customer.Id; set => _customer.SetId(value); }
+    [Ignore] public Customer? Customer { get => _customer.Value; set => CustomerId = value.Id; }
+    readonly ForeignPropertyHelper<Sample, Customer?> _customer;
 
-    bool _samplingDayValid;
+    public int? ManufacturerId { get => _manufacturer.Id; set => _manufacturer.SetId(value); }
+    [Ignore] public virtual Manufacturer Manufacturer { get => _manufacturer.Value; set => ManufacturerId = value.Id; }
+    readonly ForeignPropertyHelper<Sample, Manufacturer> _manufacturer;
 
+    public int? PharmacopoeiaId { get => _pharmacopoeia.Id; set => _pharmacopoeia.SetId(value); }
+    [Ignore] public Pharmacopoeia Pharmacopoeia { get => _pharmacopoeia.Value; set => PharmacopoeiaId = value.Id; }
+    readonly ForeignPropertyHelper<Sample, Pharmacopoeia> _pharmacopoeia;
 
-    public string SamplingOrigin
-    {
-        get => _samplingOrigin;
-        set => this.SetAndRaise(ref _samplingOrigin, value);
-    }
+    public int? ProductId { get => _product.Id;  set => _product.SetId(value); }
+    [Ignore] public Product? Product { get => _product.Value; set => ProductId = value.Id; }
+    readonly ForeignPropertyHelper<Sample, Product?> _product;
 
-    string _samplingOrigin = "";
-
-
-    public string PharmacopoeiaVersion
-    {
-        get => _pharmacopoeiaVersion;
-        set => this.SetAndRaise(ref _pharmacopoeiaVersion, value);
-    }
-
-    string _pharmacopoeiaVersion = "";
-
-
-    public bool InOriginalPackaging
-    {
-        get => _inOriginalPackaging;
-        set => this.SetAndRaise(ref _inOriginalPackaging, value);
-    }
-
-    bool _inOriginalPackaging;
-
-
-    public string PrimaryPackaging
-    {
-        get => _primaryPackaging;
-        set => this.SetAndRaise(ref _primaryPackaging, value);
-    }
-
-    string _primaryPackaging = "";
-
-
-    public string SecondaryPackaging
-    {
-        get => _secondaryPackaging;
-        set => this.SetAndRaise(ref _secondaryPackaging, value);
-    }
-
-    string _secondaryPackaging = "";
-
-
-    public double? ReceivedQuantity
-    {
-        get => _receivedQuantity;
-        set => this.SetAndRaise(ref _receivedQuantity, value);
-    }
-
-    double? _receivedQuantity;
-
-    public double? RemainingQuantity
-    {
-        get => _remainingQuantity;
-        set => this.SetAndRaise(ref _remainingQuantity,value);
-    }
-
-    double? _remainingQuantity ;
-
-    public string Aspect
-    {
-        get => _aspect;
-        set => this.SetAndRaise(ref _aspect, value);
-    }
-
-    string _aspect = "";
-
-
-    public string Size
-    {
-        get => _size;
-        set => this.SetAndRaise(ref _size, value);
-    }
-
-    string _size = "";
-
-
-    public bool HasInstruction
-    {
-        get => _hasInstruction;
-        set => this.SetAndRaise(ref _hasInstruction, value);
-    }
-
-    bool _hasInstruction;
-
-
-    public bool NoticeFr
-    {
-        get => _noticeFr;
-        set => this.SetAndRaise(ref _noticeFr, value);
-    }
-
-    bool _noticeFr;
-
-
-    public bool NoticeEn
-    {
-        get => _noticeEn;
-        set => this.SetAndRaise(ref _noticeEn, value);
-    }
-
-    bool _noticeEn;
-
-
-    public string InstructionLanguages
-    {
-        get => _instructionLanguages;
-        set => this.SetAndRaise(ref _instructionLanguages, value);
-    }
-
-    string _instructionLanguages = "";
-
-
-    public string StorageConditions
-    {
-        get => _storageConditions;
-        set => this.SetAndRaise(ref _storageConditions, value);
-    }
-
-    string _storageConditions = "";
-
-
-    public string Note
-    {
-        get => _note;
-        set => this.SetAndRaise(ref _note, value);
-    }
-
-    string _note = "";
-
-
-    public string Conclusion
-    {
-        get => _conclusion;
-        set => this.SetAndRaise(ref _conclusion, value);
-    }
-
-    string _conclusion = "";
-
-
-    public DateTime? NotificationDate
-    {
-        get => _notificationDate;
-        set => this.SetAndRaise(ref _notificationDate, value);
-    }
-
-    DateTime? _notificationDate;
-
-
-    public int? ValidatorId
-    {
-        get => _validator.Id;
-        set => _validator.SetId(value);
-    }
-
-
-    [Ignore]
-    public User? Validator
-    {
-        get => _validator.Value;
-        set => ValidatorId = value.Id;
-    }
-    ForeignPropertyHelper<Sample, User?> _validator;
-
-    public double Progress
-    {
-        get => _progress;
-        set => this.SetAndRaise(ref _progress, value);
-    }
-
-    double _progress;
-
-
-    public sbyte? Validation
-    {
-        get => _validation;
-        set => this.SetAndRaise(ref _validation, value);
-    }
-
-    sbyte? _validation;
-
-
-    public ConformityState ConformityId
-    {
-        get => _conformityId;
-        set => this.SetAndRaise(ref _conformityId, value);
-    }
-
-    ConformityState _conformityId;
-
-    [Column("Stage")]
-    public string StageId
-    {
-        get => _stageId;
-        set => this.SetAndRaise(ref _stageId, value);
-    }
-
-    string _stageId;
-
-    [Ignore]
-    public SampleWorkflow.Stage Stage
-    {
-        get => _stage.Value;
-        set => StageId = value.Name;
-    }
-    ObservableAsPropertyHelper<SampleWorkflow.Stage> _stage;
-    public string PreviousStageId
-    {
-        get => _previousStageId;
-        set => this.SetAndRaise(ref _previousStageId,value);
-    }
-
-    string _previousStageId ;
-
-
-    public int? CustomerId
-    {
-        get => _customer.Id;
-        set => _customer.SetId(value);
-    }
-    [Ignore]
-    public Customer? Customer
-    {
-        get => _customer.Value;
-        set => CustomerId = value.Id;
-    }
-    ForeignPropertyHelper<Sample, Customer?> _customer;
-
-    public int? ManufacturerId
-    {
-        get => _manufacturer.Id;
-        set => _manufacturer.SetId(value);
-    }
-    [Ignore]
-    public virtual Manufacturer Manufacturer
-    {
-        get => _manufacturer.Value;
-        set => ManufacturerId = value.Id;
-    }
-    ForeignPropertyHelper<Sample, Manufacturer> _manufacturer;
-
-
-    public int? PharmacopoeiaId
-    {
-        get => _pharmacopoeia.Id;
-        set => _pharmacopoeia.SetId(value);
-    }
-    [Ignore]
-    public Pharmacopoeia Pharmacopoeia
-    {
-        get => _pharmacopoeia.Value;
-        set => PharmacopoeiaId = value.Id;
-    }
-    ForeignPropertyHelper<Sample, Pharmacopoeia> _pharmacopoeia;
-
-
-    public int? ProductId
-    {
-        get => _product.Id;
-        set => _product.SetId(value);
-    }
-    [Ignore]
-    public Product? Product
-    {
-        get => _product.Value;
-        set => ProductId = value.Id;
-    }
-    ForeignPropertyHelper<Sample, Product?> _product;
-
-    public int? AnalysisMotivationId
-    {
-        get => _analysisMotivation.Id;
-        set => _analysisMotivation.SetId(value);
-    }
-    [Ignore]
-    public AnalysisMotivation AnalysisMotivation
-    {
-        get => _analysisMotivation.Value;
-        set => AnalysisMotivationId = value.Id;
-    }
+    public int? AnalysisMotivationId { get => _analysisMotivation.Id; set => _analysisMotivation.SetId(value); }
+    [Ignore] public AnalysisMotivation AnalysisMotivation { get => _analysisMotivation.Value; set => AnalysisMotivationId = value.Id; }
     readonly ForeignPropertyHelper<Sample, AnalysisMotivation> _analysisMotivation;
 
     [Ignore] public ObservableQuery<SampleTest> SampleTests;
@@ -486,8 +167,7 @@ public partial class Sample : Entity, IListableModel
     //);
 
 
-    [Ignore]
-    public static Sample DesignModel => new Sample
+    [Ignore] public static Sample DesignModel => new()
     {
         Reference = "0042/11/2019",
         ReceivedQuantity = 100,
@@ -497,44 +177,20 @@ public partial class Sample : Entity, IListableModel
 
     };
 
-    public bool Invoiced
-    {
-        get => _invoiced;
-        set => this.SetAndRaise(ref _invoiced, value);
-    }
+    public bool Invoiced { get; set => this.SetAndRaise(ref field, value); }
 
-    bool _invoiced;
+    public bool Paid { get; set => this.SetAndRaise(ref field, value); }
 
+    public string InvoiceNo { get; set => this.SetAndRaise(ref field, value); }
 
-    public bool Paid
-    {
-        get => _paid;
-        set => this.SetAndRaise(ref _paid, value);
-    }
+    [Ignore] public bool Expired => _expired.Value;
+    readonly ObservableAsPropertyHelper<bool> _expired;
 
-    bool _paid;
-
-
-    public string InvoiceNo
-    {
-        get => _invoiceNo;
-        set => this.SetAndRaise(ref _invoiceNo, value);
-    }
-
-    string _invoiceNo;
-
-    [Ignore]
-    public bool Expired => _expired.Value;
-    ObservableAsPropertyHelper<bool> _expired;
-
-
-    [Ignore]
-    public TimeSpan Life => _life.Value;
+    [Ignore] public TimeSpan Life => _life.Value;
     readonly ObservableAsPropertyHelper<TimeSpan> _life;
-    TimeSpan GetLife(DateTime? expirationDate, DateTime? manufacturingDate) => expirationDate == null || manufacturingDate == null ? new TimeSpan(0) : expirationDate.Value - manufacturingDate.Value;
+    static TimeSpan GetLife(DateTime? expirationDate, DateTime? manufacturingDate) => expirationDate == null || manufacturingDate == null ? new TimeSpan(0) : expirationDate.Value - manufacturingDate.Value;
 
-    [Ignore]
-    public bool EndOfLife => _endOfLife.Value;
+    [Ignore] public bool EndOfLife => _endOfLife.Value;
     readonly ObservableAsPropertyHelper<bool> _endOfLife;
 
     static bool GetEndOfLife(DateTime? expirationDate, TimeSpan life)
@@ -543,9 +199,7 @@ public partial class Sample : Entity, IListableModel
         return DateTime.Now > expirationDate.Value.Subtract(new TimeSpan(life.Ticks / 3));
     }
 
-    [Ignore]
-    public string Caption => Reference;
+    [Ignore] public string Caption => Reference;
 
-    [Ignore]
-    public string IconPath => "Icons/Entities/Sample";
+    [Ignore] public string IconPath => "Icons/Entities/Sample";
 }

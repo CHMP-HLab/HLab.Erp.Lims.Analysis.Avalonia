@@ -8,8 +8,6 @@
 //
 //---------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
@@ -67,7 +65,7 @@ using System.Xml;
 // deals with it
 
 
-namespace HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
+namespace HLab.Erp.Lims.Analysis.HtmlXaml;
 
 /// <summary>
 /// HtmlParser class accepts a string of possibly badly formed Html, parses it and returns a string

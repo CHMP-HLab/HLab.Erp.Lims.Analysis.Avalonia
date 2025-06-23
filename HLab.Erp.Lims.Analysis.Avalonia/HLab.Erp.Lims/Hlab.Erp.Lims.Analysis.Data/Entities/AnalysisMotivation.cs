@@ -21,23 +21,11 @@ public partial class AnalysisMotivation : Entity, IListableModel, ILocalCache
 
     public override string ToString() => Name;
 
+    public string Name { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    public string Name
-    {
-        get => _name; set => this.SetAndRaise(ref _name, value);
-    }
-    string _name = "";
-
-
-    public string IconPath
-    {
-        get => _iconPath;
-        set => this.SetAndRaise(ref _iconPath, value);
-    }
-    string _iconPath = "";
+    public string IconPath { get; set => this.SetAndRaise(ref field, value); } = "";
 
     [Ignore]
     public string Caption => _caption.Value;
     readonly ObservableAsPropertyHelper<string> _caption;
-
 }

@@ -9,12 +9,16 @@
              xmlns:application="clr-namespace:HLab.Mvvm.Application;assembly=HLab.Mvvm.Application"
              xmlns:core="clr-namespace:HLab.Erp.Core;assembly=HLab.Erp.Core"
              xmlns:entityLists="clr-namespace:HLab.Erp.Core.Wpf.EntityLists;assembly=HLab.Erp.Core.Wpf"
+             xmlns:entityLists1="clr-namespace:HLab.Erp.Core.EntityLists;assembly=HLab.Erp.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             x:DataType="entityLists:ListableEntityListViewModel"
+              x:CompileBindings="False"
 			 >
     <Grid>
-            <!--<entitySelectors:ForeignView
+            <!--
+            x:DataType="application:IListableModel"
+			
+			<entitySelectors:ForeignView
                 Model="{Binding Value}"
                 ListClass="{Binding ListClass}"
                 />-->

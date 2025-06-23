@@ -30,6 +30,7 @@ using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 using System.Xml;
 using HLab.Base;
+using HLab.Erp.Lims.Analysis.HtmlXaml;
 using HLab.Erp.Lims.Analysis.Wpf.Prints.HtmlXaml;
 using Nito.Disposables.Internals;
 using PdfSharp.Pdf;

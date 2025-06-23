@@ -26,73 +26,27 @@ public partial class Product : Entity, ILocalCache, IListableModel
             .ToProperty(this, e => e.IconPath);
     }
 
-    public string Name
-    {
-        get => _name;
-        set => this.SetAndRaise(ref _name,value);
-    }
+    public string Name { get; set => this.SetAndRaise(ref field, value);} = "";
 
-    string _name = "";
+    public string Variant { get; set => this.SetAndRaise(ref field, value); } = "";
 
+    public string Complement { get; set => this.SetAndRaise(ref field, value); } = "";
 
-    public string Variant
-    {
-        get => _variant;
-        set => this.SetAndRaise(ref _variant,value);
-    }
+    public string Note { get;  set => this.SetAndRaise(ref field, value); } = "";
 
-    string _variant = "";
-
-
-    public string Complement
-    {
-        get => _complement;
-        set => this.SetAndRaise(ref _complement, value);
-    }
-    string _complement = "";
-
-
-    public string Note
-    {
-        get => _note;
-        set => this.SetAndRaise(ref _note, value);
-    }
-    string _note = "";
-
-    [Ignore]
-    public string Caption => _caption.Value;
+    [Ignore] public string Caption => _caption.Value;
     readonly ObservableAsPropertyHelper<string> _caption;
 
-    [Ignore]
-    public string IconPath => _iconPath.Value;
+    [Ignore] public string IconPath => _iconPath.Value;
     readonly ObservableAsPropertyHelper<string> _iconPath;
 
-    public int? FormId
-    {
-        get => _form.Id;
-        set => _form.SetId(value);
-    }
-    [Ignore]
-    public Form Form
-    {
-        get => _form.Value;
-        set => FormId = value.Id;
-    }
+    public int? FormId { get => _form.Id; set => _form.SetId(value); }
+    [Ignore] public Form Form { get => _form.Value; set => FormId = value.Id; }
     readonly ForeignPropertyHelper<Product, Form> _form;
 
-    public int? CategoryId
-    {
-        get => _category.Id;
-        set => _category.SetId(value);
-    }
-    [Ignore]
-    public ProductCategory Category
-    {
-        get => _category.Value;
-        set => CategoryId = value.Id;
-    }
+    public int? CategoryId { get => _category.Id; set => _category.SetId(value); }
+    [Ignore] public ProductCategory Category { get => _category.Value; set => CategoryId = value.Id; }
     readonly ForeignPropertyHelper<Product, ProductCategory> _category;
-
 
     public static Product DesignModel => new Product
     {
