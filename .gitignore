@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/HLab.Erp.Lims.Analysis.Avalonia/HLab.Erp.Lims/HLab.Erp.Lims.Analysis.Wpf/ClientConfig.cs
