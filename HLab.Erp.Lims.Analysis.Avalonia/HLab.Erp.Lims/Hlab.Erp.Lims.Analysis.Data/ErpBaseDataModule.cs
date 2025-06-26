@@ -4,12 +4,9 @@ using HLab.Erp.Lims.Analysis.Data.Entities;
 
 namespace HLab.Erp.Lims.Analysis.Data;
 
-public class HLabErpLimsAnalysisDataUpdaterBootloader : DataUpdaterBootloader
+public class HLabErpLimsAnalysisDataUpdaterBootloader(IDataService data) : DataUpdaterBootloader(data)
 {
-    public HLabErpLimsAnalysisDataUpdaterBootloader(IDataService data) : base(data)
-    { }
-
-    protected override ISqlBuilder GetSqlUpdater(string version, ISqlBuilder builder)
+   protected override ISqlBuilder GetSqlUpdater(string version, ISqlBuilder builder)
     {
         switch (version)
         {

@@ -68,6 +68,7 @@ public partial class App : Application
             c.Export<MessageBus>().As<IMessagesService>().Lifestyle.Singleton();
 
             c.Export<AclService>().As<IAclService>().Lifestyle.Singleton();
+            c.Export<CryptService>().As<ICryptService>().Lifestyle.Singleton();
             c.Export<AclHelperWindows>().As<IAclHelper>().Lifestyle.Singleton();
             c.Export<DebugLogger>().As<IDebugLogger>().Lifestyle.Singleton();
             c.Export<DataService>().As<IDataService>().Lifestyle.Singleton();
@@ -179,8 +180,10 @@ public partial class App : Application
          };
          theme.SetTheme(info.Theme);
 
+         var acl = container.Locate<IAclHelper>();
+         
 
-         var boot = new Bootstrapper(container.Locate<IEnumerable<HLab.Core.Annotations.Bootloader>>);
+         var boot = new Bootstrapper(container.Locate<IEnumerable<Bootloader>>);
          await boot.BootAsync();
       }
       catch (Exception ex)
