@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using AvalonDock.Controls;
 using HLab.Base;
 using HLab.Base.Wpf.Extensions;
 using HLab.Compiler;
 using HLab.Erp.Lims.Analysis.FormClasses;
-using HLab.UI;
 
 namespace HLab.Erp.Lims.Analysis.Wpf.FormClasses;
 
@@ -213,7 +213,7 @@ public class FormClassProvider : IFormClassProvider
     /// <returns></returns>
     Dictionary<string, ElementInfo> GetNamedElements(FrameworkElement e) =>
         e
-            .FindVisualChildren<FrameworkElement>()
+            .FindLogicalChildren<FrameworkElement>()
             .Where(fe => !string.IsNullOrEmpty(fe.Name) && fe.Name != "formulaContainerElement")
             .GroupBy(fe => fe.Name)
             .Where(g => g.Count() == 1)

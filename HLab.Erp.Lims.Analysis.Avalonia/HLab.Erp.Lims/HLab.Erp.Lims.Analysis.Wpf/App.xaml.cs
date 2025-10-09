@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Windows;
-using Grace.DependencyInjection;
+﻿using Grace.DependencyInjection;
 using HLab.Base.Wpf.Themes;
 using HLab.Bugs.Wpf;
 using HLab.Core;
@@ -24,6 +19,8 @@ using HLab.Erp.Core.Wpf.Localization;
 using HLab.Erp.Core.Wpf.WebService;
 using HLab.Erp.Data;
 using HLab.Erp.Data.Observables;
+using HLab.Erp.Lims.Analysis;
+using HLab.Erp.Lims.Analysis.Data.Entities;
 using HLab.Icons.Wpf.Icons;
 using HLab.Mvvm;
 using HLab.Mvvm.Annotations;
@@ -34,11 +31,16 @@ using HLab.Mvvm.Application.Messages;
 using HLab.Mvvm.Application.Wpf;
 using HLab.Mvvm.Wpf;
 using HLab.Options;
-using HLab.UI;
 using HLab.Ui.Wpf;
-
-using HLab.Erp.Lims.Analysis;
-using HLab.Erp.Lims.Analysis.Data.Entities;
+using HLab.UI;
+using ReactiveUI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reactive.Concurrency;
+using System.Runtime.ExceptionServices;
+using System.Windows;
+using MessageBus = HLab.Core.MessageBus;
 
 namespace HLab.Erp.Lims.Analysis.Wpf;
 
@@ -61,7 +63,9 @@ public partial class App : Application
          ListFilterConfiguratorWpfImplementation.Initialize();
          UiWpfImplementation.Initialize();
 
-         container.Configure(c =>
+        RxApp.MainThreadScheduler = DispatcherScheduler.Current;
+
+            container.Configure(c =>
          {
             c.Export<OptionsServices>().As<IOptionsService>().Lifestyle.Singleton();
             //                    c.Export<EventHandlerServiceWpf>().As<IEventHandlerService>().Lifestyle.Singleton();
@@ -76,6 +80,7 @@ public partial class App : Application
             // WPF
             c.Export<DragDropServiceWpf>().As<IDragDropService>().Lifestyle.Singleton();
             c.Export<WpfDocumentService>().As<IDocumentService>().Lifestyle.Singleton();
+            c.Export<MvvmWpfImpl>().As<IMvvmPlatformImpl>().Lifestyle.Singleton();
 
 
             c.Export<DialogService>().As<IDialogService>().Lifestyle.Singleton();
