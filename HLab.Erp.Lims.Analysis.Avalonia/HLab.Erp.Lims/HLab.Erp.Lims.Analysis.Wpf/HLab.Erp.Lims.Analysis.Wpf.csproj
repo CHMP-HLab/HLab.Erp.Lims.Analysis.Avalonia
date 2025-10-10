@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFramework>net9.0-windows</TargetFramework>
+	  <TargetFramework>net10.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <RootNamespace>HLab.Erp.Lims.Analysis.Wpf</RootNamespace>
     <Platforms>x64</Platforms>
@@ -160,7 +160,6 @@
     <PackageReference Include="Grace" Version="7.2.1" />
     <PackageReference Include="Mages" Version="3.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
-    <PackageReference Include="ReactiveUI.WPF" Version="20.3.1" />
     <PackageReference Include="WpfMath" Version="2.1.0" />
   </ItemGroup>
 
