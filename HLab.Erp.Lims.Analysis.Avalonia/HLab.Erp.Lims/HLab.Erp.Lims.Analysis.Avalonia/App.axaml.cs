@@ -52,6 +52,12 @@ public partial class App : Application
    {
       try
       {
+         // La fenêtre de login se ferme avant que la fenêtre principale ne s'affiche :
+         // en OnLastWindowClose l'app s'arrêterait entre les deux. Le bootloader
+         // applicatif rebascule sur OnMainWindowClose une fois le shell affiché.
+         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+            desktopLifetime.ShutdownMode = global::Avalonia.Controls.ShutdownMode.OnExplicitShutdown;
+
          UiAvaloniaImplementation.Initialize();
          ListFilterConfiguratorAvaloniaImplementation.Initialize();
          RxSchedulers.MainThreadScheduler = AvaloniaScheduler.Instance;
