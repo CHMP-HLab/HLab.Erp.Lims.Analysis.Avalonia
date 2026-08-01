@@ -92,6 +92,7 @@ public partial class App : Application
 
             c.Export(typeof(EntityListHelper<>)).As(typeof(IEntityListHelper<>));
             c.Export(typeof(ColumnsProvider<>)).As(typeof(IColumnsProvider<>));
+            c.Export<GuiTimer>().As<HLab.UI.IGuiTimer>();
 
             /* TODO : à porter (HLab.Erp.Core.Wpf)
             c.Export<LocalizeFromDb>().As<LocalizeFromDb>().Lifestyle.Singleton();
@@ -109,6 +110,8 @@ public partial class App : Application
             parser.LoadDll("HLab.Options.Wpf"); // provider d'options (registre), pas de dépendance WPF
             parser.LoadDll("HLab.Erp.Acl.Avalonia"); // LoginView, audit trail
             parser.LoadDll("HLab.Erp.Workflow.Avalonia"); // vues workflow
+            parser.LoadDll("HLab.Erp.Base.Avalonia"); // vues Pays/Clients + icônes de base
+            parser.LoadDll("HLab.Erp.Data.Avalonia"); // vue de configuration BDD
 
             parser.LoadModules();
 
