@@ -24,6 +24,11 @@
    <PackageReference Include="Avalonia.Desktop" Version="12.1.0" />
    <PackageReference Include="Grace" Version="7.2.1" />
    <PackageReference Include="PDFsharp" Version="6.2.3" />
+ </ItemGroup>
+
+ <ItemGroup>
+   <!-- Provider d'options (registre Windows) : aucune dépendance WPF malgré son nom -->
+   <ProjectReference Include="..\..\HLab.Wpf\HLab.Options.Wpf\HLab.Options.Wpf.csproj" />
   </ItemGroup>
 
   <ItemGroup>
