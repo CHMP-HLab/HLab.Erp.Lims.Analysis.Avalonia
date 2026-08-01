@@ -1,0 +1,101 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.TestClasses.TestClassDetailView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:views="clr-namespace:HLab.Erp.Core.Avalonia.Views;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:icons="clr-namespace:HLab.Icons.Avalonia.Icons;assembly=HLab.Icons.Avalonia"
+             xmlns:annotations="clr-namespace:HLab.Mvvm.Annotations;assembly=HLab.Mvvm.Annotations"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             xmlns:local="clr-namespace:HLab.Erp.Lims.Analysis.Avalonia"
+             x:CompileBindings="False"
+             Background="#FF005040"
+             >
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <mvvm:ViewLocator Height="50" Model="{Binding Locker}" Grid.ColumnSpan="2"/>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                <views:DetailView
+                Text="{}{Test}"
+                IconPath="{Binding IconPath}"
+                EditMode="{Binding Locker.IsActive}">
+
+                    <Label><lang:Localize Id="{}{Name} : " /></Label>
+                    <TextBox Text="{Binding Model.Name}" HorizontalContentAlignment="Center" />
+
+                    <Label><lang:Localize Id="{}{Version} : " /></Label>
+                    <TextBox Text="{Binding Model.Version}" HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Icon} : "/>
+                    <!-- TODO : IconSelectorView non porté -->
+                    <TextBox Text="{Binding Model.IconPath}"/>
+
+                    <Label><lang:Localize Id="{}{Component aware} : " /></Label>
+                    <CheckBox IsChecked="{Binding Model.ComponentAware}" HorizontalContentAlignment="Center" />
+
+                    <Label><lang:Localize Id="{}{Compilation} : "/></Label>
+                    <TextBox Text="{Binding FormHelper.Provider.CompileDuration,Mode=OneWay}" HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Creation} : "/>
+                    <TextBox Text="{Binding FormHelper.Form.CreationDuration,Mode=OneWay}" HorizontalContentAlignment="Center" />
+                </views:DetailView>
+
+                <views:DetailView
+                Text="{}{Results}"
+                IconPath="Icons/Sample/Folder"
+                EditMode="{Binding Locker.IsActive}">
+
+                    <Label HorizontalContentAlignment="Right">
+                        <lang:Localize Id="{}{Test Name} : "/>
+                    </Label>
+                    <TextBox Text="{Binding FormHelper.Form.Test.TestName}" HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Description} : " HorizontalContentAlignment="Right"/>
+                    <lang:LocalizedLabel HorizontalAlignment="Center" Text="{Binding FormHelper.Form.Target.Description}"/>
+
+                    <lang:LocalizedLabel Text="{}{Specifications} : " HorizontalContentAlignment="Right"/>
+                    <lang:LocalizedLabel HorizontalAlignment="Center" Text="{Binding FormHelper.Form.Target.Specification}"/>
+
+                    <lang:LocalizedLabel Text="{}{Result}" HorizontalContentAlignment="Center"/>
+                    <lang:LocalizedLabel HorizontalAlignment="Center" Text="{Binding FormHelper.Form.Target.Result}"/>
+
+                    <lang:LocalizedLabel Text="{}{Conformity}" HorizontalContentAlignment="Center"/>
+                    <lang:LocalizedLabel HorizontalAlignment="Center" Text="{Binding FormHelper.Form.Target.Conformity}"/>
+
+                    <lang:LocalizedLabel Text="{}{Icon}" HorizontalContentAlignment="Center"/>
+                    <local:ConformityIcon Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Conformity="{Binding FormHelper.Form.Target.ConformityId}" MaxHeight="40"/>
+
+                    <Border Grid.ColumnSpan="2" Margin="0,15,0,10" Background="{DynamicResource HLab.Brushes.Header.Background}">
+                        <Grid VerticalAlignment="Center">
+                            <Canvas>
+                                <icons:IconView Path="Icons/Sample/Folder" Height="35" Opacity="0.8"/>
+                            </Canvas>
+                            <lang:Localize Id="Unit Tests" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="50,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <Button Grid.ColumnSpan="2"
+                        Command="{Binding CheckUnitTestsCommand}">
+                        <lang:LocalizedLabel>{Check}</lang:LocalizedLabel>
+                    </Button>
+                    <lang:LocalizedLabel>{Add}</lang:LocalizedLabel>
+                    <TextBox Text="{Binding NewName}" />
+                    <Button Grid.ColumnSpan="2" Command="{Binding AddUnitTestCommand}">
+                        <lang:LocalizedLabel>{Add}</lang:LocalizedLabel>
+                    </Button>
+                    <mvvm:ViewLocator Grid.ColumnSpan="2" ViewClass="{x:Type annotations:IContentViewClass}" Model="{Binding UnitTests}"/>
+
+                </views:DetailView>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <views:DetailView Grid.Row="2" EditMode="{Binding Locker.IsActive}" IconPath="Icons/Edit" Text="{}{Note}">
+
+                    <TextBox Margin="50,0,15,0" Grid.ColumnSpan="2" Text="{Binding Model.Note}" AcceptsReturn="True" TextWrapping="Wrap"/>
+                    <Label />
+
+                </views:DetailView>
+
+            </Grid>
+
+</UserControl>

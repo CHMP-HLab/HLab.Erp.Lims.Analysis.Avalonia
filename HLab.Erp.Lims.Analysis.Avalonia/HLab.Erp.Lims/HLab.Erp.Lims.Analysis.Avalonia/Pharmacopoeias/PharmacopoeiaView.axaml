@@ -1,0 +1,45 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.Pharmacopoeias.PharmacopoeiaView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:views="clr-namespace:HLab.Erp.Core.Avalonia.Views;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:icons="clr-namespace:HLab.Icons.Avalonia.Icons;assembly=HLab.Icons.Avalonia"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             x:CompileBindings="False"
+             Background="#FF003FA0"
+             >
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <mvvm:ViewLocator Height="50" Model="{Binding Locker}"/>
+
+            <views:DetailView
+                Grid.Row="1"
+                Text="{}{Pharmacopoeia}"
+                IconPath="Icons/Entities/Pharmacopoeia"
+                EditMode="{Binding Locker.IsActive}">
+
+                    <lang:LocalizedLabel Text="{}{Name} : "/>
+                    <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.Name}" HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Abbreviation} : "/>
+                    <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.Abbreviation}" HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Url} : "/>
+                    <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.Url}" HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Search Url} : "/>
+                    <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.SearchUrl}" HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Reference Url} : "/>
+                    <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.ReferenceUrl}" HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Icon Path} : "/>
+                    <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.IconPath}" HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{Icon} : "/>
+                    <icons:IconView Path="{Binding Model.IconPath}"/>
+
+            </views:DetailView>
+
+    </Grid>
+</UserControl>

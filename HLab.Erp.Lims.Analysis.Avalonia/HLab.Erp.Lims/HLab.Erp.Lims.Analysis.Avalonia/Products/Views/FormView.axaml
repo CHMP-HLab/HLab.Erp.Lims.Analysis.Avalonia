@@ -1,0 +1,34 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.Products.Views.FormView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:views="clr-namespace:HLab.Erp.Core.Avalonia.Views;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             x:CompileBindings="False"
+             >
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <mvvm:ViewLocator Height="50" Model="{Binding Locker}"/>
+
+        <views:DetailView
+            Grid.Row="1"
+            Text="{}{Form}"
+            IconPath="{Binding IconPath}"
+            EditMode="{Binding Locker.IsActive}">
+
+            <lang:LocalizedLabel Text="{}{Name} : "/>
+            <lang:LocalizedTextBox
+                Text="{Binding Model.Name}"
+                IsReadOnly="{Binding Locker.IsReadOnly}"/>
+
+            <lang:LocalizedLabel Text="{}{English Name} : "/>
+            <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.EnglishName}" HorizontalContentAlignment="Center" />
+
+            <lang:LocalizedLabel Text="{}{Icon Path} : "/>
+            <!-- TODO : IconSelectorView non porté -->
+            <TextBox TextWrapping="Wrap" Text="{Binding Model.IconPath}" HorizontalContentAlignment="Center" />
+
+        </views:DetailView>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,13 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.TestClasses.TestClassesExceptionView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             x:CompileBindings="False"
+             Width="400" Height="300"
+             >
+    <StackPanel>
+            <lang:Localize Id="{}{Error}"/>
+            <TextBlock Text="{Binding Message}"/>
+            <TextBlock Text="{Binding StackTrace}"/>
+    </StackPanel>
+</UserControl>
