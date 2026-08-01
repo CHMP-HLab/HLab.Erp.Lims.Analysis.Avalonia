@@ -3,13 +3,16 @@
 
 using HLab.Core;
 using HLab.Core.Annotations;
-using HLab.Erp.Data;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace HLab.Erp.Lims.Analysis.Avalonia;
 
-public class ClientConfig(ICryptService crypt, IDataService data) : Bootloader
+/// <summary>
+/// Configure les clés de chiffrement du client : la chaîne de connexion vient
+/// de la base de registre (Connections\{Source}\Connection, chiffrée) ; si
+/// elle est absente, ErpDataBootloader affiche DatabaseConfigView.
+/// </summary>
+public class ClientConfig(ICryptService crypt) : Bootloader
 {
    protected override BootState Load()
    {
@@ -24,7 +27,6 @@ public class ClientConfig(ICryptService crypt, IDataService data) : Bootloader
 #endif
 #if GIMO
       crypt.Configure("h5ju8WPCMQ/T4Q0aIidQdQacXCmbOniH", "+y3URN8fvUg=");
-      data.SetConfigureAction(() => Task.FromResult("Host=gimopharm-lims-postgres;Username=lims_001_user;Password=Qv9#eLuR6!xPzA4jWm;Database=gimopharm_lims_001"), true);
 #endif
 
       return base.Load();
