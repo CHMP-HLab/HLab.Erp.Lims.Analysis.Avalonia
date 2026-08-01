@@ -36,9 +36,10 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <lang:Localize 
-                                HorizontalAlignment="Left" 
-                                Foreground="{DynamicResource MahApps.Brushes.SystemControlErrorTextForeground}"  
+                            <!-- Pas de ressource MahApps en Avalonia : rouge en dur -->
+                            <lang:Localize
+                                HorizontalAlignment="Left"
+                                Foreground="OrangeRed"
                                 VerticalAlignment="Center" Id="{Binding}"/>
                         </Grid>
                     </DataTemplate>
