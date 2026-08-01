@@ -1,0 +1,113 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.Samples.SampleView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:acl="clr-namespace:HLab.Erp.Acl;assembly=HLab.Erp.Acl"
+             xmlns:entities="clr-namespace:HLab.Erp.Lims.Analysis.Data.Entities;assembly=HLab.Erp.Lims.Analysis.Data"
+             xmlns:entitySelectors="clr-namespace:HLab.Erp.Core.Avalonia.EntitySelectors;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             xmlns:samples="clr-namespace:HLab.Erp.Lims.Analysis.Avalonia.Samples"
+             xmlns:local="clr-namespace:HLab.Erp.Lims.Analysis.Avalonia"
+             x:CompileBindings="False"
+             Background="{DynamicResource HLab.Brushes.Background}"
+             >
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,5,2*,Auto">
+
+            <samples:SampleDetailView Grid.Column="0"/>
+
+            <GridSplitter Width="5" Grid.Column="1" Background="Transparent"/>
+
+            <Grid Grid.Column="2" RowDefinitions="Auto,Auto,*,Auto">
+
+                <Grid Grid.Row="0" Background="{DynamicResource HLab.Brushes.Header.Background}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <StackPanel>
+                            <Label>
+                                <lang:Localize Id="{}{Worksheet}"/>
+                            </Label>
+                            <TextBox IsReadOnly="{Binding IsReadOnlyMonograph}" Text="{Binding Model.Worksheet}" MinWidth="110"/>
+                        </StackPanel>
+                        <Label/>
+                        <StackPanel>
+                            <lang:LocalizedLabel Text="{}{Technician}"/>
+                            <entitySelectors:ForeignView
+                                    IsReadOnly="{Binding IsReadOnlyMonograph}"
+                                    Model="{Binding Model.User}"
+                                    ModelClass="{x:Type acl:User}"
+                                    />
+                        </StackPanel>
+                        <Label/>
+                        <StackPanel Orientation="Vertical">
+                            <lang:LocalizedLabel Text="{}{Pharmacopoeia}"/>
+                            <entitySelectors:ForeignView
+                                    IsReadOnly="{Binding IsReadOnlyMonograph}"
+                                    Model="{Binding Model.Pharmacopoeia}"
+                                    ModelClass="{x:Type entities:Pharmacopoeia}"
+                                    />
+                        </StackPanel>
+                        <Label/>
+                        <StackPanel>
+                            <lang:LocalizedLabel Text="{}{Pharmacopoeia version}"/>
+                            <TextBox
+                                IsReadOnly="{Binding IsReadOnlyMonograph}"
+                                    IsEnabled="{Binding Locker.IsActive}"
+                                    Text="{Binding Model.PharmacopoeiaVersion}"
+                                    HorizontalContentAlignment="Right"
+                                    HorizontalAlignment="Stretch"/>
+
+                        </StackPanel>
+                        <Label/>
+                    </StackPanel>
+
+                </Grid>
+
+                <mvvm:ViewLocator Grid.Row="2" Model="{Binding DocumentPresenter}"/>
+
+                <Grid Grid.Row="3" Height="80" ColumnDefinitions="Auto,*,Auto,Auto">
+
+                    <local:ConformityIcon Conformity="{Binding Model.ConformityId}"/>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                        <lang:LocalizedLabel Text="{}{Conclusion}"/>
+
+                        <TextBox IsReadOnly="{Binding IsReadOnlyProduction}"
+                                 IsEnabled="{Binding ProductionMode}"
+                                 Text="{Binding Model.Conclusion}"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 HorizontalAlignment="Stretch"
+                                 HorizontalContentAlignment="Stretch"
+                                 Margin="0,0,5,0" VerticalAlignment="Stretch"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Margin="5,0" VerticalAlignment="Top">
+                        <lang:LocalizedLabel Text="{}{Validator}"/>
+                        <entitySelectors:ForeignView
+                                    IsReadOnly="True"
+                                    Model="{Binding Model.Validator}"
+                                    ModelClass="{x:Type acl:User}"
+                                    />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3">
+                        <TextBlock>N° de Rapport</TextBlock>
+                        <TextBox
+                                 Text="{Binding Model.ReportReference}"
+                                    IsReadOnly="{Binding IsReadOnlyProduction}"
+                                    IsEnabled="{Binding ProductionMode}"
+                                 />
+
+                        <Button
+                                    Width="80"
+                                    Command="{Binding CertificateCommand}">
+                            <lang:Localize Id="{}{Certificate}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,260 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.Samples.SampleDetailView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:annotations="clr-namespace:HLab.Mvvm.Annotations;assembly=HLab.Mvvm.Annotations"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:workflows="clr-namespace:HLab.Erp.Workflow.Avalonia.Views;assembly=HLab.Erp.Workflow.Avalonia"
+             xmlns:icons="clr-namespace:HLab.Icons.Avalonia.Icons;assembly=HLab.Icons.Avalonia"
+             xmlns:audittrails="clr-namespace:HLab.Erp.Acl.Avalonia.AuditTrails;assembly=HLab.Erp.Acl.Avalonia"
+             xmlns:entitySelectors="clr-namespace:HLab.Erp.Core.Avalonia.EntitySelectors;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             xmlns:views1="clr-namespace:HLab.Erp.Core.Avalonia.Views;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:customers="clr-namespace:HLab.Erp.Base.Customers;assembly=HLab.Erp.Base"
+             xmlns:analysisData="clr-namespace:HLab.Erp.Lims.Analysis.Data.Entities;assembly=HLab.Erp.Lims.Analysis.Data"
+             xmlns:erpData="clr-namespace:HLab.Erp.Base.Data;assembly=HLab.Erp.Base.Data"
+             xmlns:manufacturers="clr-namespace:HLab.Erp.Lims.Analysis.Manufacturers;assembly=HLab.Erp.Lims.Analysis"
+             xmlns:products="clr-namespace:HLab.Erp.Lims.Analysis.Products;assembly=HLab.Erp.Lims.Analysis"
+             x:CompileBindings="False"
+             Background="{DynamicResource HLab.Brushes.Background}"
+             >
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <workflows:WorkflowLockerView/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+
+                <audittrails:EntityAuditTrailListView/>
+
+                <!-- RECORD -->
+                <views1:DetailView EditMode="{Binding EditMode}" Text="{}{Record}" IconPath="Icons/Sample/Folder">
+
+                    <lang:LocalizedLabel Text="{}{Reference} : "/>
+                    <TextBox
+                        Margin="0,0,15,0"
+                        Text="{Binding Model.Reference}"
+                        HorizontalContentAlignment="Center" />
+
+                    <lang:LocalizedLabel Text="{}{FileId} : "/>
+                    <NumericUpDown
+                        Margin="0,0,15,0"
+                        ShowButtonSpinner="False"
+                        HorizontalContentAlignment="Center"
+                        Maximum="999999999"
+                        Value="{Binding Model.FileId}"/>
+
+                    <lang:LocalizedLabel Text="{}{Customer Reference} : "/>
+                    <TextBox
+                        Margin="0,0,15,0"
+                        HorizontalContentAlignment="Center"
+                        Text="{Binding Model.CustomerReference}"/>
+
+                    <lang:LocalizedLabel Text="{}{Motivation} : "/>
+                    <StackPanel Margin="0,0,0,0">
+                        <entitySelectors:ForeignView
+                            Model="{Binding Model.AnalysisMotivation}"
+                            ModelClass="{x:Type analysisData:AnalysisMotivation}"
+                            />
+                    </StackPanel>
+
+                    <lang:LocalizedLabel Text="{}{Customer} : "/>
+                    <entitySelectors:ForeignView
+                        Model="{Binding Model.Customer}"
+                        ModelClass="{x:Type erpData:Customer}"
+                        ListClass="{x:Type customers:CustomersListViewModel}"/>
+                </views1:DetailView>
+
+                <!-- PRODUCT -->
+                <views1:DetailView EditMode="{Binding EditMode}" IconPath="{Binding Model.Product.Form.IconPath,FallbackValue=icons}" Text="{}{Product}">
+
+                    <StackPanel Orientation="Horizontal">
+                        <lang:LocalizedLabel Text="{Binding Model.Product.Category.NamePropertyName}"/>
+                        <Label Content=" / "/>
+                        <lang:LocalizedLabel Text="{Binding Model.Product.Category.VariantPropertyName}"/>
+                        <Label Content=" :"/>
+                    </StackPanel>
+                    <entitySelectors:ForeignView
+                        Model="{Binding Model.Product}"
+                        ModelClass="{x:Type analysisData:Product}"
+                        ListClass="{x:Type products:ProductsListPopupViewModel}"/>
+
+                    <lang:LocalizedLabel Text="{}{Commercial Name} : "/>
+                    <AutoCompleteBox
+                        IsVisible="{Binding EditMode}"
+                        ItemsSource="{Binding CommercialNames}"
+                        Text="{Binding Model.CommercialName}"
+                    />
+
+                </views1:DetailView>
+
+                <!-- RECEPTION -->
+                <views1:DetailView EditMode="{Binding EditMode}" IconPath="icons/Sample/PackageOpened" Text="{}{Reception}">
+
+                    <lang:LocalizedLabel Text="{}{Date} :" />
+                    <!-- TODO : DateEx (DayValid) non porté -->
+                    <CalendarDatePicker
+                            HorizontalAlignment="Left"
+                            SelectedDate="{Binding Model.ReceptionDate}"
+                            MaxWidth="130"/>
+
+                    <Border Grid.ColumnSpan="2" Background="{DynamicResource HLab.Brushes.Header.Background}" Margin="5,0,0,0">
+                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+                            <Canvas>
+                                <icons:IconView Path="Icons/Sample/Sampling" Height="20" Opacity="0.8"/>
+                            </Canvas>
+                            <lang:Localize Margin="30,0,0,0" FontWeight="Bold" Id="{}{Sampling}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <lang:LocalizedLabel Text="{}{Quantity Received} : "/>
+                    <Grid Margin="0,0,15,0" ColumnDefinitions="Auto,*,Auto">
+                        <NumericUpDown
+                            Maximum="99999"
+                            ShowButtonSpinner="False"
+                            MinWidth="80"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Value="{Binding Model.ReceivedQuantity}" />
+
+                        <Label HorizontalAlignment="Right" Grid.Column="1">
+                            <lang:Localize Id="{}{Sampling date} :"/>
+                        </Label>
+
+                        <CalendarDatePicker Grid.Column="2"
+                            HorizontalAlignment="Left"
+                            Width="130"
+                            SelectedDate="{Binding Model.SamplingDate}"/>
+                    </Grid>
+
+                    <lang:LocalizedLabel Text="{}{Location} : "/>
+                    <StackPanel Margin="0,0,15,0" VerticalAlignment="Center">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Text="{Binding Model.SamplingOrigin}"
+                            IsVisible="{Binding IsReadOnly}"
+                        />
+                        <AutoCompleteBox
+                            IsVisible="{Binding EditMode}"
+                            ItemsSource="{Binding Origins}"
+                            Text="{Binding Model.SamplingOrigin}"
+                        />
+                    </StackPanel>
+
+                    <lang:LocalizedLabel Text="{}{Movements} : "/>
+
+                    <mvvm:ViewLocator
+                        ViewClass="{x:Type annotations:IContentViewClass}"
+                        Model="{Binding Movements}"
+                    />
+                    <lang:LocalizedLabel Text="{}{Remaining quantity} : "/>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Text="{Binding Model.RemainingQuantity}"
+                        IsVisible="{Binding IsReadOnly}"
+                    />
+                </views1:DetailView>
+
+                <!-- Batch -->
+                <views1:DetailView EditMode="{Binding EditMode}" IconPath="Icons/Sample/Barcode" Text="{}{Batch}">
+
+                    <lang:LocalizedLabel Text="{}{N°} : "/>
+                    <TextBox
+                        Text="{Binding Model.Batch}"/>
+
+                    <lang:LocalizedLabel Text="{}{Expiration} : "/>
+                    <Grid Margin="0,0,15,0" ColumnDefinitions="Auto,Auto,*,Auto">
+                        <CalendarDatePicker SelectedDate="{Binding Model.ExpirationDate}"/>
+                        <icons:IconView Grid.Column="1" Path="icons/sample/expired" Height="25" Margin="2"
+                                        IsVisible="{Binding Model.EndOfLife}"/>
+                        <Label Grid.Column="2" HorizontalAlignment="Right">
+                            <lang:Localize Id="{}{Manufacture} : "/>
+                        </Label>
+                        <CalendarDatePicker
+                            Grid.Column="3"
+                            SelectedDate="{Binding Model.ManufacturingDate}"/>
+                    </Grid>
+
+                    <lang:LocalizedLabel Text="{}{Manufacturer} : "/>
+                    <Grid ColumnDefinitions="*,Auto,Auto">
+
+                        <entitySelectors:ForeignView
+                            Model="{Binding Model.Manufacturer}"
+                            ModelClass="{x:Type analysisData:Manufacturer}"
+                            ListClass="{x:Type manufacturers:ManufacturersListViewModel}"/>
+
+                        <Label Grid.Column="1">
+                            <lang:Localize Id="{Binding Model.Manufacturer.Country.Name}"/>
+                        </Label>
+                        <icons:IconView Margin="0,0,15,0" Grid.Column="2" HorizontalAlignment="Right" Height="35" Path="{Binding Model.Manufacturer.Country.IconPath}"/>
+                    </Grid>
+
+                </views1:DetailView>
+
+                <views1:DetailView EditMode="{Binding EditMode}" IconPath="Icons/Entities/FormClass" Text="{}{Forms}">
+                    <Label/>
+
+                    <mvvm:ViewLocator
+                        ViewClass="{x:Type annotations:IContentViewClass}"
+                        Model="{Binding Forms}"
+                    />
+                </views1:DetailView>
+
+                <!-- PACKAGING -->
+                <views1:DetailView EditMode="{Binding EditMode}" IconPath="Icons/Sample/Packaging" Text="{}{Packaging}">
+
+                    <lang:LocalizedLabel Text="{}{Original packaging} : " VerticalContentAlignment="Center"/>
+                    <!-- TODO : YesNoView non porté -->
+                    <CheckBox IsChecked="{Binding Model.InOriginalPackaging}"/>
+
+                    <lang:LocalizedLabel Text="{}{Primary} : "/>
+                    <StackPanel Margin="0,0,15,0">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Text="{Binding Model.PrimaryPackaging}"
+                            IsVisible="{Binding IsReadOnly}"
+                            />
+                        <AutoCompleteBox
+                            IsVisible="{Binding EditMode}"
+                            ItemsSource="{Binding PrimaryPackagingList}"
+                            Text="{Binding Model.PrimaryPackaging}"
+                            />
+
+                    </StackPanel>
+
+                    <lang:LocalizedLabel Text="{}{Secondary} : "/>
+                    <StackPanel Margin="0,0,15,0">
+                        <TextBlock
+                            Text="{Binding Model.SecondaryPackaging}"
+                            IsVisible="{Binding IsReadOnly}"
+                            />
+
+                        <AutoCompleteBox
+                            IsVisible="{Binding EditMode}"
+                            IsEnabled="{Binding EditMode}"
+                            ItemsSource="{Binding SecondaryPackagingList}"
+                            Text="{Binding Model.SecondaryPackaging}"
+                            />
+                    </StackPanel>
+
+                    <lang:LocalizedLabel Text="{}{Storage Conditions} : "/>
+                    <AutoCompleteBox
+                        IsVisible="{Binding EditMode}"
+                        ItemsSource="{Binding StorageConditionsList}"
+                        Text="{Binding Model.StorageConditions}"
+                    />
+
+                </views1:DetailView>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- NOTE -->
+        <views1:DetailView Grid.Row="2" EditMode="{Binding Locker.IsActive}" IconPath="Icons/Edit" Text="{}{Note}">
+
+            <TextBox Margin="50,0,15,0" Grid.ColumnSpan="2" Text="{Binding Model.Note}" AcceptsReturn="True" TextWrapping="Wrap"/>
+            <Label />
+
+        </views1:DetailView>
+    </Grid>
+
+</UserControl>
