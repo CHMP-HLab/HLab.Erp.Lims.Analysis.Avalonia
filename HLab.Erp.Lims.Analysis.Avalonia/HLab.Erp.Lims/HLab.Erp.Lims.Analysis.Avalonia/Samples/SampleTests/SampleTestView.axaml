@@ -1,0 +1,47 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.Samples.SampleTests.SampleTestView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:details="clr-namespace:HLab.Erp.Core.Tools.Details;assembly=HLab.Erp.Core"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             xmlns:local="clr-namespace:HLab.Erp.Lims.Analysis.Avalonia"
+             x:CompileBindings="False"
+             Background="{DynamicResource HLab.Brushes.Background}"
+             >
+    <Grid ColumnDefinitions="*,5,2*">
+
+        <Grid>
+            <mvvm:ViewLocator ViewClass="{x:Type details:IDetailViewClass}" Model="{Binding}"/>
+        </Grid>
+
+        <GridSplitter Grid.Column="1"/>
+
+        <Grid Grid.Column="2" RowDefinitions="*,Auto">
+
+            <mvvm:ViewLocator Model="{Binding DocumentPresenter}"/>
+
+            <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,Auto" RowDefinitions="*,*">
+
+                <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Background="#30000000"/>
+                <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Background="#30000000"/>
+                <lang:LocalizedLabel FontWeight="Bold" Text="{}{Description}" HorizontalContentAlignment="Left" Grid.Row="0" Grid.Column="0"/>
+                <lang:LocalizedLabel Margin="5" HorizontalAlignment="Left" Text="{Binding Model.Description}" Grid.Row="1" Grid.Column="0"/>
+
+                <lang:LocalizedLabel FontWeight="Bold" Text="{}{Specifications}" HorizontalContentAlignment="Left" Grid.Row="0" Grid.Column="1"/>
+                <lang:LocalizedLabel Margin="5" HorizontalAlignment="Center" Text="{Binding Model.Specification}" Grid.Row="1" Grid.Column="1"/>
+
+                <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Background="#30000000"/>
+                <lang:LocalizedLabel FontWeight="Bold" Text="{}{Result}" HorizontalContentAlignment="Left" Grid.Row="0" Grid.Column="2"/>
+                <lang:LocalizedLabel Margin="5" HorizontalAlignment="Center" Text="{Binding Model.Result.Result,FallbackValue='{}{Select a result}'}" Grid.Row="1" Grid.Column="2"/>
+
+                <Border Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Background="#30000000"/>
+                <lang:LocalizedLabel FontWeight="Bold" Text="{}{Conformity}" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="3" />
+                <lang:LocalizedLabel Margin="5" HorizontalAlignment="Center" Text="{Binding Model.Result.Conformity}" Grid.Row="1" Grid.Column="3"/>
+
+                <local:ConformityIcon Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4" Conformity="{Binding Model.Result.ConformityId}" MaxHeight="40"/>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

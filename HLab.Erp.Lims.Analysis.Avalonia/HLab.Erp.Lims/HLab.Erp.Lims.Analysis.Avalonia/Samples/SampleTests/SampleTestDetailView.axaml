@@ -1,0 +1,115 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.Samples.SampleTests.SampleTestDetailView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:workflows="clr-namespace:HLab.Erp.Workflow.Avalonia.Views;assembly=HLab.Erp.Workflow.Avalonia"
+             xmlns:views="clr-namespace:HLab.Erp.Core.Avalonia.Views;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:entities="clr-namespace:HLab.Erp.Lims.Analysis.Data.Entities;assembly=HLab.Erp.Lims.Analysis.Data"
+             xmlns:audittrails="clr-namespace:HLab.Erp.Acl.Avalonia.AuditTrails;assembly=HLab.Erp.Acl.Avalonia"
+             xmlns:entitySelectors="clr-namespace:HLab.Erp.Core.Avalonia.EntitySelectors;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             xmlns:annotations="clr-namespace:HLab.Mvvm.Annotations;assembly=HLab.Mvvm.Annotations"
+             xmlns:viewModels="clr-namespace:HLab.Erp.Lims.Analysis.Wpf.Products.ViewModels;assembly=HLab.Erp.Lims.Analysis"
+             x:CompileBindings="False"
+             Background="{DynamicResource HLab.Brushes.Background}"
+             >
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <workflows:WorkflowLockerView/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+
+                <audittrails:EntityAuditTrailListView/>
+
+                <views:DetailView
+                    IconPath="{Binding Model.TestClass.IconPath}"
+                    Text="{Binding Model.TestClass.Name}"
+                    EditMode="{Binding EditMode}">
+
+                    <lang:LocalizedLabel Text="{}{Component}" IsVisible="{Binding Model.TestClass.ComponentAware}"/>
+                    <entitySelectors:ForeignView
+                        IsVisible="{Binding Model.TestClass.ComponentAware}"
+                        IsReadOnly="{Binding IsReadOnly}"
+                        Model="{Binding Model.ProductComponent}"
+                        ModelClass="{x:Type entities:ProductComponent}"
+                        ListClass="{x:Type viewModels:ProductProductComponentsListViewModel}"
+                        SecondaryModel="{Binding Model.Sample.Product}"
+                    />
+
+                    <lang:LocalizedLabel Text="{}{Pharmacopoeia}"/>
+                    <entitySelectors:ForeignView
+                        IsReadOnly="{Binding IsReadOnly}"
+                        Model="{Binding Model.Pharmacopoeia}"
+                        ModelClass="{x:Type entities:Pharmacopoeia}"
+                    />
+
+                    <lang:LocalizedLabel Text="{}{Pharmacopoeia version}"/>
+                    <TextBox
+                        Text="{Binding Model.PharmacopoeiaVersion}"
+                        HorizontalContentAlignment="Right"
+                        HorizontalAlignment="Stretch"/>
+
+                    <Label Grid.ColumnSpan="2"/>
+
+                    <lang:LocalizedLabel Text="{}{Name} : " VerticalAlignment="Top"/>
+                    <TextBlock Margin="0,5" Text="{Binding Model.TestName}" VerticalAlignment="Top"/>
+
+                </views:DetailView>
+                <views:DetailView
+                    IconPath="Icons/Workflows/Planning"
+                    Text="{}{Scheduling}"
+                    EditMode="{Binding ScheduleEditMode}">
+
+                    <lang:LocalizedLabel Text="{}{Date} :" />
+                    <!-- TODO : DateEx (DayValid/ShowTime) non porté -->
+                    <CalendarDatePicker
+                        HorizontalAlignment="Left"
+                        SelectedDate="{Binding Model.ScheduledDate}"
+                        MaxWidth="130"/>
+
+                </views:DetailView>
+
+                <views:DetailView
+                    IconPath="Icons/Workflows/Planning"
+                    Text="{}{Processing date}"
+                    EditMode="{Binding ResultMode}">
+
+                    <lang:LocalizedLabel Text="{}{Start} :" />
+                    <CalendarDatePicker
+                        HorizontalAlignment="Left"
+                        SelectedDate="{Binding Model.StartDate}"
+                        MinWidth="200"/>
+
+                    <lang:LocalizedLabel Text="{}{End} :" />
+                    <CalendarDatePicker
+                        HorizontalAlignment="Left"
+                        SelectedDate="{Binding Model.EndDate}"
+                        MinWidth="200"/>
+
+                </views:DetailView>
+
+                <views:DetailView Text="{}{Results}" IconPath="Icons/Result" EditMode="{Binding EditMode}">
+                    <Label />
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding SelectResultCommand}" HorizontalAlignment="Left">
+                                <lang:Localize Id="{}{Select result}"/>
+                            </Button>
+                        </StackPanel>
+                        <Grid VerticalAlignment="Top">
+                            <mvvm:ViewLocator ViewClass="{x:Type annotations:IContentViewClass}" Model="{Binding Results}"/>
+                        </Grid>
+                    </StackPanel>
+
+                </views:DetailView>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <views:DetailView Grid.Row="2" Text="{}{Note}" IconPath="Icons/Sample/Folder">
+            <TextBox Margin="50,0,15,0" Grid.ColumnSpan="2" Text="{Binding Model.Note}" AcceptsReturn="True" TextWrapping="Wrap"/>
+            <Label />
+        </views:DetailView>
+    </Grid>
+</UserControl>
