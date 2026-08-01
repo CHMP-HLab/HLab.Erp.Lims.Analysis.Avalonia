@@ -68,7 +68,7 @@ public partial class App : Application
             UiWpfImplementation.Initialize();
 
             // Needed for
-            RxApp.MainThreadScheduler = RxApp.MainThreadScheduler = new SynchronizationContextScheduler(
+            RxSchedulers.MainThreadScheduler = RxSchedulers.MainThreadScheduler = new SynchronizationContextScheduler(
                 SynchronizationContext.Current ??
                 new DispatcherSynchronizationContext()
             );

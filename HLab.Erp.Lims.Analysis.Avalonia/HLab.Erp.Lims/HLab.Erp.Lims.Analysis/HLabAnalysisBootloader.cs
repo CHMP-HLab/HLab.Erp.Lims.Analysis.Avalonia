@@ -23,8 +23,8 @@ public class HLabAnalysisBootloader(IMvvmService mvvm, IAclService acl, IOptions
       _ = SampleTestWorkflow.ValidatedResults;
       _ = SampleTestResultWorkflow.Checked;
          
-      await mvvm.RegisterAsync(typeof(Customer), typeof(CustomerViewModel), typeof(IDocumentViewClass), typeof(DefaultViewMode));
-      await mvvm.RegisterAsync(typeof(Manufacturer), typeof(ManufacturerViewModel), typeof(IDocumentViewClass), typeof(DefaultViewMode));
+      mvvm.Register(typeof(Customer), typeof(CustomerViewModel), typeof(IDocumentViewClass), typeof(DefaultViewMode));
+      mvvm.Register(typeof(Manufacturer), typeof(ManufacturerViewModel), typeof(IDocumentViewClass), typeof(DefaultViewMode));
       
       return BootState.Completed;
    }
