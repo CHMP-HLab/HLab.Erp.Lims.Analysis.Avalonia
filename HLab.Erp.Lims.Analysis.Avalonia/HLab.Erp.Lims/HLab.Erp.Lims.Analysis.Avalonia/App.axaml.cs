@@ -22,13 +22,21 @@ using HLab.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Avalonia.Controls;
+using Avalonia.Media;
 using HLab.Erp.Acl.AuditTrails;
 using HLab.Erp.Acl.Windows;
 using HLab.Icons.Avalonia;
 using HLab.Mvvm.Avalonia;
 using HLab.Erp.Acl.Avalonia.LoginServices;
 using HLab.Erp.Acl.LoginServices;
+using HLab.Mvvm.Application.Avalonia;
+using HLab.Mvvm.Application.Messages;
 using HLab.Theme.Avalonia;
+using HLab.Ui.Avalonia;
+using ReactiveUI;
+using ReactiveUI.Avalonia;
+using MessageBus = HLab.Core.MessageBus;
 
 namespace HLab.Erp.Lims.Analysis.Avalonia;
 
@@ -39,11 +47,14 @@ public partial class App : Application
       AvaloniaXamlLoader.Load(this);
    }
 
-   public override void OnFrameworkInitializationCompleted()
+   public override async void OnFrameworkInitializationCompleted()
    {
       try
       {
          var theme = new ThemeService(Resources);
+
+         UiAvaloniaImplementation.Initialize();
+         RxSchedulers.MainThreadScheduler = AvaloniaScheduler.Instance;
 
          var container = new DependencyInjectionContainer();
 
@@ -69,24 +80,21 @@ public partial class App : Application
             c.Export<AuditTrailMotivationViewModel>().As<IAuditTrailProvider>();
 
             c.Export<MvvmService>().As<IMvvmService>().Lifestyle.Singleton();
-            /*
-            c.Export<MainAvaloniaViewModel>().As<MainAvaloniaViewModel>().Lifestyle.Singleton();
 
+            c.Export<CryptService>().As<ICryptService>().Lifestyle.Singleton();
+            c.Export<MvvmAvaloniaImpl>().As<MvvmAvaloniaImpl>().As<IMvvmPlatformImpl>().Lifestyle.Singleton();
 
+            c.Export<AvaloniaDocumentService>().As<IDocumentService>().Lifestyle.Singleton();
+            c.Export<DocumentPresenterViewModel>().As<IDocumentPresenter>();
+            c.Export<AvaloniaMenuService>().As<IMenuService>().Lifestyle.Singleton();
+            c.Export<AvaloniaApplicationViewModel>().As<IApplicationViewModel>().Lifestyle.Singleton();
+            c.Export<SelectedMessage>().As<ISelectedMessage>();
+
+            /* TODO phase 3 : portage HLab.Erp.Core.Avalonia
             c.Export<LocalizeFromDb>().As<LocalizeFromDb>().Lifestyle.Singleton();
             c.Export<CurrencyService>().As<ICurrencyService>().Lifestyle.Singleton();
-            c.Export<EventHandlerServiceWpf>().As<IEventHandlerService>().Lifestyle.Singleton();
-            c.Export<DragDropServiceWpf>().As<IDragDropService>().Lifestyle.Singleton();
-            c.Export<GraphService>().As<IGraphService>().Lifestyle.Singleton();
-
+            c.Export<DragDropServiceAvalonia>().As<IDragDropService>().Lifestyle.Singleton();
             c.Export<BrowserViewModel>().As<IBrowserService>().Lifestyle.Singleton();
-
-            c.Export<DocumentServiceWpf>().As<IDocumentService>().Lifestyle.Singleton();
-            c.Export<DocumentPresenter>().As<IDocumentPresenter>();
-            c.Export<MenuService>().As<IMenuService>().Lifestyle.Singleton();
-
-
-            c.Export<SelectedMessage>().As<ISelectedMessage>();
 
             c.Export(typeof(EntityListHelper<>)).As(typeof(IEntityListHelper<>));
             c.Export(typeof(ColumnsProvider<>)).As(typeof(IColumnsProvider<>));
@@ -96,19 +104,11 @@ public partial class App : Application
 
             parser.LoadReferencedAssemblies("HLab");
 
-            ////var a0 = boot.LoadDll("HLab.Erp.Core.Wpf");
-            //var a01 = parser.LoadDll("HLab.Options.Wpf");
-            //var a3 = parser.LoadDll("HLab.Notify.Wpf");
-            //var a2 = parser.LoadDll("HLab.Erp.Base.Wpf");
-            ////  var b0 = boot.LoadDll("HLab.Mvvm");
-            ////  var c0 = boot.LoadDll("HLab.Mvvm.Wpf");
-            ////  var d0 = boot.LoadDll("HLab.Erp.Data");
-            //var d1 = parser.LoadDll("HLab.Erp.Data.Wpf");
-            //var e0 = parser.LoadDll("HLab.Erp.Acl.Wpf");
-            //var a1 = parser.LoadDll("HLab.Erp.Workflows.Wpf");
-            //var g0 = parser.LoadDll("HLab.Erp.Lims.Analysis.Data");
-            //var g2 = parser.LoadDll("HLab.Erp.Lims.Analysis.Module");
-            ////var g1 = boot.LoadDll("HLab.Erp.Lims.Monographs.Module");
+            // Assemblies jamais référencés par le code : le compilateur les élague
+            // des métadonnées, il faut les charger explicitement.
+            parser.LoadDll("HLab.Options.Wpf"); // provider d'options (registre), pas de dépendance WPF
+            parser.LoadDll("HLab.Erp.Acl.Avalonia"); // LoginView, audit trail
+            parser.LoadDll("HLab.Erp.Workflow.Avalonia"); // vues workflow
 
             parser.LoadModules();
 
@@ -166,27 +166,50 @@ public partial class App : Application
 
 
          var boot = new Bootstrapper(container.Locate<IEnumerable<HLab.Core.Annotations.Bootloader>>);
-         var t = boot.BootAsync();
+
+         // Boot once the Avalonia main loop is running : contrary to WPF where OnStartup
+         // runs inside Application.Run, this method completes *before* the lifetime starts,
+         // and awaiting the boot here would spin the UI thread before any window can show.
+         global::Avalonia.Threading.Dispatcher.UIThread.Post(async () =>
+         {
+            try
+            {
+               await boot.BootAsync();
+            }
+            catch (Exception ex)
+            {
+               ShowBootError(ex);
+            }
+         });
       }
       catch (Exception ex)
       {
-         /* TODO
-                         Application.Current.Dispatcher.Invoke(() =>
-                         {
-                             var view = new ExceptionView {
-                                 Exception = ex 
-                                 // TODO store token in db
-                                  , Token = ""
-                                 };
-                             view.ShowDialog();
-             #if DEBUG
-                             //throw;
-                             ExceptionDispatchInfo.Capture(ex).Throw();
-             #endif        
-
-                         });
-         */
+         ShowBootError(ex);
       }
+   }
+
+   void ShowBootError(Exception ex)
+   {
+      Console.Error.WriteLine(ex);
+
+      if (ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop) return;
+
+      var window = new Window
+      {
+         Title = "LIMS - Erreur de démarrage",
+         Width = 900,
+         Height = 600,
+         Content = new TextBox
+         {
+            Text = ex.ToString(),
+            IsReadOnly = true,
+            AcceptsReturn = true,
+            TextWrapping = TextWrapping.Wrap
+         }
+      };
+
+      desktop.MainWindow = window;
+      window.Show();
    }
 }
 
