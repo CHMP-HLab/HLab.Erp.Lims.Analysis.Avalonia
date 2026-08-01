@@ -1,0 +1,41 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.TestClasses.TestCategoryDetailView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:views="clr-namespace:HLab.Erp.Core.Avalonia.Views;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:icons="clr-namespace:HLab.Icons.Avalonia.Icons;assembly=HLab.Icons.Avalonia"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             x:CompileBindings="False"
+             Background="#FF005040"
+             >
+    <Grid>
+        <views:DetailView>
+            <mvvm:ViewLocator Height="50" Model="{Binding Locker}" Grid.ColumnSpan="2"/>
+
+            <Label>
+                <lang:Localize Id="Workflow" Margin="50,0,0,0"/>
+            </Label>
+            <ContentPresenter Content="{Binding Workflow}"/>
+
+            <Border Grid.ColumnSpan="2" Margin="0,15,0,10" Background="{DynamicResource HLab.Brushes.Header.Background}">
+                <Grid VerticalAlignment="Center">
+                    <Canvas>
+                        <icons:IconView Path="Icons/Sample/Folder" Height="35" Opacity="0.8"/>
+                    </Canvas>
+                    <lang:Localize Id="Name" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="50,0,0,0"/>
+                </Grid>
+            </Border>
+
+            <Label HorizontalContentAlignment="Right">
+                <lang:Localize Id="{}{Name} : "/>
+            </Label>
+            <TextBox Text="{Binding Model.Name}" HorizontalContentAlignment="Center" />
+
+            <Label HorizontalContentAlignment="Right">
+                <lang:Localize Id="{}{Icon} : "/>
+            </Label>
+            <TextBox Text="{Binding Model.IconPath}" HorizontalContentAlignment="Center" />
+
+        </views:DetailView>
+    </Grid>
+</UserControl>

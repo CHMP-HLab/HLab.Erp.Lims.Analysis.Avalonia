@@ -1,0 +1,71 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.Products.Views.ProductView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:annotations="clr-namespace:HLab.Mvvm.Annotations;assembly=HLab.Mvvm.Annotations"
+             xmlns:views="clr-namespace:HLab.Erp.Core.Avalonia.Views;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:entities="clr-namespace:HLab.Erp.Lims.Analysis.Data.Entities;assembly=HLab.Erp.Lims.Analysis.Data"
+             xmlns:entitySelectors="clr-namespace:HLab.Erp.Core.Avalonia.EntitySelectors;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             xmlns:viewModels2="clr-namespace:HLab.Erp.Lims.Analysis.Module.Products.ViewModels;assembly=HLab.Erp.Lims.Analysis"
+             x:CompileBindings="False"
+             Background="#FF93A03F"
+             >
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <mvvm:ViewLocator Height="50" Model="{Binding Locker}"/>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <views:DetailView
+                Text="{}{Product}"
+                IconPath="Icons/Sample/Drugs"
+                EditMode="{Binding Locker.IsActive}">
+
+            <lang:LocalizedLabel Text="{}{Category} : "/>
+            <entitySelectors:ForeignView
+                HorizontalAlignment="Left"
+                Model="{Binding Model.Category}"
+                ModelClass="{x:Type entities:ProductCategory}"
+                ListClass="{x:Type viewModels2:ProductCategoriesListViewModel}"/>
+
+            <StackPanel Orientation="Horizontal">
+                <lang:LocalizedLabel Text="{Binding Model.Category.NamePropertyName}"/>
+                <Label Content=" : "/>
+            </StackPanel>
+            <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.Name}" HorizontalContentAlignment="Center" />
+
+            <StackPanel Orientation="Horizontal">
+                <lang:LocalizedLabel Text="{Binding Model.Category.VariantPropertyName}"/>
+                <lang:LocalizedLabel Text=" : "/>
+            </StackPanel>
+
+            <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.Variant}" HorizontalContentAlignment="Center" />
+
+            <lang:LocalizedLabel Text="{}{Complement} : "/>
+            <TextBox TextWrapping="Wrap" FontSize="20" Text="{Binding Model.Complement}" HorizontalContentAlignment="Center" />
+
+            <lang:LocalizedLabel Text="{}{Form} : "/>
+            <entitySelectors:ForeignView
+                    HorizontalAlignment="Left"
+                    ModelClass="{x:Type entities:Form}"
+                    Model="{Binding Model.Form}"
+                    />
+            </views:DetailView>
+
+            <views:DetailView
+                Text="{}{Components}"
+                IconPath="Icons/Sample/Drugs"
+                EditMode="{Binding Locker.IsActive}">
+
+                <lang:LocalizedLabel Text="{}{Components} : "/>
+                <Grid VerticalAlignment="Top">
+                    <mvvm:ViewLocator
+                        ViewClass="{x:Type annotations:IContentViewClass}"
+                        Model="{Binding Components}"
+                        />
+                </Grid>
+            </views:DetailView>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

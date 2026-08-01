@@ -1,0 +1,26 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.Filters.ConformityFilterView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:icons="clr-namespace:HLab.Icons.Avalonia.Icons;assembly=HLab.Icons.Avalonia"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             x:CompileBindings="False"
+             >
+    <Grid>
+            <ListBox ItemsSource="{Binding List}" SelectionMode="Multiple">
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="IsSelected" Value="{Binding Selected, Mode=TwoWay}"/>
+                    </Style>
+                </ListBox.Styles>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <icons:IconView Path="{Binding IconPath}" MaxHeight="15"/>
+                            <lang:LocalizedLabel Text="{Binding Caption}" Margin="5,0,0,0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+    </Grid>
+</UserControl>
