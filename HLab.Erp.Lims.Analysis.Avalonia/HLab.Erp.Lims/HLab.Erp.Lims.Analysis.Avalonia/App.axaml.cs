@@ -26,6 +26,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using HLab.Erp.Acl.AuditTrails;
 using HLab.Erp.Acl.Windows;
+using HLab.Erp.Core.Avalonia.EntityLists;
 using HLab.Icons.Avalonia;
 using HLab.Mvvm.Avalonia;
 using HLab.Erp.Acl.Avalonia.LoginServices;
@@ -51,9 +52,8 @@ public partial class App : Application
    {
       try
       {
-         var theme = new ThemeService(Resources);
-
          UiAvaloniaImplementation.Initialize();
+         ListFilterConfiguratorAvaloniaImplementation.Initialize();
          RxSchedulers.MainThreadScheduler = AvaloniaScheduler.Instance;
 
          var container = new DependencyInjectionContainer();
@@ -90,14 +90,14 @@ public partial class App : Application
             c.Export<AvaloniaApplicationViewModel>().As<IApplicationViewModel>().Lifestyle.Singleton();
             c.Export<SelectedMessage>().As<ISelectedMessage>();
 
-            /* TODO phase 3 : portage HLab.Erp.Core.Avalonia
+            c.Export(typeof(EntityListHelper<>)).As(typeof(IEntityListHelper<>));
+            c.Export(typeof(ColumnsProvider<>)).As(typeof(IColumnsProvider<>));
+
+            /* TODO : à porter (HLab.Erp.Core.Wpf)
             c.Export<LocalizeFromDb>().As<LocalizeFromDb>().Lifestyle.Singleton();
             c.Export<CurrencyService>().As<ICurrencyService>().Lifestyle.Singleton();
             c.Export<DragDropServiceAvalonia>().As<IDragDropService>().Lifestyle.Singleton();
             c.Export<BrowserViewModel>().As<IBrowserService>().Lifestyle.Singleton();
-
-            c.Export(typeof(EntityListHelper<>)).As(typeof(IEntityListHelper<>));
-            c.Export(typeof(ColumnsProvider<>)).As(typeof(IColumnsProvider<>));
             */
 
             var parser = new AssemblyParser();
@@ -159,10 +159,10 @@ public partial class App : Application
          {
             if (a.PropertyName == "Theme")
             {
-               theme.SetTheme(info.Theme);
+               ApplyTheme(info.Theme);
             }
          };
-         theme.SetTheme(info.Theme);
+         ApplyTheme(info.Theme);
 
 
          var boot = new Bootstrapper(container.Locate<IEnumerable<HLab.Core.Annotations.Bootloader>>);
@@ -187,6 +187,17 @@ public partial class App : Application
          ShowBootError(ex);
       }
    }
+
+   /// <summary>
+   /// Le choix utilisateur ({Dark}/{Light}/{Auto}, persisté dans les options) pilote
+   /// RequestedThemeVariant ; les ressources HLab.Theme.axaml suivent la variante.
+   /// </summary>
+   void ApplyTheme(string? name) => RequestedThemeVariant = name switch
+   {
+      "{Dark}" or "Dark" => global::Avalonia.Styling.ThemeVariant.Dark,
+      "{Light}" or "Light" => global::Avalonia.Styling.ThemeVariant.Light,
+      _ => global::Avalonia.Styling.ThemeVariant.Default,
+   };
 
    void ShowBootError(Exception ex)
    {
