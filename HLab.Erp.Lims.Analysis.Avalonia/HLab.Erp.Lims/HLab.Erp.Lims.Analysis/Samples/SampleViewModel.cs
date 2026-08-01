@@ -98,7 +98,7 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
                 if (model == null || locker == null) return null;
                 return _getSampleWorkflow(model, locker);
             }
-        ).ToProperty(this , e => e.Workflow, scheduler: RxApp.TaskpoolScheduler );
+        ).ToProperty(this , e => e.Workflow, scheduler: RxSchedulers.TaskpoolScheduler );
 
 
         _editMode = this.WhenAnyValue(
