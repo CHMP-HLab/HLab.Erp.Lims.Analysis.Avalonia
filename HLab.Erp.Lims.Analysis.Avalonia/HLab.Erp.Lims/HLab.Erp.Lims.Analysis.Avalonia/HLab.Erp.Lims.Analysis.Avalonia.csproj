@@ -29,6 +29,8 @@
  <ItemGroup>
    <!-- Provider d'options (registre Windows) : aucune dépendance WPF malgré son nom -->
    <ProjectReference Include="..\..\HLab.Wpf\HLab.Options.Wpf\HLab.Options.Wpf.csproj" />
+   <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Base.Avalonia\HLab.Erp.Base.Avalonia.csproj" />
+   <ProjectReference Include="..\..\HLab.Erp\HLab.Erp.Data.Avalonia\HLab.Erp.Data.Avalonia.csproj" />
   </ItemGroup>
 
   <ItemGroup>
