@@ -1,0 +1,48 @@
+<UserControl x:Class="HLab.Erp.Lims.Analysis.Avalonia.Samples.SampleMovements.SampleMovementView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
+             xmlns:views="clr-namespace:HLab.Erp.Core.Avalonia.Views;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:entities="clr-namespace:HLab.Erp.Lims.Analysis.Data.Entities;assembly=HLab.Erp.Lims.Analysis.Data"
+             xmlns:entitySelectors="clr-namespace:HLab.Erp.Core.Avalonia.EntitySelectors;assembly=HLab.Erp.Core.Avalonia"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
+             x:CompileBindings="False"
+             Background="#FF93A03F"
+             >
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <mvvm:ViewLocator Height="50" Model="{Binding Locker}"/>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <views:DetailView
+                Text="{}{Movement}"
+                IconPath="Icons/Entities/Movement"
+                EditMode="{Binding Locker.IsActive}">
+
+            <lang:LocalizedLabel Text="{}{Date} : "/>
+            <CalendarDatePicker
+                         HorizontalAlignment="Left"
+                         Width="130"
+                         SelectedDate="{Binding Model.Date}"/>
+
+            <lang:LocalizedLabel Text="{}{Motivation} : "/>
+            <entitySelectors:ForeignView
+                HorizontalAlignment="Left"
+                Model="{Binding Model.Motivation}"
+                ModelClass="{x:Type entities:SampleMovementMotivation}"
+                />
+
+            <lang:LocalizedLabel Text="{}{Quantity}"/>
+            <NumericUpDown
+                Maximum="9999"
+                ShowButtonSpinner="False"
+                FontSize="20"
+                Value="{Binding Model.Quantity}"
+                HorizontalContentAlignment="Left" />
+
+            </views:DetailView>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>
