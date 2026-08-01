@@ -66,17 +66,15 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
         _getMovements = getMovements;
         _getForms = getForms;
 
-        _isReadOnly = this.WhenAnyValue(e => e.EditMode, editMode => !editMode)
-            .ToProperty(this, e => e.IsReadOnly);
-
-        this.WhenAnyValue(e => e.AuditDetail, e => e.AuditTrail)
-            .Subscribe(e => OnAuditDetail(e.Item1, e.Item2));
-
+        // _auditTrail doit exister AVANT l'abonnement qui lit AuditTrail
         _auditTrail = this
             .WhenAnyValue(e => e.Model)
             .WhereNotNull()
             .Select(e => _getAudit?.Invoke(e.Id))
             .ToProperty(this, e => e.AuditTrail);
+
+        this.WhenAnyValue(e => e.AuditDetail, e => e.AuditTrail)
+            .Subscribe(e => OnAuditDetail(e.Item1, e.Item2));
 
 
         this.WhenAnyValue(e => e.Locker.IsActive)
@@ -98,6 +96,15 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
             .Select(u => Injected.Acl.IsGranted(ErpRights.ErpViewCustomer))
             .ToProperty(this, e => e.CustomerVisibility);
 
+        // _workflow doit exister avant les modes qui lisent Workflow.CurrentStage,
+        // et _editMode avant _isReadOnly (même ordre que la version partagée).
+        _workflow = this.WhenAnyValue(e => e.Model, e => e.Locker, selector : (model, locker) =>
+        {
+            if (model == null || locker == null) return null;
+            return _getSampleWorkflow(model, locker);
+        }
+        ).ToProperty(this , e => e.Workflow);
+
         _editMode = this.WhenAnyValue(
                 e => e.Locker.IsActive,
                 e => e.Workflow.CurrentStage,
@@ -106,6 +113,9 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
                     AnalysisRights.AnalysisReceptionSign)
             )
             .ToProperty(this, e => e.EditMode);
+
+        _isReadOnly = this.WhenAnyValue(e => e.EditMode, editMode => !editMode)
+            .ToProperty(this, e => e.IsReadOnly);
 
         _monographMode = this.WhenAnyValue(
             e => e.Locker.IsActive,
@@ -148,14 +158,7 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
             .Select(async _ => await UpdateProductLists())
             .Subscribe();
 
-        _workflow = this.WhenAnyValue(e => e.Model, e => e.Locker, selector : (model, locker) =>
-        {
-            if (model == null || locker == null) return null;
-            return _getSampleWorkflow(model, locker);
-        }
-        ).ToProperty(this , e => e.Workflow);
-
-        CertificateCommand = ReactiveCommand.Create(() => Certificate(false), 
+        CertificateCommand = ReactiveCommand.Create(() => Certificate(false),
             this.WhenAnyValue(e => e.Injected.Acl)
                 .Select(e => e.IsGranted(AnalysisRights.AnalysisCertificateCreate)));
 
@@ -179,8 +182,9 @@ public class SampleViewModel : ListableEntityViewModel<Sample>
     }
     bool _auditDetail;
 
-    static void OnAuditDetail(bool auditDetail, SampleAuditTrailViewModel auditTrail)
+    static void OnAuditDetail(bool auditDetail, SampleAuditTrailViewModel? auditTrail)
     {
+        if (auditTrail is null) return;
         if (auditDetail)
             auditTrail.List.RemoveFilter("Detail");
         else
