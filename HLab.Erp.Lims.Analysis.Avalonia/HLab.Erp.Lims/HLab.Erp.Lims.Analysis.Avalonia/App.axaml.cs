@@ -52,6 +52,12 @@ public partial class App : Application
    {
       try
       {
+         // La fenêtre de login se ferme avant que la fenêtre principale ne s'affiche :
+         // en OnLastWindowClose l'app s'arrêterait entre les deux. Le bootloader
+         // applicatif rebascule sur OnMainWindowClose une fois le shell affiché.
+         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+            desktopLifetime.ShutdownMode = global::Avalonia.Controls.ShutdownMode.OnExplicitShutdown;
+
          UiAvaloniaImplementation.Initialize();
          ListFilterConfiguratorAvaloniaImplementation.Initialize();
          RxSchedulers.MainThreadScheduler = AvaloniaScheduler.Instance;
@@ -94,8 +100,9 @@ public partial class App : Application
             c.Export(typeof(ColumnsProvider<>)).As(typeof(IColumnsProvider<>));
             c.Export<GuiTimer>().As<HLab.UI.IGuiTimer>();
 
+            c.Export<HLab.Erp.Core.Wpf.Localization.LocalizeFromDb>().As<HLab.Erp.Core.Wpf.Localization.LocalizeFromDb>().Lifestyle.Singleton();
+
             /* TODO : à porter (HLab.Erp.Core.Wpf)
-            c.Export<LocalizeFromDb>().As<LocalizeFromDb>().Lifestyle.Singleton();
             c.Export<CurrencyService>().As<ICurrencyService>().Lifestyle.Singleton();
             c.Export<DragDropServiceAvalonia>().As<IDragDropService>().Lifestyle.Singleton();
             c.Export<BrowserViewModel>().As<IBrowserService>().Lifestyle.Singleton();

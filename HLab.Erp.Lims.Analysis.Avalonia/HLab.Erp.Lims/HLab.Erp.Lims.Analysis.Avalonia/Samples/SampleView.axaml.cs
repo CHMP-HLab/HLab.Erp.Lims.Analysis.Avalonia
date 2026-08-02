@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using HLab.Erp.Workflows;
 using HLab.Mvvm.Annotations;
 using HLab.Mvvm.Application.Documents;
 
@@ -13,6 +14,6 @@ public partial class SampleView : UserControl, IView<SampleViewModel>, IDocument
     {
         InitializeComponent();
 
-        // TODO : SetHighlights (HighlightHelper de HLab.Erp.Workflows.Wpf non porté)
+        this.SetHighlights(vm => vm.Workflow);
     }
 }

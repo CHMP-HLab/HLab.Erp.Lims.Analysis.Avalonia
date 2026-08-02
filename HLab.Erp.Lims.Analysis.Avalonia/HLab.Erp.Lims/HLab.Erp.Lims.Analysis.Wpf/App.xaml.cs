@@ -60,6 +60,12 @@ public partial class App : Application
         {
             base.OnStartup(e);
 
+            // ReactiveUI 23 : l'initialisation implicite (RxApp) a disparu, le builder
+            // est obligatoire avant tout usage (côté Avalonia c'est UseReactiveUI qui s'en charge).
+            ReactiveUI.Builder.RxAppBuilder.CreateReactiveUIBuilder()
+                .WithPlatformServices()
+                .BuildApp();
+
             var theme = new ThemeService(Resources);
 
             var container = new DependencyInjectionContainer();

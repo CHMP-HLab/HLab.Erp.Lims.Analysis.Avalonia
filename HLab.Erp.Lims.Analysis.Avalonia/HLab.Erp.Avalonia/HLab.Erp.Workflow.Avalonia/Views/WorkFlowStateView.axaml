@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:workflows="clr-namespace:HLab.Erp.Workflows"
              xmlns:viewModels="clr-namespace:HLab.Erp.Workflows.ViewModels;assembly=HLab.Erp.Workflows"
+             xmlns:models="clr-namespace:HLab.Erp.Workflows.Models;assembly=HLab.Erp.Workflows"
+             xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
              xmlns:lang="clr-namespace:HLab.Localization.Avalonia.Lang;assembly=HLab.Localization.Avalonia"
              xmlns:icons="clr-namespace:HLab.Icons.Avalonia.Icons;assembly=HLab.Icons.Avalonia"
              mc:Ignorable="d" 
@@ -79,20 +81,33 @@
                 </StackPanel>
                     <Grid Grid.Row="1" ColumnDefinitions="Auto,*">
 
-                        <ItemsControl 
+                        <ItemsControl
                     Grid.Column="0"
                     Margin="5"
                     ItemsSource="{Binding BackwardActions}"
                     Background="Transparent"
-                    />
+                    >
+                            <!-- Résolution explicite : pas de templates implicites en Avalonia -->
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="models:WorkflowAction">
+                                    <mvvm:ViewLocator Model="{Binding}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
-                <ItemsControl 
+                <ItemsControl
                     Grid.Column="1"
                     Margin="5"
                     ItemsSource="{Binding Actions}"
                     Background="Transparent"
                     HorizontalAlignment="Right"
-                    />
+                    >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:WorkflowAction">
+                            <mvvm:ViewLocator Model="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
                         
                         
                     </Grid>

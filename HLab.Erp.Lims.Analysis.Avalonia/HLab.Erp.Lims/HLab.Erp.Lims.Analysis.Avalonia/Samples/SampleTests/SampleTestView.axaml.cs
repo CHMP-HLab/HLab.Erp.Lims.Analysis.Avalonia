@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using HLab.Erp.Lims.Analysis.Samples.SampleTests;
+using HLab.Erp.Workflows;
 using HLab.Mvvm.Annotations;
 using HLab.Mvvm.Application.Documents;
 
@@ -11,6 +12,6 @@ public partial class SampleTestView : UserControl, IView<SampleTestViewModel>, I
     {
         InitializeComponent();
 
-        // TODO : SetHighlights (HighlightHelper Wpf non porté)
+        this.SetHighlights(vm => vm.Workflow);
     }
 }
