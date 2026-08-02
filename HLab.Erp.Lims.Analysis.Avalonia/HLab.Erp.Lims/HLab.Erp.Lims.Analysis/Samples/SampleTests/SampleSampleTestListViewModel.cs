@@ -90,7 +90,13 @@ public class SampleSampleTestListViewModel : Core.EntityLists.EntityListViewMode
             e => e.Sample.Pharmacopoeia,
             e => e.Sample.PharmacopoeiaVersion,
             e => e.Sample.Stage
-            ).Subscribe(e => UpdateConformity());
+            ).Subscribe(e =>
+            {
+                UpdateConformity();
+                // AddCanExecute/DeleteCanExecute dépendent de ces états
+                // (rôle de l'ancien ITrigger _1, perdu à la migration ReactiveUI)
+                RefreshCanExecute();
+            });
 
 
 
