@@ -7,6 +7,8 @@
     <Application.Styles>
         <FluentTheme />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        <!-- Docking des documents (DocumentPresenterView) -->
+        <DockFluentTheme />
         <!-- Densité et sobriété par-dessus Fluent (parité MahApps du client WPF) -->
         <StyleInclude Source="avares://HLab.Theme.Avalonia/Themes/HLab.Styles.axaml"/>
     </Application.Styles>
@@ -14,6 +16,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- Couleurs du thème Dock (RegionColor... surchargées par HLab.Theme) -->
+                <ResourceInclude Source="avares://Dock.Avalonia.Themes.Fluent/Presets/Ide/Default.axaml"/>
                 <!-- Ressources HLab variant-aware : suivent ActualThemeVariant (OS) -->
                 <ResourceInclude Source="avares://HLab.Theme.Avalonia/Themes/HLab.Theme.axaml"/>
             </ResourceDictionary.MergedDictionaries>
