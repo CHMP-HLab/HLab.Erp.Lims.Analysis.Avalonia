@@ -4,9 +4,9 @@
              xmlns:details="clr-namespace:HLab.Erp.Core.Tools.Details;assembly=HLab.Erp.Core"
              xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
              x:CompileBindings="False"
-             Background="{DynamicResource HLab.Brushes.Background}"
+             Background="{DynamicResource HLab.Brushes.ThemeBackground}"
              >
-    <Grid ColumnDefinitions="*,5,2*">
+    <Grid ColumnDefinitions="*,5,2*" Background="{DynamicResource HLab.Brushes.Accent4}">
 
         <Grid>
             <mvvm:ViewLocator ViewClass="{x:Type details:IDetailViewClass}" Model="{Binding}"/>

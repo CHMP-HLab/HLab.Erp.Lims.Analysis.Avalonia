@@ -6,17 +6,17 @@
              xmlns:mvvm="clr-namespace:HLab.Mvvm.Avalonia;assembly=HLab.Mvvm.Avalonia"
              xmlns:local="clr-namespace:HLab.Erp.Lims.Analysis.Avalonia"
              x:CompileBindings="False"
-             Background="{DynamicResource HLab.Brushes.Background}"
+             Background="{DynamicResource HLab.Brushes.ThemeBackground}"
              >
     <Grid ColumnDefinitions="*,5,2*">
 
-        <Grid>
+        <Grid Background="{DynamicResource HLab.Brushes.Accent4}">
             <mvvm:ViewLocator ViewClass="{x:Type details:IDetailViewClass}" Model="{Binding}"/>
         </Grid>
 
         <GridSplitter Grid.Column="1"/>
 
-        <Grid Grid.Column="2" RowDefinitions="*,Auto">
+        <Grid Grid.Column="2" RowDefinitions="*,Auto" Background="{DynamicResource HLab.Brushes.Accent4}">
 
             <mvvm:ViewLocator Model="{Binding DocumentPresenter}"/>
 

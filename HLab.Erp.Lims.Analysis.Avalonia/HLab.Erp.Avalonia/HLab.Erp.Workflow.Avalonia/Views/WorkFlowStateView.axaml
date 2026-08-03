@@ -14,21 +14,14 @@
              d:DataContext="{d:DesignInstance {x:Type viewModels:WorkflowViewModel}}"
 			 x:DataType="viewModels:WorkflowViewModel"
              >
-        <Grid MinHeight="50"                
->
-            <Grid.Effect>
-                <DropShadowEffect 
-					OffsetX="0"
-					OffsetY="0"
-                    Color="{DynamicResource MahApps.Colors.ThemeForeground}"
-                    Opacity="1"
-                    BlurRadius="10"
-                />
-            </Grid.Effect>
+        <Grid MinHeight="50" Margin="10">
 
+            <!-- BoxShadow natif plutôt que DropShadowEffect : l'effet Avalonia
+                 dessine un halo rectangulaire qui casse l'arrondi de la carte. -->
             <Border
                 BorderThickness="0"
-                Background="{DynamicResource MahApps.Brushes.Control.Background}" 
+                Background="{DynamicResource HLab.Brushes.Control.Background}"
+                BoxShadow="0 0 10 0 #80FFFFFF"
                 CornerRadius="10" />
 
             <Grid>
@@ -37,19 +30,23 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Border
-                    BorderBrush="{DynamicResource MahApps.Brushes.Button.Flat.Foreground}"
+                    BorderBrush="{DynamicResource HLab.Brushes.Accent}"
                     BorderThickness="0"
-                    Background="{DynamicResource MahApps.Brushes.Badged.Background}" 
+                    Background="{DynamicResource HLab.Brushes.Badge.Background}"
                     CornerRadius="10,0,0,10" />
 
                 <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
-                            <lang:Localize 
-                                Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}"  
-                                Id="{}{Workflow}">
-                                <lang:Localize.RenderTransform>
+                            <!-- LayoutTransformControl : une RenderTransform ne
+                                 participe pas au layout (le texte tourné gardait
+                                 son encombrement horizontal et chevauchait l'icône). -->
+                            <LayoutTransformControl>
+                                <LayoutTransformControl.LayoutTransform>
                                     <RotateTransform Angle="-90" />
-                                </lang:Localize.RenderTransform>
-                            </lang:Localize>
+                                </LayoutTransformControl.LayoutTransform>
+                                <lang:Localize
+                                    Foreground="{DynamicResource HLab.Brushes.Badge.Foreground}"
+                                    Id="{}{Workflow}"/>
+                            </LayoutTransformControl>
                             <icons:IconView Margin="0,10" Path="Icons/Workflow" MaxHeight="15" MaxWidth="15"/>
                 </StackPanel>
 

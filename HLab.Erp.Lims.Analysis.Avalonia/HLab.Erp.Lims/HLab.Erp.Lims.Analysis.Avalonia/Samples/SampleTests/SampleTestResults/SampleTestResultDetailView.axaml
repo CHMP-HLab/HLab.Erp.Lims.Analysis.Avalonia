@@ -10,9 +10,9 @@
              xmlns:annotations="clr-namespace:HLab.Mvvm.Annotations;assembly=HLab.Mvvm.Annotations"
              xmlns:local="clr-namespace:HLab.Erp.Lims.Analysis.Avalonia"
              x:CompileBindings="False"
-             Background="{DynamicResource HLab.Brushes.Background}"
+             Background="{DynamicResource HLab.Brushes.ThemeBackground}"
              >
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*,Auto" Background="{DynamicResource HLab.Brushes.Accent3}">
 
         <StackPanel>
             <workflows:WorkflowLockerView/>

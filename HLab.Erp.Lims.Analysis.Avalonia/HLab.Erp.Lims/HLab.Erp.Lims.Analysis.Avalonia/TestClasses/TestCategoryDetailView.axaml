@@ -17,14 +17,14 @@
             </Label>
             <ContentPresenter Content="{Binding Workflow}"/>
 
-            <Border Grid.ColumnSpan="2" Margin="0,15,0,10" Background="{DynamicResource HLab.Brushes.Header.Background}">
+            <Label Classes="separator">
                 <Grid VerticalAlignment="Center">
                     <Canvas>
                         <icons:IconView Path="Icons/Sample/Folder" Height="35" Opacity="0.8"/>
                     </Canvas>
                     <lang:Localize Id="Name" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="50,0,0,0"/>
                 </Grid>
-            </Border>
+            </Label>
 
             <Label HorizontalContentAlignment="Right">
                 <lang:Localize Id="{}{Name} : "/>

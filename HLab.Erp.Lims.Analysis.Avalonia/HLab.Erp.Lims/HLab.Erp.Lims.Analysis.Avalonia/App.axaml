@@ -7,6 +7,8 @@
     <Application.Styles>
         <FluentTheme />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        <!-- Densité et sobriété par-dessus Fluent (parité MahApps du client WPF) -->
+        <StyleInclude Source="avares://HLab.Theme.Avalonia/Themes/HLab.Styles.axaml"/>
     </Application.Styles>
 
     <Application.Resources>

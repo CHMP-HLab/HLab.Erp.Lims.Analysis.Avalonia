@@ -66,14 +66,14 @@
                     <lang:LocalizedLabel Text="{}{Icon}" HorizontalContentAlignment="Center"/>
                     <local:ConformityIcon Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Conformity="{Binding FormHelper.Form.Target.ConformityId}" MaxHeight="40"/>
 
-                    <Border Grid.ColumnSpan="2" Margin="0,15,0,10" Background="{DynamicResource HLab.Brushes.Header.Background}">
+                    <Label Classes="separator">
                         <Grid VerticalAlignment="Center">
                             <Canvas>
                                 <icons:IconView Path="Icons/Sample/Folder" Height="35" Opacity="0.8"/>
                             </Canvas>
                             <lang:Localize Id="Unit Tests" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="50,0,0,0"/>
                         </Grid>
-                    </Border>
+                    </Label>
                     <Button Grid.ColumnSpan="2"
                         Command="{Binding CheckUnitTestsCommand}">
                         <lang:LocalizedLabel>{Check}</lang:LocalizedLabel>

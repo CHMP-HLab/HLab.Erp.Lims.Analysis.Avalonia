@@ -15,9 +15,9 @@
              xmlns:manufacturers="clr-namespace:HLab.Erp.Lims.Analysis.Manufacturers;assembly=HLab.Erp.Lims.Analysis"
              xmlns:products="clr-namespace:HLab.Erp.Lims.Analysis.Products;assembly=HLab.Erp.Lims.Analysis"
              x:CompileBindings="False"
-             Background="{DynamicResource HLab.Brushes.Background}"
+             Background="{DynamicResource HLab.Brushes.ThemeBackground}"
              >
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*,Auto" Background="{DynamicResource HLab.Brushes.Accent4}">
 
         <workflows:WorkflowLockerView/>
 
@@ -97,14 +97,14 @@
                             SelectedDate="{Binding Model.ReceptionDate}"
                             MaxWidth="130"/>
 
-                    <Border Grid.ColumnSpan="2" Background="{DynamicResource HLab.Brushes.Header.Background}" Margin="5,0,0,0">
+                    <Label Classes="small-separator">
                         <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
                             <Canvas>
                                 <icons:IconView Path="Icons/Sample/Sampling" Height="20" Opacity="0.8"/>
                             </Canvas>
                             <lang:Localize Margin="30,0,0,0" FontWeight="Bold" Id="{}{Sampling}"/>
                         </StackPanel>
-                    </Border>
+                    </Label>
 
                     <lang:LocalizedLabel Text="{}{Quantity Received} : "/>
                     <Grid Margin="0,0,15,0" ColumnDefinitions="Auto,*,Auto">
